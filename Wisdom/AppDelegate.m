@@ -7,38 +7,54 @@
 //
 
 #import "AppDelegate.h"
-
-#import "ViewController.h"
-
+#import "MainViewController.h"
+#import "UIImage+TPCategory.h"
 @implementation AppDelegate
-
 - (void)dealloc
 {
     [_window release];
-    [_viewController release];
     [super dealloc];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+   
+    /***
+     
+     NSString *path1=[DocumentPath stringByAppendingPathComponent:@"ico_001.png"];
+     UIImage *image1=[[UIImage imageNamed:@"ico_001.png"] imageByScalingProportionallyToSize:CGSizeMake(231*103/199, 103)];
+     [image1 saveImage:path1];
+
+    NSString *path2=[DocumentPath stringByAppendingPathComponent:@"message.png"];
+    UIImage *image2=[[UIImage imageNamed:@"message.png"] imageAtRect:CGRectMake(0, 33, 80, 55)];
+    [image2 saveImage:path2];
+
+     NSString *path=[DocumentPath stringByAppendingPathComponent:@"login.png"];
+     UIImage *image=[[UIImage imageNamed:@"login.png"] imageByScalingProportionallyToSize:CGSizeMake(80*35/49, 35)];
+     [image saveImage:path];
+     NSLog(@"path=%@\n",path);
+    
+    NSString *path3=[DocumentPath stringByAppendingPathComponent:@"search_select.png"];
+    UIImage *image3=[[UIImage imageNamed:@"search_select.png"] imageByScalingProportionallyToSize:CGSizeMake(79, 55)];
+    [image3 saveImage:path3];
+    ***/
+
+//    NSString *path3=[DocumentPath stringByAppendingPathComponent:@"search_select.png"];
+//    UIImage *image3=[[UIImage imageNamed:@"search_select.gif"] imageAtRect:CGRectMake(0, 22, 80, 62)];
+//    [image3 saveImage:path3];
+    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    // Override point for customization after application launch.
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil] autorelease];
-    } else {
-        self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil] autorelease];
-    }
-    self.window.rootViewController = self.viewController;
+    MainViewController *main=[[[MainViewController alloc] init] autorelease];
+    self.window.rootViewController = main;
     [self.window makeKeyAndVisible];
     return YES;
 }
-
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
-
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
