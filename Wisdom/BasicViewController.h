@@ -28,4 +28,8 @@
 -(void) hideSuccessViewAnimated:(void (^)(AnimateErrorView *errorView))complete;
 -(void) showSuccessViewWithHide:(void (^)(AnimateErrorView *errorView))process completed:(void (^)(AnimateErrorView *errorView))complete;
 -(void) hideLoadingSuccessWithTitle:(NSString*)title completed:(void (^)(AnimateErrorView *errorView))complete;
+
+-(void)loadNoLoginBarButtonItem;
+-(void)loadLoginBarButtonItem;
+-(void)buttonExitLogin;
 @end

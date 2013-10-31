@@ -12,10 +12,13 @@
 @property(nonatomic,copy) NSString *userAcc;
 @property(nonatomic,copy) NSString *userPwd;
 @property(nonatomic,assign) BOOL isRemember;
+@property(nonatomic,assign) BOOL isLogin;
 @property(nonatomic,copy) NSString *userId;
 @property(nonatomic,copy) NSString *channelId;
 @property(nonatomic,copy) NSString *appToken;
 //单例模式
 + (Account *)sharedInstance;
 -(void)save;
++(void)exitAccount;
++(void)accountLogin:(NSString*)user password:(NSString*)pwd login:(BOOL)login;
 @end

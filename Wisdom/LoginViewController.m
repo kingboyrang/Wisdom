@@ -12,6 +12,8 @@
 #import "TKRememberCell.h"
 #import "TKRememberCell.h"
 #import "TKLoginButtonCell.h"
+#import "UIImage+TPCategory.h"
+#import "Account.h"
 @interface LoginViewController ()
 -(void)buttonSubmit;
 -(BOOL)formSubmit;
@@ -38,34 +40,49 @@
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg.png"] forBarMetrics:UIBarMetricsDefault];
     [self editBackBarbuttonItem:@"会员登录"];
-    [self.navigationItem rightBarBtnItem:@"登录" target:self action:@selector(buttonSubmit)];
+    //[self.navigationItem rightBarBtnItem:@"登录" target:self action:@selector(buttonSubmit)];
     
-    _tableView=[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    
+    CGRect r=self.view.bounds;
+    r.size.height-=54+44;
+    UIImage *image=[[UIImage imageNamed:@"loginbg.png"] imageByScalingToSize:r.size];
+    UIImageView *imageView=[[UIImageView alloc] initWithFrame:r];
+    [imageView setImage:image];
+    [self.view addSubview:imageView];
+    [imageView release];
+    
+    r.origin.x=(self.view.bounds.size.width-250)/2;
+    r.origin.y=110;
+    r.size.height=self.view.bounds.size.height-110;
+    r.size.width=250;
+    _tableView=[[UITableView alloc] initWithFrame:r style:UITableViewStylePlain];
     _tableView.dataSource=self;
     _tableView.delegate=self;
     _tableView.autoresizesSubviews=YES;
     _tableView.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     _tableView.bounces=NO;
+    _tableView.backgroundColor=[UIColor clearColor];
     [self.view addSubview:_tableView];
     
     
     TKLabelCell *cell1=[[[TKLabelCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     cell1.label.text=@"手机号码";
     TKTextFieldCell *cell2=[[[TKTextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-    cell2.field.keyboardType=UIKeyboardTypePhonePad;
+    //cell2.field.keyboardType=UIKeyboardTypePhonePad;
     cell2.field.placeholder=@"手机号码";
     TKLabelCell *cell3=[[[TKLabelCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-    cell3.label.text=@"密   码";
+    cell3.label.text=@"密       码";
     TKTextFieldCell *cell4=[[[TKTextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     cell4.field.secureTextEntry=YES;
     cell4.field.placeholder=@"密码";
     TKRememberCell *cell5=[[[TKRememberCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     
-//    TKLoginButtonCell *cell6=[[[TKLoginButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-//    [cell6.button setTitle:@"登陆" forState:UIControlStateNormal];
+    TKLoginButtonCell *cell6=[[[TKLoginButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+    [cell6.button setTitle:@"登陆" forState:UIControlStateNormal];
+    [cell6.button addTarget:self action:@selector(buttonSubmit) forControlEvents:UIControlEventTouchUpInside];
     
-    self.cells=[NSMutableArray arrayWithObjects:cell1,cell2,cell3,cell4,cell5, nil];
+    self.cells=[NSMutableArray arrayWithObjects:cell1,cell2,cell3,cell4,cell5,cell6, nil];
 	// Do any additional setup after loading the view.
 }
 -(BOOL)formSubmit{
@@ -94,7 +111,7 @@
     }
     TKTextFieldCell *cell1=self.cells[1];
     TKTextFieldCell *cell2=self.cells[3];
-    //TKRememberCell *cell3=self.cells[4];
+    TKRememberCell *cell3=self.cells[4];
     
     NSMutableArray *params=[NSMutableArray array];
     [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:cell1.field.text,@"uid", nil]];
@@ -113,6 +130,7 @@
             XmlNode *node=[result.xmlParse soapXmlSelectSingleNode:@"//LoginResult"];
             if ([node.Value isEqualToString:@"true"]) {
                 boo=YES;
+                [Account accountLogin:cell1.field.text password:cell2.field.text login:cell3.check.hasRemember];
             }
         }
         if (boo) {

@@ -9,12 +9,20 @@
 #import "BasicViewController.h"
 #import "FXLabel.h"
 #import "UIColor+TPCategory.h"
+#import "NSString+TPCategory.h"
+#import "UIImage+TPCategory.h"
+#import "Account.h"
+#import "UIButton+TPCategory.h"
+#import "LoginViewController.h"
+#import "RegisterViewController.h"
 @interface BasicViewController (){
     AnimateLoadView *_loadView;
     AnimateErrorView *_errorView;
     AnimateErrorView *_successView;
 }
 -(void)buttonBackClick;
+-(void)buttonLogin;
+-(void)buttonRegister;
 @end
 
 @implementation BasicViewController
@@ -38,11 +46,84 @@
     }
     return self;
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    Account *acc=[Account sharedInstance];
+    if (acc.isLogin) {
+        [self loadLoginBarButtonItem];
+    }else{
+        [self loadNoLoginBarButtonItem];
+    }
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+}
+-(void)loadNoLoginBarButtonItem{
+    UIView *rightView=[[UIView alloc] initWithFrame:CGRectZero];
+    rightView.backgroundColor=[UIColor clearColor];
+    UIButton *btn1=[UIButton buttonWithBackgroundTitle:@"登录" target:self action:@selector(buttonLogin)];
+    [rightView addSubview:btn1];
+    UIButton *btn2=[UIButton buttonWithBackgroundTitle:@"注册" target:self action:@selector(buttonRegister)];
+    CGRect r=btn2.frame;
+    r.origin.x=btn1.frame.size.width+5;
+    btn2.frame=r;
+    [rightView addSubview:btn2];
+    rightView.frame=CGRectMake(0, 0, btn2.frame.size.width+btn2.frame.origin.x, 35);
+    UIBarButtonItem *rightBtn=[[UIBarButtonItem alloc] initWithCustomView:rightView];
+    [rightView release];
+    self.navigationItem.rightBarButtonItem=rightBtn;
+    [rightBtn release];
+}
+-(void)loadLoginBarButtonItem{
+    UIView *rightView=[[UIView alloc] initWithFrame:CGRectZero];
+    rightView.backgroundColor=[UIColor clearColor];
+    
+    NSString *title=@"黄小勇";
+    CGSize size=[title textSize:[UIFont fontWithName:@"Helvetica-Bold" size:16] withWidth:self.view.bounds.size.width];
+    
+    FXLabel *secondLabel = [[FXLabel alloc] init];
+    secondLabel.frame = CGRectMake(0,0, size.width, size.height);
+    secondLabel.backgroundColor = [UIColor clearColor];
+    secondLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+    secondLabel.text = title;
+    secondLabel.textAlignment=NSTextAlignmentCenter;
+    secondLabel.textColor = [UIColor whiteColor];
+    secondLabel.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.75f];
+    secondLabel.shadowOffset = CGSizeMake(0.0f, 5.0f);
+    secondLabel.shadowBlur = 5.0f;
+    [rightView addSubview:secondLabel];
+    
+    
+    UIImage *image=[[UIImage imageNamed:@"ico_login.png"] imageByScalingToSize:CGSizeMake(35, 35)];
+    UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame=CGRectMake(secondLabel.frame.size.width+secondLabel.frame.origin.x+5, -8, image.size.width, image.size.height);
+    [btn setBackgroundImage:image forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(buttonExitLogin) forControlEvents:UIControlEventTouchUpInside];
+    [rightView addSubview:btn];
+    rightView.frame=CGRectMake(0, 0, btn.frame.size.width+btn.frame.origin.x, size.height);
+    [secondLabel release];
+    
+    UIBarButtonItem *rightBtn=[[UIBarButtonItem alloc] initWithCustomView:rightView];
+    [rightView release];
+    self.navigationItem.rightBarButtonItem=rightBtn;
+    [rightBtn release];
+    
+}
+#pragma mark login/register events
+-(void)buttonLogin{
+    LoginViewController *login=[[LoginViewController alloc] init];
+    [self.navigationController pushViewController:login animated:YES];
+    [login release];
+}
+-(void)buttonRegister{
+    RegisterViewController *registerController=[[RegisterViewController alloc] init];
+    [self.navigationController pushViewController:registerController animated:YES];
+    [registerController release];
+}
+-(void)buttonExitLogin{
+    [Account exitAccount];
+    [self loadNoLoginBarButtonItem];
 }
 -(void)editBackBarbuttonItem:(NSString*)title{
     [self.navigationItem backBarBtnItem:title target:self action:@selector(buttonBackClick)];
@@ -90,7 +171,7 @@
     [self.view bringSubviewToFront:loadingView];
     [loadingView.activityIndicatorView startAnimating];
     CGRect r=loadingView.frame;
-    r.origin.y=0;
+    r.origin.y=2;
     [UIView animateWithDuration:0.5f animations:^{
         loadingView.frame=r;
     }];
@@ -120,7 +201,7 @@
     [self.view addSubview:errorView];
     [self.view bringSubviewToFront:errorView];
     CGRect r=errorView.frame;
-    r.origin.y=0;
+    r.origin.y=2;
     [UIView animateWithDuration:0.5f animations:^{
         errorView.frame=r;
     }];
@@ -160,7 +241,7 @@
     [self.view addSubview:errorView];
     [self.view bringSubviewToFront:errorView];
     CGRect r=errorView.frame;
-    r.origin.y=0;
+    r.origin.y=2;
     [UIView animateWithDuration:0.5f animations:^{
         errorView.frame=r;
     }];

@@ -26,6 +26,14 @@
 #define DataWebserviceURL @"http://192.168.123.134/MiLe.Web/Webservices/Push.asmx"
 #define DataNameSpace @"http://tempuri.org/"
 
+//弥勒介绍
+#define MaitreyaURL @"http://iBDCloud.com:8888/app/main01.htm"
+//景点
+#define ViewIntroduceURL @"http://iBDCloud.com:8888/app/main02.htm"
+//住宿
+#define HotelIntroduceURL @"http://iBDCloud.com:8888/app/main04.htm"
+//美食
+#define FoodIntroduceURL @"http://iBDCloud.com:8888/app/main05.htm"
 
 
 

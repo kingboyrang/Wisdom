@@ -23,6 +23,18 @@
 		0137DBCB1820E4340087B152 /* top_002.png in Resources */ = {isa = PBXBuildFile; fileRef = 0137DBC71820E4340087B152 /* top_002.png */; };
 		0137DBCC1820E4340087B152 /* top_003.png in Resources */ = {isa = PBXBuildFile; fileRef = 0137DBC81820E4340087B152 /* top_003.png */; };
 		0137DBCD1820E4340087B152 /* top_004.png in Resources */ = {isa = PBXBuildFile; fileRef = 0137DBC91820E4340087B152 /* top_004.png */; };
+		014DC2D81821E0A10050DFB8 /* MaitreyaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014DC2D71821E0A10050DFB8 /* MaitreyaViewController.m */; };
+		014DC2DB1821E7C80050DFB8 /* ViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014DC2DA1821E7C80050DFB8 /* ViewViewController.m */; };
+		014DC2DD1822065B0050DFB8 /* loginbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 014DC2DC1822065B0050DFB8 /* loginbg.png */; };
+		014DC2E1182225790050DFB8 /* bg_002.png in Resources */ = {isa = PBXBuildFile; fileRef = 014DC2E0182225790050DFB8 /* bg_002.png */; };
+		014DC2E4182227550050DFB8 /* EMKeyboardBarTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 014DC2E3182227550050DFB8 /* EMKeyboardBarTextField.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		014DC2E61822284E0050DFB8 /* registerbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 014DC2E51822284E0050DFB8 /* registerbg.png */; };
+		014DC2E818222BDA0050DFB8 /* ico_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 014DC2E718222BDA0050DFB8 /* ico_login.png */; };
+		014DC2EB182230B90050DFB8 /* RegisterCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 014DC2EA182230B90050DFB8 /* RegisterCheck.m */; };
+		014DC2EF182232BA0050DFB8 /* TKRegisterCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 014DC2EE182232BA0050DFB8 /* TKRegisterCheckCell.m */; };
+		014DC2F3182235D60050DFB8 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 014DC2F2182235D60050DFB8 /* LoadingView.m */; };
+		014DC30A18225E000050DFB8 /* HotelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014DC30918225E000050DFB8 /* HotelViewController.m */; };
+		014DC30D18225F570050DFB8 /* FoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014DC30C18225F570050DFB8 /* FoodViewController.m */; };
 		015A0741181E302E00000FCC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 015A0740181E302E00000FCC /* UIKit.framework */; };
 		015A0743181E302E00000FCC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 015A0742181E302E00000FCC /* Foundation.framework */; };
 		015A0745181E302E00000FCC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 015A0744181E302E00000FCC /* CoreGraphics.framework */; };
@@ -126,6 +138,26 @@
 		0137DBC71820E4340087B152 /* top_002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_002.png; sourceTree = "<group>"; };
 		0137DBC81820E4340087B152 /* top_003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_003.png; sourceTree = "<group>"; };
 		0137DBC91820E4340087B152 /* top_004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_004.png; sourceTree = "<group>"; };
+		014DC2D61821E0A10050DFB8 /* MaitreyaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaitreyaViewController.h; sourceTree = "<group>"; };
+		014DC2D71821E0A10050DFB8 /* MaitreyaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaitreyaViewController.m; sourceTree = "<group>"; };
+		014DC2D91821E7C80050DFB8 /* ViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewViewController.h; sourceTree = "<group>"; };
+		014DC2DA1821E7C80050DFB8 /* ViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewViewController.m; sourceTree = "<group>"; };
+		014DC2DC1822065B0050DFB8 /* loginbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginbg.png; sourceTree = "<group>"; };
+		014DC2E0182225790050DFB8 /* bg_002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_002.png; sourceTree = "<group>"; };
+		014DC2E2182227540050DFB8 /* EMKeyboardBarTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMKeyboardBarTextField.h; sourceTree = "<group>"; };
+		014DC2E3182227550050DFB8 /* EMKeyboardBarTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMKeyboardBarTextField.m; sourceTree = "<group>"; };
+		014DC2E51822284E0050DFB8 /* registerbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = registerbg.png; sourceTree = "<group>"; };
+		014DC2E718222BDA0050DFB8 /* ico_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_login.png; sourceTree = "<group>"; };
+		014DC2E9182230B90050DFB8 /* RegisterCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterCheck.h; sourceTree = "<group>"; };
+		014DC2EA182230B90050DFB8 /* RegisterCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterCheck.m; sourceTree = "<group>"; };
+		014DC2ED182232BA0050DFB8 /* TKRegisterCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKRegisterCheckCell.h; sourceTree = "<group>"; };
+		014DC2EE182232BA0050DFB8 /* TKRegisterCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKRegisterCheckCell.m; sourceTree = "<group>"; };
+		014DC2F1182235D60050DFB8 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
+		014DC2F2182235D60050DFB8 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
+		014DC30818225E000050DFB8 /* HotelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotelViewController.h; sourceTree = "<group>"; };
+		014DC30918225E000050DFB8 /* HotelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotelViewController.m; sourceTree = "<group>"; };
+		014DC30B18225F570050DFB8 /* FoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodViewController.h; sourceTree = "<group>"; };
+		014DC30C18225F570050DFB8 /* FoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodViewController.m; sourceTree = "<group>"; };
 		015A073D181E302E00000FCC /* Wisdom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wisdom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		015A0740181E302E00000FCC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		015A0742181E302E00000FCC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -306,6 +338,42 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		014DC2D51821E0150050DFB8 /* Introduce */ = {
+			isa = PBXGroup;
+			children = (
+				014DC2F0182235140050DFB8 /* UI */,
+				014DC2D61821E0A10050DFB8 /* MaitreyaViewController.h */,
+				014DC2D71821E0A10050DFB8 /* MaitreyaViewController.m */,
+				014DC2D91821E7C80050DFB8 /* ViewViewController.h */,
+				014DC2DA1821E7C80050DFB8 /* ViewViewController.m */,
+				014DC30818225E000050DFB8 /* HotelViewController.h */,
+				014DC30918225E000050DFB8 /* HotelViewController.m */,
+				014DC30B18225F570050DFB8 /* FoodViewController.h */,
+				014DC30C18225F570050DFB8 /* FoodViewController.m */,
+			);
+			name = Introduce;
+			sourceTree = "<group>";
+		};
+		014DC2EC182232890050DFB8 /* RegisterUI */ = {
+			isa = PBXGroup;
+			children = (
+				014DC2E9182230B90050DFB8 /* RegisterCheck.h */,
+				014DC2EA182230B90050DFB8 /* RegisterCheck.m */,
+				014DC2ED182232BA0050DFB8 /* TKRegisterCheckCell.h */,
+				014DC2EE182232BA0050DFB8 /* TKRegisterCheckCell.m */,
+			);
+			name = RegisterUI;
+			sourceTree = "<group>";
+		};
+		014DC2F0182235140050DFB8 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				014DC2F1182235D60050DFB8 /* LoadingView.h */,
+				014DC2F2182235D60050DFB8 /* LoadingView.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		015A0734181E302E00000FCC = {
 			isa = PBXGroup;
 			children = (
@@ -370,6 +438,7 @@
 		015A0769181E31CE00000FCC /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				014DC2D51821E0150050DFB8 /* Introduce */,
 				01B85C5B181F9A5C004DA2D3 /* Common */,
 				01B85C25181F638B004DA2D3 /* Index */,
 			);
@@ -379,6 +448,10 @@
 		015A076A181E31E200000FCC /* images */ = {
 			isa = PBXGroup;
 			children = (
+				014DC2E51822284E0050DFB8 /* registerbg.png */,
+				014DC2E718222BDA0050DFB8 /* ico_login.png */,
+				014DC2E0182225790050DFB8 /* bg_002.png */,
+				014DC2DC1822065B0050DFB8 /* loginbg.png */,
 				01CB12ED1820E984005C3B9A /* bgView.png */,
 				0137DBB21820B1210087B152 /* notice_error_icon.png */,
 				0137DBB31820B1210087B152 /* notice_error_icon@2x.png */,
@@ -500,6 +573,7 @@
 		01B85C25181F638B004DA2D3 /* Index */ = {
 			isa = PBXGroup;
 			children = (
+				014DC2EC182232890050DFB8 /* RegisterUI */,
 				01B85C43181F8697004DA2D3 /* LoginUI */,
 				01B85C26181F639B004DA2D3 /* IndexUI */,
 				01B85BFD181F4FB3004DA2D3 /* IndexViewController.h */,
@@ -544,6 +618,8 @@
 		01B85C38181F832E004DA2D3 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				014DC2E2182227540050DFB8 /* EMKeyboardBarTextField.h */,
+				014DC2E3182227550050DFB8 /* EMKeyboardBarTextField.m */,
 				01B85C3D181F8433004DA2D3 /* TKLabelCell.h */,
 				01B85C3E181F8433004DA2D3 /* TKLabelCell.m */,
 				01B85C40181F8520004DA2D3 /* TKTextFieldCell.h */,
@@ -698,12 +774,15 @@
 				0137DBCD1820E4340087B152 /* top_004.png in Resources */,
 				01B85C46181F8BA6004DA2D3 /* checkbox-checked.png in Resources */,
 				0137DBCC1820E4340087B152 /* top_003.png in Resources */,
+				014DC2E1182225790050DFB8 /* bg_002.png in Resources */,
+				014DC2E61822284E0050DFB8 /* registerbg.png in Resources */,
 				01B85C2E181F659F004DA2D3 /* ico_002.png in Resources */,
 				01B85BE0181F42F8004DA2D3 /* message_select.png in Resources */,
 				0137DBB11820B1120087B152 /* notice_success_icon@2x.png in Resources */,
 				0137DBB51820B1210087B152 /* notice_error_icon@2x.png in Resources */,
 				01CB12EE1820E984005C3B9A /* bgView.png in Resources */,
 				01B85BE8181F4353004DA2D3 /* search_select.png in Resources */,
+				014DC2DD1822065B0050DFB8 /* loginbg.png in Resources */,
 				01B85C2F181F659F004DA2D3 /* ico_003.png in Resources */,
 				01B85BF5181F4B63004DA2D3 /* topbg.png in Resources */,
 				0137DBCB1820E4340087B152 /* top_002.png in Resources */,
@@ -723,6 +802,7 @@
 				0137DBAD1820AFC60087B152 /* error.png in Resources */,
 				01B85BF1181F48B7004DA2D3 /* bg_info.png in Resources */,
 				01B85BE1181F42F8004DA2D3 /* message.png in Resources */,
+				014DC2E818222BDA0050DFB8 /* ico_login.png in Resources */,
 				0137DBCA1820E4340087B152 /* top_001.png in Resources */,
 				0137DBB01820B1120087B152 /* notice_success_icon.png in Resources */,
 				01B85C31181F659F004DA2D3 /* ico_005.png in Resources */,
@@ -750,9 +830,12 @@
 				01BA000818209B6D00C09E1B /* ASIInputStream.m in Sources */,
 				01B85C10181F5585004DA2D3 /* FXLabel.m in Sources */,
 				01BA000718209B6D00C09E1B /* ASIHTTPRequest.m in Sources */,
+				014DC30D18225F570050DFB8 /* FoodViewController.m in Sources */,
 				01B85C7D181FBCB0004DA2D3 /* UIButton+TPCategory.m in Sources */,
 				0137DB5518209FAB0087B152 /* ServiceArgs.m in Sources */,
+				014DC2F3182235D60050DFB8 /* LoadingView.m in Sources */,
 				01B85C42181F8520004DA2D3 /* TKTextFieldCell.m in Sources */,
+				014DC2E4182227550050DFB8 /* EMKeyboardBarTextField.m in Sources */,
 				01B85C6D181FA4C2004DA2D3 /* TKEmptyCell.m in Sources */,
 				0137DBBA1820DC310087B152 /* Account.m in Sources */,
 				01B85C5F181F9A95004DA2D3 /* HeaderView.m in Sources */,
@@ -764,22 +847,27 @@
 				01B85C7A181FBB90004DA2D3 /* UIBarButtonItem+TPCategory.m in Sources */,
 				01CB12EC1820E96A005C3B9A /* IndexMenu.m in Sources */,
 				01B85C50181F9077004DA2D3 /* BasicNavigationController.m in Sources */,
+				014DC2EF182232BA0050DFB8 /* TKRegisterCheckCell.m in Sources */,
 				01B85C82181FBF42004DA2D3 /* UITextField+TPCategory.m in Sources */,
 				01BA000918209B6D00C09E1B /* ASINetworkQueue.m in Sources */,
 				01B85C13181F55F5004DA2D3 /* NSString+TPCategory.m in Sources */,
 				015A0751181E302E00000FCC /* AppDelegate.m in Sources */,
 				01B85C3F181F8433004DA2D3 /* TKLabelCell.m in Sources */,
+				014DC2D81821E0A10050DFB8 /* MaitreyaViewController.m in Sources */,
 				01B85C24181F622D004DA2D3 /* AdModel.m in Sources */,
 				01BA000518209B6D00C09E1B /* ASIDownloadCache.m in Sources */,
 				0197F65D181E3270002F6398 /* UIColor+TPCategory.m in Sources */,
 				01B85C57181F956D004DA2D3 /* BasicViewController.m in Sources */,
 				0197F660181E327B002F6398 /* UIImage+TPCategory.m in Sources */,
+				014DC30A18225E000050DFB8 /* HotelViewController.m in Sources */,
 				01B85C4D181F8D76004DA2D3 /* TKRememberCell.m in Sources */,
 				0137DB5418209FAB0087B152 /* ServiceResult.m in Sources */,
 				01B85BF8181F4BF8004DA2D3 /* UINavigationBar+TPCategory.m in Sources */,
 				01B85C37181F8291004DA2D3 /* RegisterViewController.m in Sources */,
 				0137DBAA1820AD8D0087B152 /* AnimateLoadView.m in Sources */,
 				01BA000218209B6D00C09E1B /* ASIAuthenticationDialog.m in Sources */,
+				014DC2DB1821E7C80050DFB8 /* ViewViewController.m in Sources */,
+				014DC2EB182230B90050DFB8 /* RegisterCheck.m in Sources */,
 				0197F663181E3289002F6398 /* NSData+TPCategory.m in Sources */,
 				01BA000618209B6D00C09E1B /* ASIFormDataRequest.m in Sources */,
 				01B85BFF181F4FB3004DA2D3 /* IndexViewController.m in Sources */,

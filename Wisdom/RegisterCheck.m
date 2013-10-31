@@ -1,20 +1,20 @@
 //
-//  SwitchLightNumber.m
-//  ElandSearch
+//  RegisterCheck.m
+//  Wisdom
 //
-//  Created by rang on 13-8-26.
-//  Copyright (c) 2013年 rang. All rights reserved.
+//  Created by aJia on 2013/10/31.
+//  Copyright (c) 2013年 lz. All rights reserved.
 //
 
-#import "RememberCheck.h"
+#import "RegisterCheck.h"
 #import "NSString+TPCategory.h"
-@interface RememberCheck ()
+@interface RegisterCheck ()
 -(void)loadControls:(CGRect)frame;
 -(void)buttonClickTap:(id)sender;
 -(void)addButton:(CGFloat)leftx height:(CGFloat)h index:(NSInteger)tag;
 @end
 
-@implementation RememberCheck
+@implementation RegisterCheck
 @synthesize hasRemember=_hasRemember;
 -(void)dealloc{
     [super dealloc];
@@ -32,9 +32,6 @@
 }
 -(void)loadControls:(CGRect)frame{
     CGFloat leftx=0;
-    [self addButton:leftx height:frame.size.height index:100];
-    leftx+=20+1;
-    
     if (!_lightLabel) {
         NSString *title=@"下次自动登录";
         CGSize size=[title textSize:[UIFont boldSystemFontOfSize:15.0] withWidth:frame.size.width-leftx];
@@ -44,7 +41,15 @@
         _lightLabel.backgroundColor=[UIColor clearColor];
         _lightLabel.textColor=[UIColor blackColor];
         //[UIColor colorWithRed:110/255.0 green:106/255.0 blue:97/255.0 alpha:1];
+        leftx=_lightLabel.frame.size.width+5;
+        UISwitch *switchItem=[[UISwitch alloc] initWithFrame:CGRectMake(leftx, (frame.size.height-30)/2, 40, 30)];
+        switchItem.on=YES;
+        [switchItem addTarget:self action:@selector(buttonClickTap:) forControlEvents:UIControlEventValueChanged];
+        [self addSubview:switchItem];
+        [switchItem release];
     }
+    //[self addButton:leftx height:frame.size.height index:100];
+    //leftx+=20+1;
     [self addSubview:_lightLabel];
     
 }
@@ -63,8 +68,7 @@
     [self addSubview:btn1];
 }
 -(void)buttonClickTap:(id)sender{
-    UIButton *btn=(UIButton*)sender;
-    btn.selected=!btn.selected;
-    _hasRemember=btn.selected;
+    UISwitch *btn=(UISwitch*)sender;
+    _hasRemember=btn.on;
 }
 @end

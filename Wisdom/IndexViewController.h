@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IndexViewController : UIViewController
+@interface IndexViewController : BasicViewController
 -(void)buttonMenuItemIndex:(NSString*)index;
 @end

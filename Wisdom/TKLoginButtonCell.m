@@ -12,7 +12,7 @@
 
 - (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if(!(self=[super initWithStyle:style reuseIdentifier:reuseIdentifier])) return nil;
-    UIImage *leftImage=[UIImage imageNamed:@"button.png"];
+    UIImage *leftImage=[UIImage imageNamed:@"buttonbg.png"];
     UIEdgeInsets leftInsets = UIEdgeInsetsMake(5,10, 5, 10);
     leftImage=[leftImage resizableImageWithCapInsets:leftInsets resizingMode:UIImageResizingModeStretch];
     _button = [[UIButton alloc] initWithFrame:CGRectMake(10, 20, self.bounds.size.width-20, 35)];

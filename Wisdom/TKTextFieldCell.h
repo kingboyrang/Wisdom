@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UITextField+TPCategory.h"
+//#import "UITextField+TPCategory.h"
+#import "EMKeyboardBarTextField.h"
 @interface TKTextFieldCell : UITableViewCell<UITextFieldDelegate>
-@property(nonatomic,strong) UITextField *field;
+@property(nonatomic,strong) EMKeyboardBarTextField *field;
 @property(nonatomic,readonly) BOOL hasValue;
 @end

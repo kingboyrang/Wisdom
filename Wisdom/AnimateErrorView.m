@@ -57,7 +57,7 @@
         self.backgroundColor=[UIColor blackColor];
         //self.alpha=0.5;
         self.layer.masksToBounds=YES;
-        self.layer.cornerRadius=8.0;
+        self.layer.cornerRadius=5.0;
     }
 
 }

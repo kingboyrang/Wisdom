@@ -10,6 +10,9 @@
 #import "TKLabelCell.h"
 #import "TKTextFieldCell.h"
 #import "TKLoginButtonCell.h"
+#import "UIImage+TPCategory.h"
+#import "Account.h"
+#import "TKRegisterCheckCell.h"
 @interface RegisterViewController ()
 -(void)buttonSubmit;
 -(BOOL)formSubmit;
@@ -35,32 +38,50 @@
     _helper=[[ServiceHelper alloc] init];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg.png"] forBarMetrics:UIBarMetricsDefault];
     [self editBackBarbuttonItem:@"注册"];
-    [self.navigationItem rightBarBtnItem:@"确认" target:self action:@selector(buttonSubmit)];
+    //[self.navigationItem rightBarBtnItem:@"确认" target:self action:@selector(buttonSubmit)];
     
-    _tableView=[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    CGRect r=self.view.bounds;
+    r.size.height-=54+44;
+    UIImage *image=[[UIImage imageNamed:@"registerbg.png"] imageByScalingToSize:r.size];
+    UIImageView *imageView=[[UIImageView alloc] initWithFrame:r];
+    [imageView setImage:image];
+    [self.view addSubview:imageView];
+    [imageView release];
+    
+    r.origin.x=(self.view.bounds.size.width-250)/2;
+    r.origin.y=90;
+    r.size.height=self.view.bounds.size.height-90;
+    r.size.width=250;
+    
+    _tableView=[[UITableView alloc] initWithFrame:r style:UITableViewStylePlain];
     _tableView.dataSource=self;
     _tableView.delegate=self;
     _tableView.autoresizesSubviews=YES;
     _tableView.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     _tableView.bounces=NO;
+    _tableView.backgroundColor=[UIColor clearColor];
     [self.view addSubview:_tableView];
     
     TKLabelCell *cell1=[[[TKLabelCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     cell1.label.text=@"手机号码";
     TKTextFieldCell *cell2=[[[TKTextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-    cell2.field.keyboardType=UIKeyboardTypePhonePad;
-    cell2.field.placeholder=@"手机号码";
+    //cell2.field.keyboardType=UIKeyboardTypePhonePad;
+    cell2.field.placeholder=@"请输入手机号码";
     TKLabelCell *cell3=[[[TKLabelCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-    cell3.label.text=@"密   码";
+    cell3.label.text=@"密       码";
     TKTextFieldCell *cell4=[[[TKTextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     cell4.field.secureTextEntry=YES;
-    cell4.field.placeholder=@"密码";
+    cell4.field.placeholder=@"请输入密码";
     
-//    TKLoginButtonCell *cell5=[[[TKLoginButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-//    [cell5.button setTitle:@"确认" forState:UIControlStateNormal];
+    TKRegisterCheckCell *cell5=[[[TKRegisterCheckCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+
     
-    self.cells=[NSMutableArray arrayWithObjects:cell1,cell2,cell3,cell4, nil];
+    TKLoginButtonCell *cell6=[[[TKLoginButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+    [cell6.button setTitle:@"确认" forState:UIControlStateNormal];
+    [cell6.button addTarget:self action:@selector(buttonSubmit) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.cells=[NSMutableArray arrayWithObjects:cell1,cell2,cell3,cell4,cell5,cell6, nil];
 }
 -(BOOL)formSubmit{
     for (id item in self.cells) {
@@ -88,6 +109,7 @@
     }
     TKTextFieldCell *cell1=self.cells[1];
     TKTextFieldCell *cell2=self.cells[3];
+    TKRegisterCheckCell *cell3=self.cells[4];
     
     NSMutableArray *params=[NSMutableArray array];
     [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:cell1.field.text,@"uid", nil]];
@@ -108,6 +130,7 @@
             XmlNode *node=[result.xmlParse soapXmlSelectSingleNode:@"//RegisterResult"];
             if ([node.Value isEqualToString:@"true"]) {
                 boo=YES;
+                [Account accountLogin:cell1.field.text password:cell2.field.text login:cell3.check.hasRemember];
             }
         }
         if (boo) {
@@ -138,6 +161,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([self.cells[indexPath.row] isKindOfClass:[TKLoginButtonCell class]]) {
         return 55.0;
+    }
+    if ([self.cells[indexPath.row] isKindOfClass:[TKRegisterCheckCell class]]) {
+        return 30.0;
     }
     if (indexPath.row%2==0) {
         return 30;
