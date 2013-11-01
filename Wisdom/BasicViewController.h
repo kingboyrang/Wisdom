@@ -10,6 +10,7 @@
 #import "AnimateLoadView.h"
 #import "AnimateErrorView.h"
 @interface BasicViewController : UIViewController
+@property(nonatomic,assign) BOOL showRightBtnItem;
 -(void)editBackBarbuttonItem:(NSString*)title;
 //动画操作
 -(AnimateErrorView*) errorView;
@@ -31,5 +32,6 @@
 
 -(void)loadNoLoginBarButtonItem;
 -(void)loadLoginBarButtonItem;
+-(void)loadWetherTitleView;
 -(void)buttonExitLogin;
 @end

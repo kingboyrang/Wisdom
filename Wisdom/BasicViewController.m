@@ -26,6 +26,7 @@
 @end
 
 @implementation BasicViewController
+@synthesize showRightBtnItem;
 -(void)dealloc{
     [super dealloc];
     if(_loadView){
@@ -48,16 +49,26 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    Account *acc=[Account sharedInstance];
-    if (acc.isLogin) {
-        [self loadLoginBarButtonItem];
-    }else{
-        [self loadNoLoginBarButtonItem];
+    if (self.showRightBtnItem) {
+        Account *acc=[Account sharedInstance];
+        if (acc.isLogin) {
+            [self loadLoginBarButtonItem];
+        }else{
+            [self loadNoLoginBarButtonItem];
+        }
     }
 }
 - (void)viewDidLoad
-{
+{   self.showRightBtnItem=YES;
     [super viewDidLoad];
+}
+-(void)loadWetherTitleView{
+    UIImage *image=[[UIImage imageNamed:@"ico_weather.png"] imageByScalingProportionallyToSize:CGSizeMake(62*35/44, 35)];
+    UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame=CGRectMake(0,9/2, image.size.width, image.size.height);
+    [btn setBackgroundImage:image forState:UIControlStateNormal];
+    self.navigationItem.titleView=btn;
+    
 }
 -(void)loadNoLoginBarButtonItem{
     UIView *rightView=[[UIView alloc] initWithFrame:CGRectZero];

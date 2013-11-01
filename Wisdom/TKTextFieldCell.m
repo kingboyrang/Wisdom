@@ -17,9 +17,8 @@
     _field.font=[UIFont boldSystemFontOfSize:16.0];
     _field.textColor=[UIColor blackColor];
     _field.borderStyle=UITextBorderStyleRoundedRect;
-    _field.delegate=self;
     _field.contentVerticalAlignment=UIControlContentVerticalAlignmentCenter;
-
+    _field.delegate=self;
 	
 	[self.contentView addSubview:_field];
     
@@ -29,6 +28,10 @@
 - (id) initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
 	self = [self initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
 	return self;
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
 }
 -(BOOL)hasValue{
     NSString *title=[_field.text Trim];
@@ -42,9 +45,5 @@
     [super layoutSubviews];
 	CGRect r = CGRectInset(self.contentView.bounds, 10, 4);
 	_field.frame = r;
-}
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return YES;
 }
 @end

@@ -26,6 +26,7 @@
 - (void) layoutSubviews {
     [super layoutSubviews];
 	CGRect r = CGRectInset(self.contentView.bounds, 10, 0);
+    r.origin.y=5;
 	_check.frame=r;
 }
 @end

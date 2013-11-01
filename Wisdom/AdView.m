@@ -97,6 +97,7 @@
             [lbl_Info setText:adModel.advertName];
             [lbl_Info setTextAlignment:NSTextAlignmentLeft];
             [lbl_Info setLineBreakMode:NSLineBreakByWordWrapping|NSLineBreakByTruncatingTail];
+            //[lbl_Info setLineBreakMode:NSLineBreakByWordWrapping];
             [self addSubview:lbl_Info];
         }
         i++;

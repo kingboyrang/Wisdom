@@ -14,6 +14,7 @@
 #import "TKLoginButtonCell.h"
 #import "UIImage+TPCategory.h"
 #import "Account.h"
+#import "UIColor+TPCategory.h"
 @interface LoginViewController ()
 -(void)buttonSubmit;
 -(BOOL)formSubmit;
@@ -36,15 +37,31 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.showRightBtnItem=NO;
     _helper=[[ServiceHelper alloc] init];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg.png"] forBarMetrics:UIBarMetricsDefault];
     [self editBackBarbuttonItem:@"会员登录"];
     //[self.navigationItem rightBarBtnItem:@"登录" target:self action:@selector(buttonSubmit)];
     
-    
+    //bg_002.png
     CGRect r=self.view.bounds;
-    r.size.height-=54+44;
+    r.size.height-=44;
+    UIImage *bgImage=[UIImage imageNamed:@"bglogreg.png"];
+    UIImageView *bgImageView=[[UIImageView alloc] initWithFrame:r];
+    [bgImageView setImage:bgImage];
+    [self.view addSubview:bgImageView];
+    [bgImageView release];
+    
+    
+    r.origin.x=30;
+    r.size.width=DeviceWidth-60;
+    r.size.height=285;
+    r.origin.y=(self.view.bounds.size.height-285-54-44)/2.0;
+    
+    CGFloat topY=r.origin.y+97;
+    
+    
     UIImage *image=[[UIImage imageNamed:@"loginbg.png"] imageByScalingToSize:r.size];
     UIImageView *imageView=[[UIImageView alloc] initWithFrame:r];
     [imageView setImage:image];
@@ -52,7 +69,7 @@
     [imageView release];
     
     r.origin.x=(self.view.bounds.size.width-250)/2;
-    r.origin.y=110;
+    r.origin.y=topY;
     r.size.height=self.view.bounds.size.height-110;
     r.size.width=250;
     _tableView=[[UITableView alloc] initWithFrame:r style:UITableViewStylePlain];
@@ -66,23 +83,22 @@
     [self.view addSubview:_tableView];
     
     
-    TKLabelCell *cell1=[[[TKLabelCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-    cell1.label.text=@"手机号码";
+   
+    TKTextFieldCell *cell1=[[[TKTextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+    cell1.field.placeholder=@"请输入手机号码";
+    cell1.field.backgroundColor=[UIColor colorFromHexRGB:@"c6dfe5"];
+    
     TKTextFieldCell *cell2=[[[TKTextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-    //cell2.field.keyboardType=UIKeyboardTypePhonePad;
-    cell2.field.placeholder=@"手机号码";
-    TKLabelCell *cell3=[[[TKLabelCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-    cell3.label.text=@"密       码";
-    TKTextFieldCell *cell4=[[[TKTextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-    cell4.field.secureTextEntry=YES;
-    cell4.field.placeholder=@"密码";
-    TKRememberCell *cell5=[[[TKRememberCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+    cell2.field.secureTextEntry=YES;
+    cell2.field.backgroundColor=[UIColor colorFromHexRGB:@"c6dfe5"];
+    cell2.field.placeholder=@"请输入密码";
+    TKRememberCell *cell3=[[[TKRememberCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     
-    TKLoginButtonCell *cell6=[[[TKLoginButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-    [cell6.button setTitle:@"登陆" forState:UIControlStateNormal];
-    [cell6.button addTarget:self action:@selector(buttonSubmit) forControlEvents:UIControlEventTouchUpInside];
+    TKLoginButtonCell *cell4=[[[TKLoginButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+    [cell4.button setTitle:@"登录" forState:UIControlStateNormal];
+    [cell4.button addTarget:self action:@selector(buttonSubmit) forControlEvents:UIControlEventTouchUpInside];
     
-    self.cells=[NSMutableArray arrayWithObjects:cell1,cell2,cell3,cell4,cell5,cell6, nil];
+    self.cells=[NSMutableArray arrayWithObjects:cell1,cell2,cell3,cell4, nil];
 	// Do any additional setup after loading the view.
 }
 -(BOOL)formSubmit{
@@ -90,7 +106,7 @@
         if ([item isKindOfClass:[TKTextFieldCell class]]) {
             TKTextFieldCell *cell=(TKTextFieldCell*)item;
             if (!cell.hasValue) {
-                [cell.field becomeFirstResponder];
+                //[cell.field becomeFirstResponder];
                 [cell.field shake];
                 return NO;
             }
@@ -100,18 +116,19 @@
 }
 //提交
 -(void)buttonSubmit{
-    if (![self formSubmit]) {
-        return;
-    }
     for (id item in self.cells) {
         if ([item isKindOfClass:[TKTextFieldCell class]]) {
             TKTextFieldCell *cell=(TKTextFieldCell*)item;
             [cell.field resignFirstResponder];
         }
     }
-    TKTextFieldCell *cell1=self.cells[1];
-    TKTextFieldCell *cell2=self.cells[3];
-    TKRememberCell *cell3=self.cells[4];
+    if (![self formSubmit]) {
+        return;
+    }
+    
+    TKTextFieldCell *cell1=self.cells[0];
+    TKTextFieldCell *cell2=self.cells[1];
+    TKRememberCell *cell3=self.cells[2];
     
     NSMutableArray *params=[NSMutableArray array];
     [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:cell1.field.text,@"uid", nil]];
@@ -160,13 +177,10 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([self.cells[indexPath.row] isKindOfClass:[TKLoginButtonCell class]]) {
-        return 55.0;
+        return 50.0;
     }
     if ([self.cells[indexPath.row] isKindOfClass:[TKRememberCell class]]) {
-        return 20.0;
-    }
-    if (indexPath.row%2==0) {
-        return 30;
+        return 25.0;
     }
     return 44.0;
 }

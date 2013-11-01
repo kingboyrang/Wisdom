@@ -46,6 +46,8 @@
     menu.controler=self;
     [self.view addSubview:menu];
     [menu release];
+    
+    [self loadWetherTitleView];
 }
 -(void)buttonMenuItemIndex:(NSString*)index{
     if ([index isEqualToString:@"0"]) {

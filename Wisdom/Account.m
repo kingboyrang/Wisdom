@@ -18,6 +18,7 @@
     [encoder encodeObject:self.userPwd forKey:@"userPwd"];
     [encoder encodeBool:self.isRemember forKey:@"isRemember"];
     [encoder encodeBool:self.isLogin forKey:@"isLogin"];
+    [encoder encodeObject:self.appId forKey:@"appId"];
     [encoder encodeObject:self.userId forKey:@"userId"];
     [encoder encodeObject:self.channelId forKey:@"channelId"];
     [encoder encodeObject:self.appToken forKey:@"appToken"];
@@ -28,6 +29,7 @@
         self.userPwd=[aDecoder decodeObjectForKey:@"userPwd"];
         self.isRemember=[aDecoder decodeBoolForKey:@"isRemember"];
         self.isLogin=[aDecoder decodeBoolForKey:@"isLogin"];
+        self.appId=[aDecoder decodeObjectForKey:@"appId"];
         self.userId=[aDecoder decodeObjectForKey:@"userId"];
         self.channelId=[aDecoder decodeObjectForKey:@"channelId"];
         self.appToken=[aDecoder decodeObjectForKey:@"appToken"];
@@ -76,6 +78,7 @@
         self.userPwd=obj.userPwd;
         self.isRemember=obj.isRemember;
         self.isLogin=obj.isLogin;
+        self.appId=obj.appId;
         self.userId=obj.userId;
         self.channelId=obj.channelId;
         self.appToken=obj.appToken;
@@ -84,6 +87,7 @@
         self.userPwd=@"";
         self.isRemember=NO;
         self.isLogin=NO;
+        self.appId=@"";
         self.userId=@"";
         self.channelId=@"";
         self.appToken=@"";

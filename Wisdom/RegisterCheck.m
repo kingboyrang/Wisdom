@@ -31,7 +31,7 @@
     return self;
 }
 -(void)loadControls:(CGRect)frame{
-    CGFloat leftx=0;
+    CGFloat leftx=40;
     if (!_lightLabel) {
         NSString *title=@"下次自动登录";
         CGSize size=[title textSize:[UIFont boldSystemFontOfSize:15.0] withWidth:frame.size.width-leftx];
@@ -40,16 +40,26 @@
         _lightLabel.text=title;
         _lightLabel.backgroundColor=[UIColor clearColor];
         _lightLabel.textColor=[UIColor blackColor];
-        //[UIColor colorWithRed:110/255.0 green:106/255.0 blue:97/255.0 alpha:1];
-        leftx=_lightLabel.frame.size.width+5;
+        
+        leftx=_lightLabel.frame.size.width+5+_lightLabel.frame.origin.x;
         UISwitch *switchItem=[[UISwitch alloc] initWithFrame:CGRectMake(leftx, (frame.size.height-30)/2, 40, 30)];
         switchItem.on=YES;
         [switchItem addTarget:self action:@selector(buttonClickTap:) forControlEvents:UIControlEventValueChanged];
+        
+        /***
+        CGRect r=_lightLabel.frame;
+        r.origin.x=(frame.size.width-size.width-5-switchItem.frame.size.width)/2;
+        _lightLabel.frame=r;
+      
+        
+        r=switchItem.frame;
+        r.origin.x=_lightLabel.frame.origin.x+5+size.width;
+        switchItem.frame=r;
+         ***/
+        
         [self addSubview:switchItem];
         [switchItem release];
     }
-    //[self addButton:leftx height:frame.size.height index:100];
-    //leftx+=20+1;
     [self addSubview:_lightLabel];
     
 }

@@ -13,6 +13,7 @@
 @property(nonatomic,copy) NSString *userPwd;
 @property(nonatomic,assign) BOOL isRemember;
 @property(nonatomic,assign) BOOL isLogin;
+@property(nonatomic,copy) NSString *appId;
 @property(nonatomic,copy) NSString *userId;
 @property(nonatomic,copy) NSString *channelId;
 @property(nonatomic,copy) NSString *appToken;

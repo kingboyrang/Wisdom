@@ -11,6 +11,8 @@
 #import "UIImage+TPCategory.h"
 #import "IndexViewController.h"
 #import "BasicNavigationController.h"
+#import "MemberViewController.h"
+#import "MapViewController.h"
 //获取设备的物理高度
 #define TabHeight 54 //工具栏高度
 @interface MainViewController ()
@@ -53,17 +55,16 @@
     IndexViewController *viewController1=[[[IndexViewController alloc] init] autorelease];
     BasicNavigationController *nav1=[[[BasicNavigationController alloc] initWithRootViewController:viewController1] autorelease];
 
-   UIViewController *viewController2=[[[UIViewController alloc] init] autorelease];
-    viewController2.view.backgroundColor=[UIColor whiteColor];
+   MapViewController *viewController2=[[[MapViewController alloc] init] autorelease];
+    BasicNavigationController *nav2=[[[BasicNavigationController alloc] initWithRootViewController:viewController2] autorelease];
     
    UIViewController *viewController3=[[[UIViewController alloc] init] autorelease];
      viewController3.view.backgroundColor=[UIColor whiteColor];
     
-   UIViewController *viewController4=[[[UIViewController alloc] init] autorelease];
-    viewController4.view.backgroundColor=[UIColor whiteColor];
+   MemberViewController *viewController4=[[[MemberViewController alloc] init] autorelease];
+    BasicNavigationController *nav4=[[[BasicNavigationController alloc] initWithRootViewController:viewController4] autorelease];
     
-    
-    self.viewControllers = [NSArray arrayWithObjects:nav1,viewController2,viewController3,viewController4, nil];
+    self.viewControllers = [NSArray arrayWithObjects:nav1,nav2,viewController3,nav4, nil];
     
     //重设可见视图大小
     
