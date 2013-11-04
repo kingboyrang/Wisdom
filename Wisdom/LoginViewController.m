@@ -155,10 +155,10 @@
                 [self.navigationController popViewControllerAnimated:YES];
             }];
         }else{
-            [self hideLoadingFailedWithTitle:@"登录失败！" completed:nil];
+            [self showMessageWithTitle:@"登录失败！"];
         }
     } failed:^(NSError *error, NSDictionary *userInfo) {
-        [self hideLoadingFailedWithTitle:@"登录失败！" completed:nil];
+        [self showMessageWithTitle:@"登录失败！"];
     }];
 }
 - (void)didReceiveMemoryWarning

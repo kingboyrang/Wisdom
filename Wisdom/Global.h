@@ -34,6 +34,12 @@
 #define HotelIntroduceURL @"http://iBDCloud.com:8888/app/main04.htm"
 //美食
 #define FoodIntroduceURL @"http://iBDCloud.com:8888/app/main05.htm"
-
-
+//路况
+#define RoadIntroduceURL @"http://iBDCloud.com:8888/app/traffic01.htm"
+//公交
+#define BusIntroduceURL @"http://iBDCloud.com:8888/app/traffic02.htm"
+//出租车
+#define TaxiIntroduceURL @"http://iBDCloud.com:8888/app/traffic03.htm"
+//航班
+#define FlightIntroduceURL @"http://iBDCloud.com:8888/app/traffic04.htm"
 

@@ -9,6 +9,7 @@
 #import "MaitreyaViewController.h"
 #import "AnimateLoadView.h"
 #import "ASIHTTPRequest.h"
+#import "NetWorkConnection.h"
 @interface MaitreyaViewController ()
 
 @end
@@ -30,6 +31,10 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg.png"] forBarMetrics:UIBarMetricsDefault];
     [self editBackBarbuttonItem:@"弥勒介绍"];
     self.view.backgroundColor=[UIColor whiteColor];
+    if (![NetWorkConnection IsEnableConnection]) {
+        [self showNoNetworkNotice:nil];
+        return;
+    }
 
     __block AnimateLoadView *activityIndicator = nil;
     if (!activityIndicator)    {
@@ -47,40 +52,23 @@
         [self.view addSubview:activityIndicator];
         [activityIndicator.activityIndicatorView startAnimating];
     }
-    /***
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSError *error=nil;
-        NSString *html=[NSString stringWithContentsOfURL:[NSURL URLWithString:MaitreyaURL] encoding:NSUTF8StringEncoding error:&error];
-        if (error==nil) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [activityIndicator removeFromSuperview];
-                activityIndicator = nil;
-                UIWebView *webView=[[[UIWebView alloc] initWithFrame:self.view.bounds] autorelease];
-                [webView loadHTMLString:html baseURL:nil];
-                [self.view addSubview:webView];
-            });
-        }
-        else {
-            [activityIndicator removeFromSuperview];
-             activityIndicator = nil;
-            [self showErrorViewWithHide:^(AnimateErrorView *errorView) {
-                errorView.labelTitle.text=@"加载失败!";
-            } completed:nil];
-        }
-    });
-     ***/
     ASIHTTPRequest *reuqest=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:MaitreyaURL]];
     [reuqest setDefaultResponseEncoding:NSUTF8StringEncoding];
     [reuqest setCompletionBlock:^{
         [activityIndicator removeFromSuperview];
         activityIndicator = nil;
-        UIWebView *webView=[[[UIWebView alloc] initWithFrame:self.view.bounds] autorelease];
-        [webView loadHTMLString:reuqest.responseString baseURL:nil];
-        [self.view addSubview:webView];
+        if (reuqest.responseStatusCode==200) {
+            UIWebView *webView=[[[UIWebView alloc] initWithFrame:self.view.bounds] autorelease];
+            [webView loadHTMLString:reuqest.responseString baseURL:nil];
+            [self.view addSubview:webView];
+        }else{
+          [self showMessageWithTitle:@"加载失败!"];
+        }
     }];
     [reuqest setFailedBlock:^{
         [activityIndicator removeFromSuperview];
         activityIndicator = nil;
+        [self showMessageWithTitle:@"加载失败!"];
     }];
     [reuqest startAsynchronous];
 }

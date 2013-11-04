@@ -34,4 +34,8 @@
 -(void)loadLoginBarButtonItem;
 -(void)loadWetherTitleView;
 -(void)buttonExitLogin;
+
+- (void) showNoNetworkNotice:(void (^)(void))dismissError;
+- (void) showMessageWithTitle:(NSString*)title;
+- (void) showMessageWithTitle:(NSString*)title innerView:(UIView*)view;
 @end

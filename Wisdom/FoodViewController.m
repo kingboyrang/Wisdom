@@ -8,6 +8,7 @@
 
 #import "FoodViewController.h"
 #import "ASIHTTPRequest.h"
+#import "NetWorkConnection.h"
 @interface FoodViewController ()
 
 @end
@@ -29,6 +30,10 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg.png"] forBarMetrics:UIBarMetricsDefault];
     [self editBackBarbuttonItem:@"美食"];
     self.view.backgroundColor=[UIColor whiteColor];
+    if (![NetWorkConnection IsEnableConnection]) {
+        [self showNoNetworkNotice:nil];
+        return;
+    }
     __block AnimateLoadView *activityIndicator = nil;
     if (!activityIndicator)    {
         activityIndicator=[[AnimateLoadView alloc] initWithFrame:CGRectMake(0, 0, 300, 40)];
@@ -73,13 +78,18 @@
     [reuqest setCompletionBlock:^{
         [activityIndicator removeFromSuperview];
         activityIndicator = nil;
-        UIWebView *webView=[[[UIWebView alloc] initWithFrame:self.view.bounds] autorelease];
-        [webView loadHTMLString:reuqest.responseString baseURL:nil];
-        [self.view addSubview:webView];
+        if (reuqest.responseStatusCode==200) {
+            UIWebView *webView=[[[UIWebView alloc] initWithFrame:self.view.bounds] autorelease];
+            [webView loadHTMLString:reuqest.responseString baseURL:nil];
+            [self.view addSubview:webView];
+            return;
+        }
+        [self showMessageWithTitle:@"加载失败!"];
     }];
     [reuqest setFailedBlock:^{
         [activityIndicator removeFromSuperview];
         activityIndicator = nil;
+         [self showMessageWithTitle:@"加载失败!"];
     }];
     [reuqest startAsynchronous];
 	// Do any additional setup after loading the view.

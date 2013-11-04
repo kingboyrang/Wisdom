@@ -28,13 +28,9 @@
         NSLog(@"manager start failed!");
     }
    
-    NSString *path1=[DocumentPath stringByAppendingPathComponent:@"IcoAddress@2x.png"];
-    UIImage *image1=[[UIImage imageNamed:@"IcoAddress.png"] imageByScalingToSize:CGSizeMake(28*2, 43*2)];
-    [image1 saveImage:path1];
-    NSLog(@"path=%@\n",path1);
+  
     /***
      
-    
 
     NSString *path2=[DocumentPath stringByAppendingPathComponent:@"message.png"];
     UIImage *image2=[[UIImage imageNamed:@"message.png"] imageAtRect:CGRectMake(0, 33, 80, 55)];
@@ -148,15 +144,14 @@
 }
 #pragma mark - 接收推播信息
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    //NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     if (application.applicationState == UIApplicationStateActive) {
-        // Nothing to do if applicationState is Inactive, the iOS already displayed an alert view.
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Did receive a Remote Notification"
-                                                            message:[NSString stringWithFormat:@"The application received this remote notification while it was running:\n%@", alert]
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-        [alertView show];
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Did receive a Remote Notification"
+//                                                            message:[NSString stringWithFormat:@"The application received this remote notification while it was running:\n%@", alert]
+//                                                           delegate:self
+//                                                  cancelButtonTitle:@"OK"
+//                                                  otherButtonTitles:nil];
+//        [alertView show];
     }
     [application setApplicationIconBadgeNumber:0];
     

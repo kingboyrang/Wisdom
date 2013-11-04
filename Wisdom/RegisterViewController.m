@@ -169,10 +169,10 @@
                 [self.navigationController popViewControllerAnimated:YES];
             }];
         }else{
-            [self hideLoadingFailedWithTitle:@"注册失败！" completed:nil];
+            [self showMessageWithTitle:@"注册失败！"];
         }
     } failed:^(NSError *error, NSDictionary *userInfo) {
-        [self hideLoadingFailedWithTitle:@"注册失败！" completed:nil];
+        [self showMessageWithTitle:@"注册失败！"];
     }];
 }
 - (void)didReceiveMemoryWarning

@@ -15,6 +15,8 @@
 #import "UIButton+TPCategory.h"
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
+#import "WBErrorNoticeView.h"
+#import "WBInfoNoticeView.h"
 @interface BasicViewController (){
     AnimateLoadView *_loadView;
     AnimateErrorView *_errorView;
@@ -62,6 +64,24 @@
 {   self.showRightBtnItem=YES;
     [super viewDidLoad];
 }
+- (void) showMessageWithTitle:(NSString*)title{
+    [self showMessageWithTitle:title innerView:self.view];
+}
+- (void) showMessageWithTitle:(NSString*)title innerView:(UIView*)view{
+    WBInfoNoticeView *info=[WBInfoNoticeView infoNoticeInView:view title:title];
+    [info show];
+    info.gradientView.backgroundColor=[UIColor colorFromHexRGB:@"c94018"];
+}
+- (void) showNoNetworkNotice:(void (^)(void))dismissError{
+    WBErrorNoticeView *notice = [WBErrorNoticeView errorNoticeInView:self.view title:@"网络未连接" message:@"请检查您的网络连接."];
+    [notice setDismissalBlock:^(BOOL dismissedInteractively) {
+        if (dismissError) {
+            dismissError();
+        }
+    }];
+    [notice show];
+}
+
 -(void)loadWetherTitleView{
     UIImage *image=[[UIImage imageNamed:@"ico_weather.png"] imageByScalingProportionallyToSize:CGSizeMake(62*35/44, 35)];
     UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];

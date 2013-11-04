@@ -24,12 +24,13 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"topbg.png"] forBarMetrics:UIBarMetricsDefault];
+     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"topbg.png"] forBarMetrics:UIBarMetricsDefault];
+   
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self loadWetherTitleView];
     //设置背景
     CGRect r=self.view.bounds;
     r.size.height-=44;

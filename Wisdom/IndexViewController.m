@@ -13,6 +13,7 @@
 #import "ViewViewController.h"
 #import "HotelViewController.h"
 #import "FoodViewController.h"
+#import "TrafficViewController.h"
 @interface IndexViewController ()
 @end
 
@@ -57,6 +58,11 @@
     }
     if ([index isEqualToString:@"1"]) {
         ViewViewController *controller=[[ViewViewController alloc] init];
+        [self.navigationController pushViewController:controller animated:YES];
+        [controller release];
+    }
+    if ([index isEqualToString:@"2"]) {
+        TrafficViewController *controller=[[TrafficViewController alloc] init];
         [self.navigationController pushViewController:controller animated:YES];
         [controller release];
     }
