@@ -17,6 +17,7 @@
 #import "RegisterViewController.h"
 #import "WBErrorNoticeView.h"
 #import "WBInfoNoticeView.h"
+#import "SkyViewController.h"
 @interface BasicViewController (){
     AnimateLoadView *_loadView;
     AnimateErrorView *_errorView;
@@ -25,6 +26,7 @@
 -(void)buttonBackClick;
 -(void)buttonLogin;
 -(void)buttonRegister;
+-(void)buttonWeatherClick;
 @end
 
 @implementation BasicViewController
@@ -87,8 +89,14 @@
     UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame=CGRectMake(0,9/2, image.size.width, image.size.height);
     [btn setBackgroundImage:image forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(buttonWeatherClick) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView=btn;
     
+}
+-(void)buttonWeatherClick{
+    SkyViewController *weather=[[SkyViewController alloc] init];
+    [self.navigationController pushViewController:weather animated:YES];
+    [weather release];
 }
 -(void)loadNoLoginBarButtonItem{
     UIView *rightView=[[UIView alloc] initWithFrame:CGRectZero];

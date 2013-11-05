@@ -11,6 +11,7 @@
 #import "UIImage+TPCategory.h"
 #import "BPush.h"
 #import "Account.h"
+#import "ZBarSDK.h"
 @implementation AppDelegate
 - (void)dealloc
 {
@@ -21,20 +22,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [ZBarReaderView class]; 
     _mapManager = [[BMKMapManager alloc]init];
     // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
     BOOL ret = [_mapManager start:@"0E0006d6779b856330e93e877acbd7d1"  generalDelegate:self];
     if (!ret) {
         NSLog(@"manager start failed!");
     }
-   
-  
-    /***
-     
+       /***
 
-    NSString *path2=[DocumentPath stringByAppendingPathComponent:@"message.png"];
-    UIImage *image2=[[UIImage imageNamed:@"message.png"] imageAtRect:CGRectMake(0, 33, 80, 55)];
-    [image2 saveImage:path2];
+        NSString *path2=[DocumentPath stringByAppendingPathComponent:@"weatherTemp.png"];
+        UIImage *image2=[[UIImage imageNamed:@"weatherTemp.gif"] imageAtRect:CGRectMake(0, 0, 50, 46)];
+        [image2 saveImage:path2];
+
 
      NSString *path=[DocumentPath stringByAppendingPathComponent:@"login.png"];
      UIImage *image=[[UIImage imageNamed:@"login.png"] imageByScalingProportionallyToSize:CGSizeMake(80*35/49, 35)];

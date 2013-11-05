@@ -11,5 +11,6 @@
 @interface AdModel : NSObject
 @property(nonatomic,copy) NSString *advertName;
 @property(nonatomic,copy) NSString *thumb;
+@property(nonatomic,copy) NSString *webURl;
 +(NSMutableArray*)sourceModels;
 @end

@@ -109,6 +109,7 @@
     {
         
         UIImageView *img_Ad = [[UIImageView alloc] initWithFrame:CGRectMake(DeviceWidth*y, 0, DeviceWidth, self.frame.size.height)];
+        //img_Ad.userInteractionEnabled=YES;
         [img_Ad setTag:y];
         //[img_Ad setImageWithURL:[NSURL URLWithString:adModel.thumb]];
         [img_Ad setImage:[UIImage imageWithContentsOfFile:adModel.thumb]];
@@ -154,6 +155,9 @@ static int cur_count = -1;
 #pragma mark - ----- -> 点击广告
 - (void)OpenAd:(int)iTag
 {
+    AdModel *adModel=self.ads[iTag];
+    UIApplication *app=[UIApplication sharedApplication];
+    [app openURL:[NSURL URLWithString:adModel.webURl]];
     //WebViewController *webVC = [[WebViewController alloc] initWithUrl:@"http://baidu.com"];
     //[self.viewController.navigationController pushViewController:webVC  animated:YES];
     
@@ -224,8 +228,9 @@ static float maxLoc = 0.f, minLoc = 0.f;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
+   
     UIView *touchedView = [touches.anyObject view];
+    [self OpenAd:touchedView.tag];
     [self.delegate openAd:self adModel:_ads[touchedView.tag]];
  
 }

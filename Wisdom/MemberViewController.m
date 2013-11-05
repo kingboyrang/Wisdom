@@ -8,6 +8,10 @@
 
 #import "MemberViewController.h"
 #import "MemberCell.h"
+#import "MainViewController.h"
+#import "EditPwdViewController.h"
+#import "Account.h"
+#import "QRCodeViewController.h"
 @interface MemberViewController ()
 
 @end
@@ -98,7 +102,30 @@
     return cell;
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row==1) {
+        QRCodeViewController *controller=[[QRCodeViewController alloc] init];
+        [self.navigationController pushViewController:controller animated:YES];
+        [controller release];
+    }
+    if (indexPath.row==3) {
+        Account *acc=[Account sharedInstance];
+        if (acc.isLogin) {
+           EditPwdViewController *controller=[[EditPwdViewController alloc] init];
+            [self.navigationController pushViewController:controller animated:YES];
+           [controller release];
+        }else{
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                        message:@"当前未登录，无去修改密码!"
+                                                                       delegate:nil
+                                                             cancelButtonTitle:@"确定"
+                                                              otherButtonTitles:nil];
+                   [alertView show];
+        }
+    }
     //页面执行
-    NSLog(@"index=%d",indexPath.row);
+    if (indexPath.row==4) {
+        MainViewController *main=(MainViewController*)self.tabBarController;
+        [main setSelectedItemIndex:2];
+    }
 }
 @end

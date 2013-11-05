@@ -15,6 +15,7 @@
 #import "UIImage+TPCategory.h"
 #import "Account.h"
 #import "UIColor+TPCategory.h"
+#import "NetWorkConnection.h"
 @interface LoginViewController ()
 -(void)buttonSubmit;
 -(BOOL)formSubmit;
@@ -125,6 +126,10 @@
     if (![self formSubmit]) {
         return;
     }
+    if(![NetWorkConnection IsEnableConnection]){
+        [self showNoNetworkNotice:nil];
+        return;
+    }
     
     TKTextFieldCell *cell1=self.cells[0];
     TKTextFieldCell *cell2=self.cells[1];
@@ -155,10 +160,14 @@
                 [self.navigationController popViewControllerAnimated:YES];
             }];
         }else{
-            [self showMessageWithTitle:@"登录失败！"];
+            [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
+                [self showMessageWithTitle:@"登录失败！"];
+            }];
         }
     } failed:^(NSError *error, NSDictionary *userInfo) {
-        [self showMessageWithTitle:@"登录失败！"];
+        [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
+            [self showMessageWithTitle:@"登录失败！"];
+        }];
     }];
 }
 - (void)didReceiveMemoryWarning

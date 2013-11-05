@@ -48,6 +48,7 @@
     [self.view addSubview:_scrollView];
     
     PushView *view1=[[[PushView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, h)] autorelease];
+    view1.infoType=1;
     view1.tag=100;
     [_scrollView addSubview:view1];
     [view1 loadingSourceData];
@@ -62,11 +63,13 @@
 }
 -(void)pageScrollLeft{
     PushView *view=(PushView*)[_scrollView viewWithTag:100];
+    view.infoType=1;
     [view loadingSourceData];
     [self.scrollView setContentOffset:CGPointMake(0, 0)];//页面滑动
 }
 -(void)pageScrollRight{
     PushView *view=(PushView*)[_scrollView viewWithTag:101];
+    view.infoType=2;
     [view loadingSourceData];
     [self.scrollView setContentOffset:CGPointMake(DeviceWidth, 0)];//页面滑动
 }

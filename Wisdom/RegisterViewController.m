@@ -16,6 +16,7 @@
 #import "TKLabelFieldCell.h"
 #import "UIColor+TPCategory.h"
 #import "TKRegisterButtonCell.h"
+#import "NetWorkConnection.h"
 @interface RegisterViewController ()
 -(void)buttonSubmit;
 -(BOOL)formSubmit;
@@ -136,17 +137,28 @@
     if (![self formSubmit]) {
         return;
     }
-    
+    if(![NetWorkConnection IsEnableConnection]){
+        [self showNoNetworkNotice:nil];
+        return;
+    }
     TKLabelFieldCell *cell1=self.cells[0];
     TKLabelFieldCell *cell2=self.cells[1];
     TKRegisterCheckCell *cell3=self.cells[4];
+    
+    
     Account *acc=[Account sharedInstance];
+    NSString *uid=acc.userId;
+    if([acc.userId isEqual:[NSNull null]]){uid=@"";}
+    NSString *chanelId=acc.channelId;
+    if([acc.channelId isEqual:[NSNull null]]){chanelId=@"";}
+    
+
     
     NSMutableArray *params=[NSMutableArray array];
     [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:cell1.field.text,@"uid", nil]];
     [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:cell2.field.text,@"pwd", nil]];
-    [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:acc.userId,@"userId", nil]];
-    [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:acc.channelId,@"channelId", nil]];
+    [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:uid,@"userId", nil]];
+    [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:chanelId,@"channelId",nil]];
     ServiceArgs *args=[[[ServiceArgs alloc] init] autorelease];
     args.methodName=@"Register";
     args.soapParams=params;
@@ -169,10 +181,15 @@
                 [self.navigationController popViewControllerAnimated:YES];
             }];
         }else{
-            [self showMessageWithTitle:@"注册失败！"];
+            [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
+                [self showMessageWithTitle:@"注册失败！"];
+            }];
         }
     } failed:^(NSError *error, NSDictionary *userInfo) {
-        [self showMessageWithTitle:@"注册失败！"];
+        [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
+            [self showMessageWithTitle:@"注册失败！"];
+        }];
+        
     }];
 }
 - (void)didReceiveMemoryWarning

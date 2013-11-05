@@ -43,3 +43,11 @@
 //航班
 #define FlightIntroduceURL @"http://iBDCloud.com:8888/app/traffic04.htm"
 
+//天气
+//取得一周天气
+#define WeatherWeekURL @"http://m.weather.com.cn/data/101290304.html"
+//取得今天天气
+#define WeatherDayURL @"http://www.weather.com.cn/data/sk/101290304.html"
+#define WeatherCityDayURL @"http://www.weather.com.cn/data/cityinfo/101290304.html"
+
+

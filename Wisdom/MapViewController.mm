@@ -8,6 +8,7 @@
 
 #import "MapViewController.h"
 #import "BMapKit.h"
+#import "NetWorkConnection.h"
 @interface MapViewController ()
 
 @end
@@ -72,7 +73,10 @@
     r.size.height-=54+44;
     _mapView= [[BMKMapView alloc]initWithFrame:r];
     [self.view addSubview:_mapView];
-	// Do any additional setup after loading the view.
+	if(![NetWorkConnection IsEnableConnection]){
+        [self showNoNetworkNotice:nil];
+        return;
+    }
 }
 -(void)cleanMap
 {
