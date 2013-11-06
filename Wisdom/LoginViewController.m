@@ -34,15 +34,18 @@
     }
     return self;
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self navigationItemWithBack];
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.showRightBtnItem=NO;
     _helper=[[ServiceHelper alloc] init];
+    [self loadRightWetherView];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg.png"] forBarMetrics:UIBarMetricsDefault];
-    [self editBackBarbuttonItem:@"会员登录"];
     //[self.navigationItem rightBarBtnItem:@"登录" target:self action:@selector(buttonSubmit)];
     
     //bg_002.png

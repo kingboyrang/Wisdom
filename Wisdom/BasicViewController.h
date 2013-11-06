@@ -30,9 +30,14 @@
 -(void) showSuccessViewWithHide:(void (^)(AnimateErrorView *errorView))process completed:(void (^)(AnimateErrorView *errorView))complete;
 -(void) hideLoadingSuccessWithTitle:(NSString*)title completed:(void (^)(AnimateErrorView *errorView))complete;
 
+-(void)navigationItemWithBack;
+-(void)navigationItemWithBackTitle:(NSString*)title;
 -(void)loadNoLoginBarButtonItem;
+-(void)loadNoLoginBarButtonItemWithWeather;
 -(void)loadLoginBarButtonItem;
+-(void)loadLoginBarButtonItemWithWeather;
 -(void)loadWetherTitleView;
+-(void)loadRightWetherView;
 -(void)buttonExitLogin;
 
 - (void) showNoNetworkNotice:(void (^)(void))dismissError;

@@ -35,14 +35,18 @@
     }
     return self;
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self navigationItemWithBack];
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self loadRightWetherView];
     self.showRightBtnItem=NO;
     _helper=[[ServiceHelper alloc] init];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg.png"] forBarMetrics:UIBarMetricsDefault];
-    [self editBackBarbuttonItem:@"注册"];
+   
     //[self.navigationItem rightBarBtnItem:@"确认" target:self action:@selector(buttonSubmit)];
     
     CGRect r=self.view.bounds;
@@ -147,13 +151,14 @@
     
     
     Account *acc=[Account sharedInstance];
-    NSString *uid=acc.userId;
-    if([acc.userId isEqual:[NSNull null]]){uid=@"";}
-    NSString *chanelId=acc.channelId;
-    if([acc.channelId isEqual:[NSNull null]]){chanelId=@"";}
-    
-
-    
+    NSString *uid=@"";
+    if(acc.userId&&[acc.userId length]>0){
+        uid=acc.userId;
+    }
+    NSString *chanelId=@"";
+    if(acc.channelId&&[acc.channelId length]>0){
+        chanelId=acc.channelId;
+    }
     NSMutableArray *params=[NSMutableArray array];
     [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:cell1.field.text,@"uid", nil]];
     [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:cell2.field.text,@"pwd", nil]];

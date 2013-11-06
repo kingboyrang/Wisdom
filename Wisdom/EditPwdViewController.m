@@ -27,13 +27,16 @@
     }
     return self;
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self navigationItemWithBack];
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self loadRightWetherView];
     _helper=[[ServiceHelper alloc] init];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg.png"] forBarMetrics:UIBarMetricsDefault];
-    [self editBackBarbuttonItem:@"修改密码"];
     
     CGRect r=self.view.bounds;
     r.size.height-=44;

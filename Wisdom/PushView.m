@@ -82,7 +82,17 @@
         return;
     }
     currentPage++;
-    NSString *uid=self.infoType==1?acc.userAcc:@"";
+    NSString *uid=@"";
+    if (self.infoType==1&&acc.userAcc&&[acc.userAcc length]>0) {
+        uid=acc.userAcc;
+    }
+    if([uid length]==0&&self.infoType==1){
+        currentPage--;
+        [_tableView tableViewDidFinishedLoading];
+        _tableView.reachedTheEnd  = NO;
+        //[self showInfoWithTitle:@"我的信息!"];
+        return;
+    }
     NSMutableArray *params=[NSMutableArray array];
     [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:uid,@"uid", nil]];
     [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d",currentPage],@"start", nil]];
@@ -94,17 +104,21 @@
     [_helper asynService:args success:^(ServiceResult *result) {
         [_tableView tableViewDidFinishedLoading];
         _tableView.reachedTheEnd  = NO;
-        if ([result.xmlString length]==0) {
-            currentPage--;
-            [self showInfoWithTitle:@"没有返回数据!"];
-            return;
-        }
         if (self.refreshing) {
             self.refreshing = NO;
+        }
+        if ([result.xmlString length]==0) {
+            currentPage--;
+            [self showInfoWithTitle:@"没有信息哦!"];
+            return;
         }
         NSString *xml=[result.xmlString stringByReplacingOccurrencesOfString:result.xmlnsAttr withString:@""];
         [result.xmlParse setDataSource:xml];
         XmlNode *node=[result.xmlParse soapXmlSelectSingleNode:@"//GetPushsResult"];
+        if ([node.Value length]==0) {
+            [self showInfoWithTitle:@"没有信息哦!"];
+            return;
+        }
         NSArray *arr=[node.Value componentsSeparatedByString:@"<;>"];
         int totalCount=[[arr objectAtIndex:0] intValue];
         maxPage=totalCount%pageSize==0?totalCount/pageSize:totalCount/pageSize+1;
@@ -133,7 +147,7 @@
         currentPage--;
         self.refreshing = NO;
         [_tableView tableViewDidFinishedLoading];
-        [self showInfoWithTitle:@"没有返回数据!"];
+        [self showInfoWithTitle:@"没有信息哦!"];
     }];
 }
 #pragma mark -

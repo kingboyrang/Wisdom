@@ -24,12 +24,16 @@
     }
     return self;
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg.png"] forBarMetrics:UIBarMetricsDefault];
+    [self editBackBarbuttonItem:@"交通"];
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg.png"] forBarMetrics:UIBarMetricsDefault];
-    [self editBackBarbuttonItem:@"交通"];
+    [self loadWetherTitleView];
     self.view.backgroundColor=[UIColor whiteColor];
     
     CGFloat h=self.view.bounds.size.height-44-54-48;

@@ -31,12 +31,16 @@
     [super viewDidAppear:animated];
     
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self navigationItemWithBack];
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg.png"] forBarMetrics:UIBarMetricsDefault];
-    [self editBackBarbuttonItem:@"二维码"];
-    
+    self.showRightBtnItem=NO;
+    [self loadRightWetherView];
    ZBarReaderViewController *_readerController = [[ZBarReaderViewController new] retain];
     _readerController.readerDelegate = self;
     //非全屏

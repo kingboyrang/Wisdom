@@ -15,6 +15,9 @@
 #import "ASIHTTPRequest.h"
 #import "CurrentWeather.h"
 #import "NetWorkConnection.h"
+#import "LoginViewController.h"
+#import "RegisterViewController.h"
+#import "Account.h"
 @interface SkyViewController ()
 -(void)loadHeaderControls;
 @end
@@ -29,12 +32,22 @@
     }
     return self;
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+     [self navigationItemWithBack];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg.png"] forBarMetrics:UIBarMetricsDefault];
-    [self editBackBarbuttonItem:@"天气"];
+    
+    NSArray *arr=self.navigationController.viewControllers;
+    if (arr&&[arr count]>=2) {
+        id v=[arr objectAtIndex:arr.count-2];
+        if ([v isKindOfClass:[LoginViewController class]]||[v isKindOfClass:[RegisterViewController class]]) {
+            Account *acc=[Account sharedInstance];
+            if(!acc.isLogin){self.showRightBtnItem=NO;}
+        }
+    }
     [self loadHeaderControls];
     if(![NetWorkConnection IsEnableConnection]){
         self.sourceData=[NSArray array];

@@ -23,12 +23,16 @@
     }
     return self;
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg.png"] forBarMetrics:UIBarMetricsDefault];
+    [self editBackBarbuttonItem:@"美食"];
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg.png"] forBarMetrics:UIBarMetricsDefault];
-    [self editBackBarbuttonItem:@"美食"];
+    [self loadWetherTitleView];
     self.view.backgroundColor=[UIColor whiteColor];
     if (![NetWorkConnection IsEnableConnection]) {
         [self showNoNetworkNotice:nil];
