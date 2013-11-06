@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0114A5A21828EEC400332911 /* code.png in Resources */ = {isa = PBXBuildFile; fileRef = 0114A5A11828EEC400332911 /* code.png */; };
 		0114A5C31828F21400332911 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0114A5A41828F21400332911 /* .gitignore */; };
 		0114A5C41828F21400332911 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0114A5BC1828F21400332911 /* libzbar.a */; };
 		0114A5C51828F21400332911 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 0114A5BD1828F21400332911 /* README */; };
@@ -161,6 +160,7 @@
 		01BA000718209B6D00C09E1B /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BAFFFA18209B6D00C09E1B /* ASIHTTPRequest.m */; };
 		01BA000818209B6D00C09E1B /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BAFFFE18209B6D00C09E1B /* ASIInputStream.m */; };
 		01BA000918209B6D00C09E1B /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BA000018209B6D00C09E1B /* ASINetworkQueue.m */; };
+		01C228F11829F1140059BFA2 /* pickerImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C228F01829F1140059BFA2 /* pickerImage.m */; };
 		01C4D6F518288F1F0058907F /* WeatherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4D6F418288F1F0058907F /* WeatherCell.m */; };
 		01C4D6F718288F530058907F /* WeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C4D6F618288F530058907F /* WeatherCell.xib */; };
 		01C4D6FA182894C10058907F /* WeatherResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4D6F9182894C10058907F /* WeatherResult.m */; };
@@ -218,7 +218,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0114A5A11828EEC400332911 /* code.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = code.png; sourceTree = "<group>"; };
 		0114A5A41828F21400332911 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		0114A5A81828F21400332911 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
 		0114A5A91828F21400332911 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
@@ -504,6 +503,8 @@
 		01BAFFFD18209B6D00C09E1B /* ASIInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIInputStream.h; sourceTree = "<group>"; };
 		01BAFFFE18209B6D00C09E1B /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIInputStream.m; sourceTree = "<group>"; };
 		01BAFFFF18209B6D00C09E1B /* ASINetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASINetworkQueue.h; sourceTree = "<group>"; };
+		01C228EF1829F1140059BFA2 /* pickerImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pickerImage.h; sourceTree = "<group>"; };
+		01C228F01829F1140059BFA2 /* pickerImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pickerImage.m; sourceTree = "<group>"; };
 		01C4D6F318288F1F0058907F /* WeatherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherCell.h; sourceTree = "<group>"; };
 		01C4D6F418288F1F0058907F /* WeatherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherCell.m; sourceTree = "<group>"; };
 		01C4D6F618288F530058907F /* WeatherCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherCell.xib; sourceTree = "<group>"; };
@@ -863,7 +864,6 @@
 		015A076A181E31E200000FCC /* images */ = {
 			isa = PBXGroup;
 			children = (
-				0114A5A11828EEC400332911 /* code.png */,
 				01816D411828C0AE00C94D74 /* weatherTemp.png */,
 				01EA441B1828C00C00C29D2D /* dplace.png */,
 				0163B8DD182771BA000FFD36 /* bg_002_normal.png */,
@@ -990,6 +990,7 @@
 		01816D511828EBB600C94D74 /* MemeberCenter */ = {
 			isa = PBXGroup;
 			children = (
+				01C228ED1829F0C20059BFA2 /* QRUI */,
 				01816D521828EBD200C94D74 /* QRCodeViewController.h */,
 				01816D531828EBD200C94D74 /* QRCodeViewController.m */,
 			);
@@ -1268,6 +1269,15 @@
 			path = ASIHttpRequest;
 			sourceTree = "<group>";
 		};
+		01C228ED1829F0C20059BFA2 /* QRUI */ = {
+			isa = PBXGroup;
+			children = (
+				01C228EF1829F1140059BFA2 /* pickerImage.h */,
+				01C228F01829F1140059BFA2 /* pickerImage.m */,
+			);
+			name = QRUI;
+			sourceTree = "<group>";
+		};
 		01C4D6EB18287BEB0058907F /* WeatherUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1540,7 +1550,6 @@
 				01EA441C1828C00C00C29D2D /* dplace.png in Resources */,
 				01816D421828C0AE00C94D74 /* weatherTemp.png in Resources */,
 				01816D4C1828D2C100C94D74 /* CurrentWeather.xib in Resources */,
-				0114A5A21828EEC400332911 /* code.png in Resources */,
 				0114A5C31828F21400332911 /* .gitignore in Resources */,
 				0114A5C51828F21400332911 /* README in Resources */,
 				0114A5C61828F21400332911 /* zbar-back.png in Resources */,
@@ -1660,6 +1669,7 @@
 				01816D4B1828D2C100C94D74 /* CurrentWeather.m in Sources */,
 				01816D4F1828E19B00C94D74 /* EditPwdViewController.m in Sources */,
 				01816D541828EBD200C94D74 /* QRCodeViewController.m in Sources */,
+				01C228F11829F1140059BFA2 /* pickerImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

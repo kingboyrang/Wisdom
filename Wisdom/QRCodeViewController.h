@@ -9,4 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "ZBarSDK.h"
 @interface QRCodeViewController : BasicViewController<ZBarReaderDelegate>
+-(void)finishPickerImage:(UIImage*)image;
 @end
