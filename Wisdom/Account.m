@@ -48,7 +48,7 @@
 -(void)save{
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:data forKey:@"EncodeAccount"];
+    [defaults setObject:data forKey:@"saveEncodeAccount"];
     [defaults synchronize];
 }
 +(void)accountLogin:(NSString*)user password:(NSString*)pwd login:(BOOL)login{
@@ -71,7 +71,7 @@
 #pragma mark 私有方法
 -(void)initloadValue{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSData *data = [defaults objectForKey:@"EncodeAccount"];
+    NSData *data = [defaults objectForKey:@"saveEncodeAccount"];
     if (data) {
         Account *obj = (Account*)[NSKeyedUnarchiver unarchiveObjectWithData: data];
         self.userAcc=obj.userAcc;

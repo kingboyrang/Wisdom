@@ -161,6 +161,7 @@
 		01BA000818209B6D00C09E1B /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BAFFFE18209B6D00C09E1B /* ASIInputStream.m */; };
 		01BA000918209B6D00C09E1B /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BA000018209B6D00C09E1B /* ASINetworkQueue.m */; };
 		01C228F11829F1140059BFA2 /* pickerImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C228F01829F1140059BFA2 /* pickerImage.m */; };
+		01C3B74E182B3A91001C0255 /* cat.caf in Resources */ = {isa = PBXBuildFile; fileRef = 01C3B74D182B3A91001C0255 /* cat.caf */; };
 		01C4D6F518288F1F0058907F /* WeatherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4D6F418288F1F0058907F /* WeatherCell.m */; };
 		01C4D6F718288F530058907F /* WeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C4D6F618288F530058907F /* WeatherCell.xib */; };
 		01C4D6FA182894C10058907F /* WeatherResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4D6F9182894C10058907F /* WeatherResult.m */; };
@@ -505,6 +506,7 @@
 		01BAFFFF18209B6D00C09E1B /* ASINetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASINetworkQueue.h; sourceTree = "<group>"; };
 		01C228EF1829F1140059BFA2 /* pickerImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pickerImage.h; sourceTree = "<group>"; };
 		01C228F01829F1140059BFA2 /* pickerImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pickerImage.m; sourceTree = "<group>"; };
+		01C3B74D182B3A91001C0255 /* cat.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = cat.caf; sourceTree = "<group>"; };
 		01C4D6F318288F1F0058907F /* WeatherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherCell.h; sourceTree = "<group>"; };
 		01C4D6F418288F1F0058907F /* WeatherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherCell.m; sourceTree = "<group>"; };
 		01C4D6F618288F530058907F /* WeatherCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherCell.xib; sourceTree = "<group>"; };
@@ -836,6 +838,7 @@
 		015A0747181E302E00000FCC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				01C3B74D182B3A91001C0255 /* cat.caf */,
 				01DA07651823772A00597F2A /* BPushConfig.plist */,
 				01A1EC1E181E3861009539D0 /* Default-568h@2x.png */,
 				01A1EC1C181E3803009539D0 /* Default@2x.png */,
@@ -1556,6 +1559,7 @@
 				0114A5C71828F21400332911 /* zbar-help.html in Resources */,
 				0114A5C81828F21400332911 /* zbar-helpicons.png in Resources */,
 				0114A5C91828F21400332911 /* zbar-samples.png in Resources */,
+				01C3B74E182B3A91001C0255 /* cat.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

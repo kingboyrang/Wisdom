@@ -22,7 +22,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [ZBarReaderView class]; 
+    [ZBarReaderView class];
+    //fD8052pzVUNGQLMlLuNGMIvh 我的API key
+    
+    //6shoE9aDtgljrB0YYKdGhO7a
     _mapManager = [[BMKMapManager alloc]init];
     // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
     BOOL ret = [_mapManager start:@"0E0006d6779b856330e93e877acbd7d1"  generalDelegate:self];
@@ -60,10 +63,8 @@
     [BPush setDelegate:self];
     
     [application setApplicationIconBadgeNumber:0];
-    [application registerForRemoteNotificationTypes:
-     UIRemoteNotificationTypeAlert
-     | UIRemoteNotificationTypeBadge
-     | UIRemoteNotificationTypeSound];
+    //注册推播
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge |UIRemoteNotificationTypeSound)];
     
     return YES;
 }
@@ -83,7 +84,6 @@
         NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
         //NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
         int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
-        
         if (returnCode == BPushErrorCode_Success) {
             Account *acc=[Account sharedInstance];
             acc.appId=appid;
@@ -121,6 +121,10 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    Account *acc=[Account sharedInstance];
+    if ([acc.appId length]==0) {
+        [BPush bindChannel];
+    }
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
@@ -140,6 +144,7 @@
     acc.appToken=deviceId;
     [acc save];
     [BPush registerDeviceToken: deviceToken];
+    [BPush bindChannel];
     
 }
 #pragma mark - 接收推播信息
@@ -148,7 +153,7 @@
     if (application.applicationState == UIApplicationStateActive) {
 //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Did receive a Remote Notification"
 //                                                            message:[NSString stringWithFormat:@"The application received this remote notification while it was running:\n%@", alert]
-//                                                           delegate:self
+//                                                          delegate:self
 //                                                  cancelButtonTitle:@"OK"
 //                                                  otherButtonTitles:nil];
 //        [alertView show];
