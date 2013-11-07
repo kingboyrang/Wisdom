@@ -19,6 +19,7 @@
 }
 @property (nonatomic) BOOL refreshing;
 @property (nonatomic,strong) NSMutableArray *list;
+@property (nonatomic,strong) NSMutableArray *cells;
 @property (nonatomic,assign) int infoType;
 -(void)loadingSourceData;
 @end

@@ -43,4 +43,6 @@
 - (void) showNoNetworkNotice:(void (^)(void))dismissError;
 - (void) showMessageWithTitle:(NSString*)title;
 - (void) showMessageWithTitle:(NSString*)title innerView:(UIView*)view;
+
+-(void)buttonBackClick;
 @end

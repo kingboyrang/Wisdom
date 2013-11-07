@@ -92,6 +92,10 @@
     }
     [UIView commitAnimations];
 }
+-(void)scrollerToRight{
+   UIButton *btn=(UIButton*)[self viewWithTag:101];
+    [self buttonComInfoClick:btn];
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

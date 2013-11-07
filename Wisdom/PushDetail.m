@@ -54,6 +54,8 @@
         r.size.height=_lineImageView.frame.origin.y+image3.size.height;
         self.frame=r;
         
+        
+        
         self.backgroundColor=[UIColor colorFromHexRGB:@"f9f6f7"];
     }
     return self;
@@ -83,6 +85,8 @@
             r=self.frame;
             r.size.height=_lineImageView.frame.origin.y+_lineImageView.frame.size.height;
             self.frame=r;
+            
+            
         }
     }
 }

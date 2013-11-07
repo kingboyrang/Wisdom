@@ -83,8 +83,8 @@
     _tabbarView.autoresizesSubviews=YES;
     _tabbarView.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin;
     [self.view addSubview:_tabbarView];
-    NSArray *heightBackground = @[@"index.png",@"location.png",@"message.png",@"search.png"];
-    NSArray *backgroud = @[@"index_select.png",@"location_select.png",@"message_select.png",@"search_select.png"];
+    NSArray *heightBackground = @[@"index.png",@"location.png",@"message.png",@"member.png"];
+    NSArray *backgroud = @[@"index_select.png",@"location_select.png",@"message_select.png",@"member_select.png"];
     
        //总数
     _barButtonItemCount=[backgroud count];

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface IndexViewController : BasicViewController
+#import "AdView.h"
+@interface IndexViewController : BasicViewController<AdViewDelegate>
 -(void)buttonMenuItemIndex:(NSString*)index;
 @end

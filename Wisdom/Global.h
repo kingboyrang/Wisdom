@@ -23,7 +23,7 @@
 #define PushWebserviceURL @"http://60.251.51.217/Pushs.Admin/WebServices/Push.asmx"
 #define PushNameSpace @"http://tempuri.org/"
 //webservice
-#define DataWebserviceURL @"http://192.168.123.134/MiLe.Web/Webservices/Push.asmx"
+#define DataWebserviceURL @"http://ibdcloud.com:8889/WebServices/Push.asmx"
 #define DataNameSpace @"http://tempuri.org/"
 
 //弥勒介绍

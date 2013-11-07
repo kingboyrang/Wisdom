@@ -10,6 +10,5 @@
 
 @interface MemberCell : UICollectionViewCell
 @property (retain, nonatomic) IBOutlet UIImageView *imageView;
-@property (retain, nonatomic) IBOutlet UILabel *labTitle;
 
 @end

@@ -12,4 +12,5 @@
     UIImageView *imageView;
 }
 @property(assign) id controler;
+-(void)scrollerToRight;
 @end

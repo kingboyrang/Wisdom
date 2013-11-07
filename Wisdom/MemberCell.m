@@ -14,7 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor=[UIColor clearColor];
+        
         // Initialization code
         NSArray *arrayOfViews = [[NSBundle mainBundle] loadNibNamed:@"MemberCell" owner:self options: nil];
         if(arrayOfViews.count < 1){return nil;}
@@ -22,12 +22,12 @@
             return nil;
         }
         self = [arrayOfViews objectAtIndex:0];
+        self.backgroundColor=[UIColor clearColor];
     }
     return self;
 }
 - (void)dealloc {
     [_imageView release];
-    [_labTitle release];
     [super dealloc];
 }
 @end

@@ -230,7 +230,7 @@ static float maxLoc = 0.f, minLoc = 0.f;
 {
    
     UIView *touchedView = [touches.anyObject view];
-    [self OpenAd:touchedView.tag];
+    //[self OpenAd:touchedView.tag];
     [self.delegate openAd:self adModel:_ads[touchedView.tag]];
  
 }

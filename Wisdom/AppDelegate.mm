@@ -32,13 +32,13 @@
     if (!ret) {
         NSLog(@"manager start failed!");
     }
+   
        /***
-
-        NSString *path2=[DocumentPath stringByAppendingPathComponent:@"weatherTemp.png"];
-        UIImage *image2=[[UIImage imageNamed:@"weatherTemp.gif"] imageAtRect:CGRectMake(0, 0, 50, 46)];
+        NSString *path2=[DocumentPath stringByAppendingPathComponent:@"changepwdbg.png"];
+        UIImage *image2=[UIImage imageNamed:@"changepwdbg.png"];
         [image2 saveImage:path2];
-
-
+        NSLog(@"path=%@\n",path2);
+        
      NSString *path=[DocumentPath stringByAppendingPathComponent:@"login.png"];
      UIImage *image=[[UIImage imageNamed:@"login.png"] imageByScalingProportionallyToSize:CGSizeMake(80*35/49, 35)];
      [image saveImage:path];

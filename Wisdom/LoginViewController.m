@@ -16,6 +16,7 @@
 #import "Account.h"
 #import "UIColor+TPCategory.h"
 #import "NetWorkConnection.h"
+#import "MemberViewController.h"
 @interface LoginViewController ()
 -(void)buttonSubmit;
 -(BOOL)formSubmit;
@@ -36,7 +37,22 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self navigationItemWithBack];
+     [self navigationItemWithBack];
+    Account *acc=[Account sharedInstance];
+   
+    if(acc.isLogin){
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+}
+-(void)buttonBackClick{
+    NSArray *arr=self.navigationController.viewControllers;
+    if(arr&&[arr count]>=2){
+        id v=[arr objectAtIndex:arr.count-2];
+        if(![v isKindOfClass:[MemberViewController class]]){
+            [super buttonBackClick];
+        }
+    }
     
 }
 - (void)viewDidLoad

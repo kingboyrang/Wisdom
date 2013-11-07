@@ -12,6 +12,7 @@
 #import "TKRegisterButtonCell.h"
 #import "Account.h"
 #import "NetWorkConnection.h"
+#import "UIImage+TPCategory.h"
 @interface EditPwdViewController ()
 -(void)buttonSubmit;
 -(BOOL)formSubmit;
@@ -46,8 +47,22 @@
     [self.view addSubview:bgImageView];
     [bgImageView release];
     
+    r.origin.x=20;
+    r.origin.y=(self.view.bounds.size.height-300-54-44)/2.0;
+    r.size.width=DeviceWidth-40;
+    r.size.height=300;
+    
+    CGFloat topY=r.origin.y+79;
+    
+    UIImage *image=[[UIImage imageNamed:@"changepwdbg.png"] imageByScalingToSize:r.size];
+    UIImageView *imageView=[[UIImageView alloc] initWithFrame:r];
+    [imageView setImage:image];
+    [self.view addSubview:imageView];
+    [imageView release];
+    
+    
     r.origin.x=(self.view.bounds.size.width-260)/2;
-    r.origin.y=110;
+    r.origin.y=topY;
     r.size.height=self.view.bounds.size.height-90;
     r.size.width=260;
     _tableView=[[UITableView alloc] initWithFrame:r style:UITableViewStylePlain];

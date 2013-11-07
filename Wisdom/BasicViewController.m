@@ -23,7 +23,7 @@
     AnimateErrorView *_errorView;
     AnimateErrorView *_successView;
 }
--(void)buttonBackClick;
+
 -(void)buttonLogin;
 -(void)buttonRegister;
 -(void)buttonWeatherClick;

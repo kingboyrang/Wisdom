@@ -13,4 +13,5 @@
 }
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) NSMutableArray *cells;
+-(void)buttonBackClick;
 @end

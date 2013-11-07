@@ -9,6 +9,8 @@
 #import "PushViewController.h"
 #import "scrollSwitch.h"
 #import "PushView.h"
+#import "PushDetail.h"
+#import "Account.h"
 @interface PushViewController ()
 
 @end
@@ -37,29 +39,42 @@
     scrollSwitch *switchItem=[[scrollSwitch alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 40)];
     switchItem.controler=self;
     [self.view addSubview:switchItem];
-    [switchItem release];
+   
     
     CGFloat h=self.view.bounds.size.height-44-54-40;
     _scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(0, 40, DeviceWidth, h)];
     _scrollView.pagingEnabled=NO;
     _scrollView.showsHorizontalScrollIndicator=NO;
     _scrollView.showsVerticalScrollIndicator=NO;
-    [_scrollView setContentSize:CGSizeMake(DeviceWidth, h)];
+    [_scrollView setContentSize:CGSizeMake(DeviceWidth*2, h)];
     [self.view addSubview:_scrollView];
+    
+     /***
+    PushDetail *detail=[[PushDetail alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 77)];
+    detail.labDate.text=@"2012.10.08";
+    detail.labMessage.text=@"test all 15:33";
+    [_scrollView addSubview:detail];
+    [detail release];
+   ***/
     
     PushView *view1=[[[PushView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, h)] autorelease];
     view1.infoType=1;
     view1.tag=100;
     [_scrollView addSubview:view1];
-    [view1 loadingSourceData];
     
-    PushView *view2=[[PushView alloc] initWithFrame:CGRectMake(DeviceWidth, 0, DeviceWidth, h)];
+    
+    PushView *view2=[[[PushView alloc] initWithFrame:CGRectMake(DeviceWidth, 0, DeviceWidth, h)] autorelease];
     view2.tag=101;
     view2.infoType=2;
     [_scrollView addSubview:view2];
-    [view2 release];
-    
-        
+ 
+    Account *acc=[Account sharedInstance];
+    if(acc.isLogin){
+      [view1 loadingSourceData];
+    }else{
+       [switchItem scrollerToRight];
+    }
+    [switchItem release];  
 }
 -(void)pageScrollLeft{
     PushView *view=(PushView*)[_scrollView viewWithTag:100];

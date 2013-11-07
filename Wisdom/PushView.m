@@ -15,9 +15,11 @@
 #import "WBErrorNoticeView.h"
 #import "Account.h"
 #import "UIColor+TPCategory.h"
+#import "TKPushDetailCell.h"
 @interface PushView ()
 -(void)loadData;
 -(void)showInfoWithTitle:(NSString*)title;
+-(void)showUpdateInfoWithTitle:(NSString*)title;
 @end
 
 @implementation PushView
@@ -57,6 +59,10 @@
     WBInfoNoticeView *info=[WBInfoNoticeView infoNoticeInView:self title:title];
     [info show];
     info.gradientView.backgroundColor=[UIColor colorFromHexRGB:@"c94018"];
+}
+-(void)showUpdateInfoWithTitle:(NSString*)title{
+    WBInfoNoticeView *info=[WBInfoNoticeView infoNoticeInView:self title:title];
+    [info show];
 }
 #pragma mark -
 #pragma mark 加载数据
@@ -126,8 +132,19 @@
         xml=[[arr objectAtIndex:1] stringByReplacingOccurrencesOfString:@"xmlns=\"Push[]\"" withString:@""];
         [result.xmlParse setDataSource:xml];
         NSArray *source=[result.xmlParse selectNodes:@"//Push" className:@"Push"];
+        [self showUpdateInfoWithTitle:[NSString stringWithFormat:@"更新%d笔信息!",source.count]];
+        
+       
         if (currentPage==1) {
+             NSMutableArray *sourceCells=[NSMutableArray array];
+            for (int i=0; i<source.count; i++) {
+                TKPushDetailCell *cell=[[TKPushDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+                [sourceCells addObject:cell];
+                [cell release];
+            }
+            self.cells=sourceCells;
             self.list=[NSMutableArray arrayWithArray:source];
+           
             [_tableView reloadData];
         }else{
             NSMutableArray *insertIndexPaths = [NSMutableArray arrayWithCapacity:pageSize];
@@ -135,6 +152,10 @@
                 [self.list addObject:[source objectAtIndex:i]];
                 NSIndexPath *newPath=[NSIndexPath indexPathForRow:(currentPage-1)*pageSize+i inSection:0];
                 [insertIndexPaths addObject:newPath];
+                
+                TKPushDetailCell *cell=[[TKPushDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+                [self.cells addObject:cell];
+                [cell release];
             }
             //重新呼叫UITableView的方法, 來生成行.
             [_tableView beginUpdates];
@@ -156,20 +177,11 @@
     return [self.list count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *CellIdentifier = @"CellCircularIdentifier";
-    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell==nil) {
-        cell=[[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        PushDetail *detail=[[PushDetail alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 71)];
-        detail.tag=100;
-        [cell.contentView addSubview:detail];
-        [detail release];
-    }
+    TKPushDetailCell *cell=self.cells[indexPath.row];
+    cell.selectionStyle=UITableViewCellSeparatorStyleNone;
     Push *entity=self.list[indexPath.row];
-    PushDetail *detail=(PushDetail*)[cell.contentView viewWithTag:100];
-    detail.labDate.text=entity.PubDate;
-    detail.labMessage.text=entity.Subject;
+    cell.detailView.labDate.text=[entity.PubDate Trim];
+    cell.detailView.labMessage.text=[entity.Subject Trim];
     return cell;
     
 }
@@ -181,9 +193,18 @@
     if (size.height>43){
         return 5+10+size.height+10+3+6;
     }
-    return 71;
+    return 77;
 }
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    Push *entity=self.list[indexPath.row];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"详情"
+                                                                message:[entity.Subject Trim]
+                                                              delegate:nil
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+    
+}
 #pragma mark - PullingRefreshTableViewDelegate
 //下拉加载
 - (void)pullingTableViewDidStartRefreshing:(PullingRefreshTableView *)tableView{

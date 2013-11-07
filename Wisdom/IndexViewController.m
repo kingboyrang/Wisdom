@@ -7,13 +7,14 @@
 //
 
 #import "IndexViewController.h"
-#import "AdView.h"
+
 #import "IndexMenu.h"
 #import "MaitreyaViewController.h"
 #import "ViewViewController.h"
 #import "HotelViewController.h"
 #import "FoodViewController.h"
 #import "TrafficViewController.h"
+#import "WebViewController.h"
 @interface IndexViewController ()
 @end
 
@@ -38,6 +39,7 @@
     self.view.backgroundColor=[UIColor whiteColor];
     
     AdView *ad_view=[[AdView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 141)];
+    ad_view.delegate=self;
     ad_view.ads=[AdModel sourceModels];
     [self.view addSubview:ad_view];
     [ad_view adLoad];
@@ -49,6 +51,12 @@
     [menu release];
     
     [self loadWetherTitleView];
+}
+- (void)openAd: (AdView *)controller adModel: (AdModel *)adModel{
+    WebViewController *web=[[WebViewController alloc] init];
+    web.webURL=adModel.webURl;
+    [self.navigationController pushViewController:web animated:YES];
+    [web release];
 }
 -(void)buttonMenuItemIndex:(NSString*)index{
     if ([index isEqualToString:@"0"]) {

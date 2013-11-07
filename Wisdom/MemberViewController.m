@@ -12,6 +12,8 @@
 #import "EditPwdViewController.h"
 #import "Account.h"
 #import "QRCodeViewController.h"
+#import "BuildViewController.h"
+#import "LoginViewController.h"
 @interface MemberViewController ()
 
 @end
@@ -51,7 +53,7 @@
     CGFloat h=136;
     flowlayout.itemSize=CGSizeMake(DeviceWidth/3.0, h);
     flowlayout.scrollDirection=UICollectionViewScrollDirectionVertical;
-    flowlayout.sectionInset=UIEdgeInsetsMake(10, 0, 10, 0);
+    flowlayout.sectionInset=UIEdgeInsetsMake(10, 0, 5, 0);
     flowlayout.minimumLineSpacing=0.0;
     flowlayout.minimumInteritemSpacing=0.0;
     _collectionView=[[UICollectionView alloc] initWithFrame:rect collectionViewLayout:flowlayout];
@@ -70,15 +72,19 @@
     [flowlayout release];
     
     NSMutableArray *source1=[NSMutableArray array];
-    for (int i=10; i<18; i++) {
+    for (int i=10; i<20; i++) {
         [source1 addObject:[NSString stringWithFormat:@"ico_0%d.png",i]];
     }
-    NSMutableArray *source2=[NSMutableArray arrayWithObjects:@"个人资料",@"二维码",@"旅记",@"修改密码",@"我的消息",@"下载中心",@"注销用户",@"优惠信息", nil];
-    NSMutableArray *result=[NSMutableArray array];
-    [result addObject:source1];
-    [result addObject:source2];
-    self.sourceData=result;
+    //NSMutableArray *source2=[NSMutableArray arrayWithObjects:@"个人资料",@"二维码",@"旅记",@"修改密码",@"我的消息",@"下载中心",@"注销用户",@"优惠信息", nil];
+    self.sourceData=source1;
 	// Do any additional setup after loading the view.
+    
+    Account *acc=[Account sharedInstance];
+    if(!acc.isLogin){
+        LoginViewController *login=[[LoginViewController alloc] init];
+        [self.navigationController pushViewController:login animated:YES];
+        [login release];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -89,17 +95,14 @@
 #pragma mark -
 #pragma mark UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    NSMutableArray *source1 = [self.sourceData objectAtIndex:0];
-    return [source1 count];
+    return [self.sourceData count];
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSMutableArray *source1 = [self.sourceData objectAtIndex:0];
-    NSMutableArray *source2 = [self.sourceData objectAtIndex:1];
+    NSString *path = [self.sourceData objectAtIndex:indexPath.row];
     static NSString *cellIdentifier = @"memberCell";
     MemberCell *cell = (MemberCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    [cell.imageView setImage:[UIImage imageNamed:[source1 objectAtIndex:indexPath.row]]];
-    cell.labTitle.text=[source2 objectAtIndex:indexPath.row];
+    [cell.imageView setImage:[UIImage imageNamed:path]];
     return cell;
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -108,7 +111,7 @@
         [self.navigationController pushViewController:controller animated:YES];
         [controller release];
     }
-    if (indexPath.row==3) {
+   else if (indexPath.row==3) {
         Account *acc=[Account sharedInstance];
         if (acc.isLogin) {
            EditPwdViewController *controller=[[EditPwdViewController alloc] init];
@@ -123,10 +126,13 @@
                    [alertView show];
         }
     }
-    //页面执行
-    if (indexPath.row==4) {
+    else if (indexPath.row==4) {//页面执行
         MainViewController *main=(MainViewController*)self.tabBarController;
         [main setSelectedItemIndex:2];
+    }else{
+        BuildViewController *controller=[[BuildViewController alloc] init];
+        [self.navigationController pushViewController:controller animated:YES];
+        [controller release];
     }
 }
 @end
