@@ -18,6 +18,8 @@
 #import "WBErrorNoticeView.h"
 #import "WBInfoNoticeView.h"
 #import "SkyViewController.h"
+#import "MemberViewController.h"
+#import "MainViewController.h"
 @interface BasicViewController (){
     AnimateLoadView *_loadView;
     AnimateErrorView *_errorView;
@@ -97,7 +99,6 @@
     [btn setBackgroundImage:image forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(buttonWeatherClick) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView=btn;
-    
 }
 -(void)loadRightWetherView{
     UIView *rightV=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 52*2+5+62*35/44, 44)];
@@ -256,6 +257,14 @@
 -(void)buttonExitLogin{
     [Account exitAccount];
     [self loadNoLoginBarButtonItem];
+    
+    MainViewController *main=(MainViewController*)self.tabBarController;
+    if (main.selectedIndex==3) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        LoginViewController *login=[[LoginViewController alloc] init];
+        [self.navigationController pushViewController:login animated:YES];
+        [login release];
+    }
 }
 -(void)editBackBarbuttonItem:(NSString*)title{
     [self.navigationItem backBarBtnItem:title target:self action:@selector(buttonBackClick)];

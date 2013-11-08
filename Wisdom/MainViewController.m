@@ -14,6 +14,7 @@
 #import "MemberViewController.h"
 #import "MapViewController.h"
 #import "PushViewController.h"
+#import "LoginViewController.h"
 //获取设备的物理高度
 #define TabHeight 54 //工具栏高度
 @interface MainViewController ()
@@ -124,6 +125,21 @@
         _prevSelectIndex=button.tag-100;
     }
     self.selectedIndex = button.tag-100;
+    
+    
+    NSArray *controls=self.viewControllers;
+    UINavigationController *navController=(UINavigationController*)[controls objectAtIndex:self.selectedIndex];
+    NSArray *arr=navController.viewControllers;
+    if (self.selectedIndex!=3&&[arr count]>1) {
+        [navController popToRootViewControllerAnimated:YES];//回首页
+    }else{
+        if (arr.count==2&&[navController.topViewController isKindOfClass:[LoginViewController class]]) {
+            
+        }else{
+           [navController popToRootViewControllerAnimated:YES];//回首页
+        }
+    }
+
     
 }
 - (void)setSelectedItemIndex:(int)index{

@@ -12,6 +12,8 @@
 @interface scrollSwitch ()
 -(void)buttonMyInfoClick:(id)sender;
 -(void)buttonComInfoClick:(id)sender;
+-(void)scrollAnimalToLeft:(BOOL)animal;
+-(void)scrollAnimalToRight:(BOOL)animal;
 @end
 
 @implementation scrollSwitch
@@ -60,41 +62,68 @@
     return self;
 }
 -(void)buttonMyInfoClick:(id)sender{
-    UIButton *btn=(UIButton*)sender;
-    UIButton *btn1=(UIButton*)[self viewWithTag:101];
-    
-    [btn setTitleColor:[UIColor colorFromHexRGB:@"919293"] forState:UIControlStateNormal];//此时选中
-    [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时未被选中
-    
-    [UIView beginAnimations:nil context:nil];//动画开始
-    [UIView setAnimationDuration:0.3];
-    
-    imageView.frame=CGRectMake(self.bounds.size.width/2, 0, self.bounds.size.width/2, self.bounds.size.height);
-    //[nibScrollView setContentOffset:CGPointMake(self.view.bounds.size.width*0, 0)];//页面滑动
-    if (self.controler&&[self.controler respondsToSelector:@selector(pageScrollLeft)]) {
-        [self.controler performSelector:@selector(pageScrollLeft)];
-    }
-    [UIView commitAnimations];
-    
+    [self scrollAnimalToLeft:YES];
 }
 -(void)buttonComInfoClick:(id)sender{
-    UIButton *btn=(UIButton*)sender;
+    [self scrollAnimalToRight:YES];
+}
+-(void)scrollAnimalToLeft:(BOOL)animal{
+    UIButton *btn=(UIButton*)[self viewWithTag:100];
+    UIButton *btn1=(UIButton*)[self viewWithTag:101];
+    [btn setTitleColor:[UIColor colorFromHexRGB:@"919293"] forState:UIControlStateNormal];//此时选中
+    [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时未被选中
+
+    NSTimeInterval duration=animal?0.3f:0.0f;
+    [UIView animateWithDuration:duration animations:^{
+        imageView.frame=CGRectMake(self.bounds.size.width/2, 0, self.bounds.size.width/2, self.bounds.size.height);
+        if (self.controler&&[self.controler respondsToSelector:@selector(pageScrollLeft)]) {
+            [self.controler performSelector:@selector(pageScrollLeft)];
+        }
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+-(void)scrollAnimalToRight:(BOOL)animal{
+   UIButton *btn=(UIButton*)[self viewWithTag:101];
     UIButton *btn1=(UIButton*)[self viewWithTag:100];
     [btn setTitleColor:[UIColor colorFromHexRGB:@"919293"] forState:UIControlStateNormal];//此时选中
     [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时未被选中
-    
-    [UIView beginAnimations:nil context:nil];//动画开始
-    [UIView setAnimationDuration:0.3];
-    
-    imageView.frame=CGRectMake(0, 0, self.bounds.size.width/2, self.bounds.size.height);
-    if (self.controler&&[self.controler respondsToSelector:@selector(pageScrollRight)]) {
-        [self.controler performSelector:@selector(pageScrollRight)];
-    }
-    [UIView commitAnimations];
+    NSTimeInterval duration=animal?0.3f:0.0f;
+    [UIView animateWithDuration:duration animations:^{
+        imageView.frame=CGRectMake(0, 0, self.bounds.size.width/2, self.bounds.size.height);
+        if (self.controler&&[self.controler respondsToSelector:@selector(pageScrollRight)]) {
+            [self.controler performSelector:@selector(pageScrollRight)];
+        }
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 -(void)scrollerToRight{
-   UIButton *btn=(UIButton*)[self viewWithTag:101];
-    [self buttonComInfoClick:btn];
+    [self scrollAnimalToRight:YES];
+}
+-(void)scrollerToLeft{
+    [self scrollAnimalToLeft:YES];
+}
+-(void)animalToLeft{
+    UIButton *btn=(UIButton*)[self viewWithTag:100];
+    UIButton *btn1=(UIButton*)[self viewWithTag:101];
+    [btn setTitleColor:[UIColor colorFromHexRGB:@"919293"] forState:UIControlStateNormal];//此时选中
+    [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时未被选中
+    
+    [UIView animateWithDuration:0.3f animations:^{
+        imageView.frame=CGRectMake(self.bounds.size.width/2, 0, self.bounds.size.width/2, self.bounds.size.height);
+    }];
+    
+}
+-(void)animalToRight{
+    UIButton *btn=(UIButton*)[self viewWithTag:101];
+    UIButton *btn1=(UIButton*)[self viewWithTag:100];
+    [btn setTitleColor:[UIColor colorFromHexRGB:@"919293"] forState:UIControlStateNormal];//此时选中
+    [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];//此时未被选中
+    [UIView animateWithDuration:0.3f animations:^{
+        imageView.frame=CGRectMake(0, 0, self.bounds.size.width/2, self.bounds.size.height);
+    }];
+    
 }
 /*
 // Only override drawRect: if you perform custom drawing.

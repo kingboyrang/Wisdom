@@ -16,6 +16,7 @@
 #import "Account.h"
 #import "UIColor+TPCategory.h"
 #import "TKPushDetailCell.h"
+#import "WBSuccessNoticeView.h"
 @interface PushView ()
 -(void)loadData;
 -(void)showInfoWithTitle:(NSString*)title;
@@ -61,8 +62,11 @@
     info.gradientView.backgroundColor=[UIColor colorFromHexRGB:@"c94018"];
 }
 -(void)showUpdateInfoWithTitle:(NSString*)title{
-    WBInfoNoticeView *info=[WBInfoNoticeView infoNoticeInView:self title:title];
-    [info show];
+    WBSuccessNoticeView *success=[WBSuccessNoticeView successNoticeInView:self title:title];
+    [success show];
+    success.gradientView.backgroundColor=[UIColor colorFromHexRGB:@"c94018"];
+    //WBInfoNoticeView *info=[WBInfoNoticeView infoNoticeInView:self title:title];
+    //[info show];
 }
 #pragma mark -
 #pragma mark 加载数据

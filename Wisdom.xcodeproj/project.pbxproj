@@ -85,6 +85,9 @@
 		01816D4F1828E19B00C94D74 /* EditPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01816D4E1828E19900C94D74 /* EditPwdViewController.m */; };
 		01816D541828EBD200C94D74 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01816D531828EBD200C94D74 /* QRCodeViewController.m */; };
 		018AE9AF182A1F6B0000AE02 /* nav_com.png in Resources */ = {isa = PBXBuildFile; fileRef = 018AE9AE182A1F6B0000AE02 /* nav_com.png */; };
+		019036AB182C8AA9004777EA /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 019036A6182C8AA9004777EA /* UIAlertView+Blocks.m */; };
+		019036AC182C8AA9004777EA /* RIButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 019036A8182C8AA9004777EA /* RIButtonItem.m */; };
+		019036AD182C8AA9004777EA /* AlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 019036AA182C8AA9004777EA /* AlertHelper.m */; };
 		0197F65D181E3270002F6398 /* UIColor+TPCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0197F65C181E3270002F6398 /* UIColor+TPCategory.m */; };
 		0197F660181E327B002F6398 /* UIImage+TPCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0197F65F181E327B002F6398 /* UIImage+TPCategory.m */; };
 		0197F663181E3289002F6398 /* NSData+TPCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0197F662181E3288002F6398 /* NSData+TPCategory.m */; };
@@ -367,6 +370,12 @@
 		01816D521828EBD200C94D74 /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
 		01816D531828EBD200C94D74 /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
 		018AE9AE182A1F6B0000AE02 /* nav_com.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_com.png; sourceTree = "<group>"; };
+		019036A5182C8AA9004777EA /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
+		019036A6182C8AA9004777EA /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		019036A7182C8AA9004777EA /* RIButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIButtonItem.h; sourceTree = "<group>"; };
+		019036A8182C8AA9004777EA /* RIButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIButtonItem.m; sourceTree = "<group>"; };
+		019036A9182C8AA9004777EA /* AlertHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertHelper.h; sourceTree = "<group>"; };
+		019036AA182C8AA9004777EA /* AlertHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertHelper.m; sourceTree = "<group>"; };
 		0197F65B181E3270002F6398 /* UIColor+TPCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+TPCategory.h"; sourceTree = "<group>"; };
 		0197F65C181E3270002F6398 /* UIColor+TPCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+TPCategory.m"; sourceTree = "<group>"; };
 		0197F65E181E327B002F6398 /* UIImage+TPCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+TPCategory.h"; sourceTree = "<group>"; };
@@ -950,6 +959,7 @@
 		015A076B181E31F700000FCC /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				019036A4182C8A88004777EA /* Blocks */,
 				01C940AA182729690000D159 /* NetWork */,
 				0137DBB61820DC0E0087B152 /* Data */,
 				0137DB4C18209FA30087B152 /* WebService */,
@@ -1039,6 +1049,19 @@
 				015B8BD6182B80AB00B99ED0 /* BuildViewController.m */,
 			);
 			name = MemeberCenter;
+			sourceTree = "<group>";
+		};
+		019036A4182C8A88004777EA /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				019036A5182C8AA9004777EA /* UIAlertView+Blocks.h */,
+				019036A6182C8AA9004777EA /* UIAlertView+Blocks.m */,
+				019036A7182C8AA9004777EA /* RIButtonItem.h */,
+				019036A8182C8AA9004777EA /* RIButtonItem.m */,
+				019036A9182C8AA9004777EA /* AlertHelper.h */,
+				019036AA182C8AA9004777EA /* AlertHelper.m */,
+			);
+			name = Blocks;
 			sourceTree = "<group>";
 		};
 		0199E9B118237E3100A51DAD /* Member */ = {
@@ -1736,6 +1759,9 @@
 				015B8BD7182B80AB00B99ED0 /* BuildViewController.m in Sources */,
 				015B8BDA182B89A800B99ED0 /* TKPushDetailCell.m in Sources */,
 				015B8BDD182B8F9300B99ED0 /* WebViewController.m in Sources */,
+				019036AB182C8AA9004777EA /* UIAlertView+Blocks.m in Sources */,
+				019036AC182C8AA9004777EA /* RIButtonItem.m in Sources */,
+				019036AD182C8AA9004777EA /* AlertHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

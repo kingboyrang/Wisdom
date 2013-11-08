@@ -68,6 +68,7 @@
  @return True if the string is formatted properly as an email address.
  */
 - (BOOL) isEmail;
+- (BOOL) isURLString;
 /** Returns a `NSString` that properly replaces HTML specific character sequences.
  @return An escaped HTML string.
  */

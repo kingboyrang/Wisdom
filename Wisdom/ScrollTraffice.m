@@ -100,6 +100,10 @@
         if (reuqest.responseStatusCode==200) {
             CGRect frame=CGRectMake(index*self.bounds.size.width, 0, self.bounds.size.width, self.bounds.size.height);
             UIWebView *webView=[[[UIWebView alloc] initWithFrame:frame] autorelease];
+            webView.scrollView.minimumZoomScale=1.0;
+            webView.scrollView.maximumZoomScale=2.0;
+            webView.scrollView.decelerationRate=1.0f;
+            //webView.scalesPageToFit=YES;
             [webView loadHTMLString:reuqest.responseString baseURL:nil];
             [_scrollView addSubview:webView];
             [self changeStatus:YES index:index];

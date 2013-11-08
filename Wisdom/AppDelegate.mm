@@ -12,6 +12,7 @@
 #import "BPush.h"
 #import "Account.h"
 #import "ZBarSDK.h"
+#import "NSString+TPCategory.h"
 @implementation AppDelegate
 - (void)dealloc
 {
@@ -48,11 +49,6 @@
     UIImage *image3=[[UIImage imageNamed:@"search_select.png"] imageByScalingProportionallyToSize:CGSizeMake(79, 55)];
     [image3 saveImage:path3];
     ***/
-
-//    NSString *path3=[DocumentPath stringByAppendingPathComponent:@"search_select.png"];
-//    UIImage *image3=[[UIImage imageNamed:@"search_select.gif"] imageAtRect:CGRectMake(0, 22, 80, 62)];
-//    [image3 saveImage:path3];
-    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     MainViewController *main=[[[MainViewController alloc] init] autorelease];
     self.window.rootViewController = main;
@@ -68,6 +64,7 @@
     
     return YES;
 }
+//回首页
 - (void)onGetNetworkState:(int)iError
 {
     NSLog(@"onGetNetworkState %d",iError);

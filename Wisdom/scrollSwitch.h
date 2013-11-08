@@ -13,4 +13,8 @@
 }
 @property(assign) id controler;
 -(void)scrollerToRight;
+-(void)scrollerToLeft;
+
+-(void)animalToLeft;
+-(void)animalToRight;
 @end

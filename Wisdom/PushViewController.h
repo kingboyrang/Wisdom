@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PushViewController : BasicViewController
+@interface PushViewController : BasicViewController<UIScrollViewDelegate>
 @property(nonatomic,strong) UIScrollView *scrollView;
 -(void)pageScrollLeft;
 -(void)pageScrollRight;

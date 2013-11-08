@@ -37,13 +37,15 @@
     
     self.view.backgroundColor=[UIColor whiteColor];
     scrollSwitch *switchItem=[[scrollSwitch alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 40)];
+    switchItem.tag=900;
     switchItem.controler=self;
     [self.view addSubview:switchItem];
    
     
     CGFloat h=self.view.bounds.size.height-44-54-40;
     _scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(0, 40, DeviceWidth, h)];
-    _scrollView.pagingEnabled=NO;
+    _scrollView.delegate=self;
+    _scrollView.pagingEnabled=YES;
     _scrollView.showsHorizontalScrollIndicator=NO;
     _scrollView.showsVerticalScrollIndicator=NO;
     [_scrollView setContentSize:CGSizeMake(DeviceWidth*2, h)];
@@ -75,6 +77,23 @@
        [switchItem scrollerToRight];
     }
     [switchItem release];  
+}
+#pragma mark -
+#pragma mark UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    //更新UIPageControl的当前页
+    CGPoint offset = scrollView.contentOffset;
+    CGRect bounds = scrollView.frame;
+    int page=offset.x / bounds.size.width;
+    
+    scrollSwitch *item=(scrollSwitch*)[self.view viewWithTag:900];
+    if(page==0){
+        [item scrollerToLeft];
+    }else{
+        [item scrollerToRight];
+    }
+    
 }
 -(void)pageScrollLeft{
     PushView *view=(PushView*)[_scrollView viewWithTag:100];

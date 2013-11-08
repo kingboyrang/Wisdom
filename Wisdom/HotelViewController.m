@@ -84,6 +84,7 @@
         activityIndicator = nil;
         if(reuqest.responseStatusCode==200){
             UIWebView *webView=[[[UIWebView alloc] initWithFrame:self.view.bounds] autorelease];
+            //webView.scalesPageToFit=YES;
             [webView loadHTMLString:reuqest.responseString baseURL:nil];
             [self.view addSubview:webView];
             return;

@@ -10,6 +10,8 @@
 #import "NSString+TPCategory.h"
 #import "UIImage+TPCategory.h"
 #import "pickerImage.h"
+#import "NSString+TPCategory.h"
+#import "AlertHelper.h"
 @interface QRCodeViewController ()
 @end
 
@@ -53,6 +55,7 @@
     [scanner setSymbology: ZBAR_I25
                    config: ZBAR_CFG_ENABLE
                        to: 0];
+    _readerController.readerView.torchMode=0;
     [self presentViewController:_readerController animated:YES completion:nil];
     
     
@@ -103,8 +106,8 @@
     //用于说明的label
     UILabel * labIntroudction= [[UILabel alloc] init];
     labIntroudction.backgroundColor = [UIColor clearColor];
-//    labIntroudction.frame=CGRectMake(15, 20, 290, 50);
-    labIntroudction.frame=CGRectMake(15, 400, 290, 50);
+    labIntroudction.frame=CGRectMake(15, 20, 290, 50);
+    //labIntroudction.frame=CGRectMake(15, 400, 290, 50);
     labIntroudction.numberOfLines=2;
     labIntroudction.textColor=[UIColor whiteColor];
     labIntroudction.text=@"将二维码图像置于矩形方框内，离手机摄像头10CM左右，系统会自动识别。";
@@ -148,19 +151,21 @@
     [downView release];
     
     //用于取消操作的button
-    /***
+   
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     cancelButton.alpha = 0.4;
-    [cancelButton setFrame:CGRectMake(20, 390, 280, 40)];
-    [cancelButton setTitle:@"图片" forState:UIControlStateNormal];
+    [cancelButton setFrame:CGRectMake(20, 400, 280, 40)];
+    [cancelButton setTitle:@"返回" forState:UIControlStateNormal];
     [cancelButton.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
     [cancelButton addTarget:self action:@selector(dismissOverlayView:)forControlEvents:UIControlEventTouchUpInside];
     [reader.view addSubview:cancelButton];  
-     ***/
+     
     
 }  
 //取消button方法
 - (void)dismissOverlayView:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
     //pickerImage *picker=[[[pickerImage alloc] init] autorelease];
     //picker.controller=self.readerController;
     //[picker openPhoto];
@@ -198,7 +203,16 @@
                         [textView release];
                         
                     }
-                    completion:NULL];
+                    completion:^(BOOL finished) {
+                        if (finished) {
+                            if ([result isURLString]) {
+                                [AlertHelper initWithTitle:@"是否打开链接？" message:result cancelTitle:@"取消" cancelAction:nil confirmTitle:@"确定" confirmAction:^{
+                                    UIApplication *app=[UIApplication sharedApplication];
+                                    [app openURL:[NSURL URLWithString:result]];
+                                }];
+                            }
+                        }
+                    }];
     
      //[reader dismissModalViewControllerAnimated: YES];
 }

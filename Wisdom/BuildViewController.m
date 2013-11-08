@@ -30,7 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.showRightBtnItem=NO;
+    self.showRightBtnItem=YES;
     self.view.backgroundColor=[UIColor whiteColor];
     [self loadRightWetherView];
     

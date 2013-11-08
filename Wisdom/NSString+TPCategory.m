@@ -125,6 +125,12 @@
     NSPredicate *regExPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
     return [regExPredicate evaluateWithObject:[self lowercaseString]];
 }
+- (BOOL) isURLString{
+    NSString *emailRegEx =@"^http(s)?://([\\w-]+.)+[\\w-]+(/[\\w-./?%&=]*)?$";
+	
+    NSPredicate *regExPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
+    return [regExPredicate evaluateWithObject:[self lowercaseString]];
+}
 - (NSString *) escapeHTML{
 	NSMutableString *s = [NSMutableString string];
 	

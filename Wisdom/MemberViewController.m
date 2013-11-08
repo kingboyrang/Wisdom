@@ -33,6 +33,13 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"topbg.png"] forBarMetrics:UIBarMetricsDefault];
     
    
+    
+    Account *acc=[Account sharedInstance];
+    if(!acc.isLogin){
+        LoginViewController *login=[[LoginViewController alloc] init];
+        [self.navigationController pushViewController:login animated:YES];
+        [login release];
+    }
 }
 - (void)viewDidLoad
 {
@@ -79,12 +86,7 @@
     self.sourceData=source1;
 	// Do any additional setup after loading the view.
     
-    Account *acc=[Account sharedInstance];
-    if(!acc.isLogin){
-        LoginViewController *login=[[LoginViewController alloc] init];
-        [self.navigationController pushViewController:login animated:YES];
-        [login release];
-    }
+    
 }
 
 - (void)didReceiveMemoryWarning
