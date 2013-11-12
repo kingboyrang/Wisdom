@@ -23,19 +23,9 @@
     }
     return self;
 }
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg.png"] forBarMetrics:UIBarMetricsDefault];
-    [self navigationItemWithBack];
-    
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.showRightBtnItem=NO;
-    [self loadRightWetherView];
-    
     self.view.backgroundColor=[UIColor whiteColor];
     if (![NetWorkConnection IsEnableConnection]) {
         [self showNoNetworkNotice:nil];

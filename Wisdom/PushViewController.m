@@ -16,7 +16,10 @@
 @end
 
 @implementation PushViewController
-
+-(void)dealloc{
+    [super dealloc];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,13 +30,23 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"topbg.png"] forBarMetrics:UIBarMetricsDefault];
-    
+    CGPoint point=_scrollView.contentOffset;
+    if (point.x==0) {
+        PushView *view=(PushView*)[_scrollView viewWithTag:100];
+        [view reloadingSourceData];
+        PushView *view1=(PushView*)[_scrollView viewWithTag:101];
+        [view1 initParams];
+    }else{
+        PushView *view=(PushView*)[_scrollView viewWithTag:101];
+        [view reloadingSourceData];
+        PushView *view1=(PushView*)[_scrollView viewWithTag:100];
+        [view1 initParams];
+    }
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self loadWetherTitleView];
+    
     
     self.view.backgroundColor=[UIColor whiteColor];
     scrollSwitch *switchItem=[[scrollSwitch alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 40)];
@@ -76,7 +89,16 @@
     }else{
        [switchItem scrollerToRight];
     }
-    [switchItem release];  
+    [switchItem release];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNoticeInfo) name:@"myInfo" object:nil];
+}
+-(void)receiveNoticeInfo{
+    scrollSwitch *item=(scrollSwitch*)[self.view viewWithTag:900];
+    [item scrollerToLeft];
+    
+    PushView *view=(PushView*)[_scrollView viewWithTag:100];
+    [view reloadingSourceData];
 }
 #pragma mark -
 #pragma mark UIScrollViewDelegate

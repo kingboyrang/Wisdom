@@ -15,7 +15,7 @@ UIImageView *backgroundView;
  #pragma 第一种方法添加背景图
  -(UIImage*)barBackground
  {
-     return [UIImage imageNamed:@"topbg.png"];
+     return [UIImage imageNamed:@"navbg.png"];
  }
  
  -(void)didMoveToSuperview

@@ -18,8 +18,11 @@
     int maxPage;
 }
 @property (nonatomic) BOOL refreshing;
+@property (nonatomic) BOOL isReload;
 @property (nonatomic,strong) NSMutableArray *list;
 @property (nonatomic,strong) NSMutableArray *cells;
 @property (nonatomic,assign) int infoType;
 -(void)loadingSourceData;
+-(void)reloadingSourceData;
+-(void)initParams;
 @end

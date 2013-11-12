@@ -9,6 +9,6 @@
 #import "TKLabelCell.h"
 #import "EMKeyboardBarTextField.h"
 @interface TKLabelFieldCell : TKLabelCell<UITextFieldDelegate>
-@property(nonatomic,strong) EMKeyboardBarTextField *field;
+@property(nonatomic,strong) UITextField *field;
 @property(nonatomic,readonly) BOOL hasValue;
 @end

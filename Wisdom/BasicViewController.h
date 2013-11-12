@@ -11,6 +11,7 @@
 #import "AnimateErrorView.h"
 @interface BasicViewController : UIViewController
 @property(nonatomic,assign) BOOL showRightBtnItem;
+@property(nonatomic,assign) BOOL showWeatherView;
 -(void)editBackBarbuttonItem:(NSString*)title;
 //动画操作
 -(AnimateErrorView*) errorView;
@@ -33,11 +34,10 @@
 -(void)navigationItemWithBack;
 -(void)navigationItemWithBackTitle:(NSString*)title;
 -(void)loadNoLoginBarButtonItem;
--(void)loadNoLoginBarButtonItemWithWeather;
 -(void)loadLoginBarButtonItem;
--(void)loadLoginBarButtonItemWithWeather;
 -(void)loadWetherTitleView;
--(void)loadRightWetherView;
+-(void)loadLogoImage;
+
 -(void)buttonExitLogin;
 
 - (void) showNoNetworkNotice:(void (^)(void))dismissError;

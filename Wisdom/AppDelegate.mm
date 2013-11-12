@@ -80,6 +80,8 @@
         NSString *userid = [res valueForKey:BPushRequestUserIdKey];
         NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
         //NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
+        //NSLog(@"u=%@",userid);
+        //NSLog(@"c=%@",channelid);
         int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
         if (returnCode == BPushErrorCode_Success) {
             Account *acc=[Account sharedInstance];
@@ -158,5 +160,7 @@
     [application setApplicationIconBadgeNumber:0];
     
     [BPush handleNotification:userInfo];
+    MainViewController *main=(MainViewController*)self.window.rootViewController;
+    [main setSelectedItemIndex:2];
 }
 @end

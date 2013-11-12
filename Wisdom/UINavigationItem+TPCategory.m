@@ -43,7 +43,7 @@
         leftView.backgroundColor=[UIColor clearColor];
         UIImage *image=[UIImage imageNamed:@"back.png"];
         UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame=CGRectMake(0, -8, image.size.width, image.size.height);
+        btn.frame=CGRectMake(0, -6.5, image.size.width, image.size.height);
         [btn setBackgroundImage:image forState:UIControlStateNormal];
         [btn addTarget:sender action:sel forControlEvents:UIControlEventTouchUpInside];
         [leftView addSubview:btn];
@@ -60,7 +60,7 @@
     }else{
         UIImage *image=[UIImage imageNamed:@"back.png"];
         UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame=CGRectMake(0, -8, image.size.width, image.size.height);
+        btn.frame=CGRectMake(0, -6.5, image.size.width, image.size.height);
         [btn setBackgroundImage:image forState:UIControlStateNormal];
         [btn addTarget:sender action:sel forControlEvents:UIControlEventTouchUpInside];
         

@@ -20,15 +20,16 @@
 #import "SkyViewController.h"
 #import "MemberViewController.h"
 #import "MainViewController.h"
+#import "AlertHelper.h"
 @interface BasicViewController (){
     AnimateLoadView *_loadView;
     AnimateErrorView *_errorView;
     AnimateErrorView *_successView;
 }
-
 -(void)buttonLogin;
 -(void)buttonRegister;
 -(void)buttonWeatherClick;
+-(void)buttonMemberClick;
 @end
 
 @implementation BasicViewController
@@ -63,10 +64,18 @@
             [self loadNoLoginBarButtonItem];
         }
     }
+    if (self.showWeatherView) {
+        [self loadWetherTitleView];
+    }
+    
 }
 - (void)viewDidLoad
-{   self.showRightBtnItem=YES;
+{
+    self.showRightBtnItem=YES;
+    self.showWeatherView=YES;
     [super viewDidLoad];
+    
+    
 }
 - (void) showMessageWithTitle:(NSString*)title{
     [self showMessageWithTitle:title innerView:self.view];
@@ -93,28 +102,15 @@
     [self editBackBarbuttonItem:title];
 }
 -(void)loadWetherTitleView{
+    if (self.navigationItem.titleView!=nil) {
+        return;
+    }
     UIImage *image=[[UIImage imageNamed:@"ico_weather.png"] imageByScalingProportionallyToSize:CGSizeMake(62*35/44, 35)];
     UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame=CGRectMake(0,9/2, image.size.width, image.size.height);
     [btn setBackgroundImage:image forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(buttonWeatherClick) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView=btn;
-}
--(void)loadRightWetherView{
-    UIView *rightV=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 52*2+5+62*35/44, 44)];
-    rightV.backgroundColor=[UIColor clearColor];
-    UIImage *image=[[UIImage imageNamed:@"ico_weather.png"] imageByScalingProportionallyToSize:CGSizeMake(62*35/44, 35)];
-    UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame=CGRectMake(0,9/2, image.size.width, image.size.height);
-    [btn setBackgroundImage:image forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(buttonWeatherClick) forControlEvents:UIControlEventTouchUpInside];
-    [rightV addSubview:btn];
-    
-    UIBarButtonItem *rightBtn=[[UIBarButtonItem alloc] initWithCustomView:rightV];
-    [rightV release];
-    self.navigationItem.rightBarButtonItem=rightBtn;
-    [rightBtn release];
-  //52*2+5
 }
 -(void)buttonWeatherClick{
     SkyViewController *weather=[[SkyViewController alloc] init];
@@ -137,82 +133,13 @@
     self.navigationItem.rightBarButtonItem=rightBtn;
     [rightBtn release];
 }
--(void)loadNoLoginBarButtonItemWithWeather{
-    UIView *rightView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 109, 35)];
-    rightView.backgroundColor=[UIColor clearColor];
-    //天气
-    UIImage *image3=[[UIImage imageNamed:@"ico_weather.png"] imageByScalingProportionallyToSize:CGSizeMake(62*35/44, 35)];
-    UIButton *btn3=[UIButton buttonWithType:UIButtonTypeCustom];
-    btn3.frame=CGRectMake(0,0, image3.size.width, image3.size.height);
-    [btn3 setBackgroundImage:image3 forState:UIControlStateNormal];
-    [btn3 addTarget:self action:@selector(buttonWeatherClick) forControlEvents:UIControlEventTouchUpInside];
-    [rightView addSubview:btn3];
-    //登陆
-    UIButton *btn1=[UIButton buttonWithBackgroundTitle:@"登录" target:self action:@selector(buttonLogin)];
-    CGRect rect=btn1.frame;
-    rect.origin.x=btn3.frame.size.width+2;
-    btn1.frame=rect;
-    [rightView addSubview:btn1];
-    //注册
-    UIButton *btn2=[UIButton buttonWithBackgroundTitle:@"注册" target:self action:@selector(buttonRegister)];
-    CGRect r=btn2.frame;
-    r.origin.x=btn1.frame.size.width+5;
-    btn2.frame=r;
-    [rightView addSubview:btn2];
-   // rightView.frame=CGRectMake(0, 0, btn2.frame.size.width+btn2.frame.origin.x, 35);
-     NSLog(@"rightView=%@",NSStringFromCGRect(rightView.frame));
-    UIBarButtonItem *rightBtn=[[UIBarButtonItem alloc] initWithCustomView:rightView];
-    [rightView release];
-    self.navigationItem.rightBarButtonItem=rightBtn;
-    [rightBtn release];
-}
--(void)loadLoginBarButtonItemWithWeather{
-    UIView *rightView=[[UIView alloc] initWithFrame:CGRectZero];
-    rightView.backgroundColor=[UIColor clearColor];
-    //天气
-    UIImage *image1=[[UIImage imageNamed:@"ico_weather.png"] imageByScalingProportionallyToSize:CGSizeMake(62*35/44, 35)];
-    UIButton *btn1=[UIButton buttonWithType:UIButtonTypeCustom];
-    btn1.frame=CGRectMake(0,9/2, image1.size.width, image1.size.height);
-    [btn1 setBackgroundImage:image1 forState:UIControlStateNormal];
-    [btn1 addTarget:self action:@selector(buttonWeatherClick) forControlEvents:UIControlEventTouchUpInside];
-    [rightView addSubview:btn1];
-    
-    //用户名
-    NSString *title=@"黄小勇";
-    CGSize size=[title textSize:[UIFont fontWithName:@"Helvetica-Bold" size:16] withWidth:self.view.bounds.size.width];
-    
-    FXLabel *secondLabel = [[FXLabel alloc] init];
-    secondLabel.frame = CGRectMake(btn1.frame.size.width+2,0, size.width, size.height);
-    secondLabel.backgroundColor = [UIColor clearColor];
-    secondLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
-    secondLabel.text = title;
-    secondLabel.textAlignment=NSTextAlignmentCenter;
-    secondLabel.textColor = [UIColor whiteColor];
-    secondLabel.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.75f];
-    secondLabel.shadowOffset = CGSizeMake(0.0f, 5.0f);
-    secondLabel.shadowBlur = 5.0f;
-    [rightView addSubview:secondLabel];
-    
-    //头像
-    UIImage *image=[[UIImage imageNamed:@"ico_login.png"] imageByScalingToSize:CGSizeMake(35, 35)];
-    UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame=CGRectMake(secondLabel.frame.size.width+secondLabel.frame.origin.x+5, -8, image.size.width, image.size.height);
-    [btn setBackgroundImage:image forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(buttonExitLogin) forControlEvents:UIControlEventTouchUpInside];
-    [rightView addSubview:btn];
-    rightView.frame=CGRectMake(0, 0, btn.frame.size.width+btn.frame.origin.x, size.height);
-    [secondLabel release];
-    
-    UIBarButtonItem *rightBtn=[[UIBarButtonItem alloc] initWithCustomView:rightView];
-    [rightView release];
-    self.navigationItem.rightBarButtonItem=rightBtn;
-    [rightBtn release];
-}
 -(void)loadLoginBarButtonItem{
+    Account *acc=[Account sharedInstance];
+    
     UIView *rightView=[[UIView alloc] initWithFrame:CGRectZero];
     rightView.backgroundColor=[UIColor clearColor];
     
-    NSString *title=@"黄小勇";
+    NSString *title=acc.userAcc;
     CGSize size=[title textSize:[UIFont fontWithName:@"Helvetica-Bold" size:16] withWidth:self.view.bounds.size.width];
     
     FXLabel *secondLabel = [[FXLabel alloc] init];
@@ -230,9 +157,9 @@
     
     UIImage *image=[[UIImage imageNamed:@"ico_login.png"] imageByScalingToSize:CGSizeMake(35, 35)];
     UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame=CGRectMake(secondLabel.frame.size.width+secondLabel.frame.origin.x+5, -8, image.size.width, image.size.height);
+    btn.frame=CGRectMake(secondLabel.frame.size.width+secondLabel.frame.origin.x+2, -8, image.size.width, image.size.height);
     [btn setBackgroundImage:image forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(buttonExitLogin) forControlEvents:UIControlEventTouchUpInside];
+    //[btn addTarget:self action:@selector(buttonExitLogin) forControlEvents:UIControlEventTouchUpInside];
     [rightView addSubview:btn];
     rightView.frame=CGRectMake(0, 0, btn.frame.size.width+btn.frame.origin.x, size.height);
     [secondLabel release];
@@ -241,7 +168,22 @@
     [rightView release];
     self.navigationItem.rightBarButtonItem=rightBtn;
     [rightBtn release];
+}
+-(void)loadLogoImage{
+    UIImage *image1=[UIImage imageNamed:@"titletext.png"];
+    UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(0,(44-image1.size.height)/2,image1.size.width, image1.size.height)];
+    [imageView setImage:image1];
     
+    UIBarButtonItem *leftBtn=[[UIBarButtonItem alloc] initWithCustomView:imageView];
+    [imageView release];
+    self.navigationItem.leftBarButtonItem=leftBtn;
+    [leftBtn release];
+}
+-(void)buttonMemberClick{
+    MainViewController *main=(MainViewController*)self.tabBarController;
+    [main setSelectedItemIndex:3];
+    UINavigationController *nav=[main.viewControllers objectAtIndex:3];
+    [nav popToRootViewControllerAnimated:YES];
 }
 #pragma mark login/register events
 -(void)buttonLogin{
@@ -255,16 +197,6 @@
     [registerController release];
 }
 -(void)buttonExitLogin{
-    [Account exitAccount];
-    [self loadNoLoginBarButtonItem];
-    
-    MainViewController *main=(MainViewController*)self.tabBarController;
-    if (main.selectedIndex==3) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        LoginViewController *login=[[LoginViewController alloc] init];
-        [self.navigationController pushViewController:login animated:YES];
-        [login release];
-    }
 }
 -(void)editBackBarbuttonItem:(NSString*)title{
     [self.navigationItem backBarBtnItem:title target:self action:@selector(buttonBackClick)];

@@ -24,16 +24,10 @@
     }
     return self;
 }
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg.png"] forBarMetrics:UIBarMetricsDefault];
-    [self editBackBarbuttonItem:@"弥勒介绍"];
-    
-}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self loadWetherTitleView];
+    [self editBackBarbuttonItem:@"弥勒介绍"];
     self.view.backgroundColor=[UIColor whiteColor];
     if (![NetWorkConnection IsEnableConnection]) {
         [self showNoNetworkNotice:nil];
@@ -45,7 +39,7 @@
         activityIndicator=[[AnimateLoadView alloc] initWithFrame:CGRectMake(0, 0, 300, 40)];
         activityIndicator.backgroundColor=[UIColor clearColor];
         activityIndicator.activityIndicatorView.activityIndicatorViewStyle=UIActivityIndicatorViewStyleGray;
-        activityIndicator.labelTitle.text=@"加载中...";
+        activityIndicator.labelTitle.text=@"正在加载,请稍后...";
         activityIndicator.labelTitle.textColor=[UIColor blackColor];
         CGFloat w=activityIndicator.labelTitle.frame.origin.x+activityIndicator.labelTitle.frame.size.width;
         CGRect r=activityIndicator.frame;

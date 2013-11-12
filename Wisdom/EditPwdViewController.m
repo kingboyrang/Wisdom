@@ -13,9 +13,11 @@
 #import "Account.h"
 #import "NetWorkConnection.h"
 #import "UIImage+TPCategory.h"
+#import "AlertHelper.h"
 @interface EditPwdViewController ()
 -(void)buttonSubmit;
 -(BOOL)formSubmit;
+- (void)moveView:(UITextField *)textField leaveView:(BOOL)leave;
 @end
 
 @implementation EditPwdViewController
@@ -28,23 +30,27 @@
     }
     return self;
 }
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self navigationItemWithBack];
-    
-}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self loadRightWetherView];
     _helper=[[ServiceHelper alloc] init];
+    
+    CGFloat h=self.view.bounds.size.height-54-44;
+    UIScrollView *scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth,h)];
+    scrollView.backgroundColor=[UIColor clearColor];
+    scrollView.pagingEnabled=YES;
+    scrollView.showsHorizontalScrollIndicator=NO;
+    scrollView.showsVerticalScrollIndicator=NO;
+    scrollView.tag=800;
+    [scrollView setContentSize:CGSizeMake(DeviceWidth, scrollView.frame.size.height)];
+    
     
     CGRect r=self.view.bounds;
     r.size.height-=44;
     UIImage *bgImage=[UIImage imageNamed:@"bglogreg.png"];
     UIImageView *bgImageView=[[UIImageView alloc] initWithFrame:r];
     [bgImageView setImage:bgImage];
-    [self.view addSubview:bgImageView];
+    [scrollView addSubview:bgImageView];
     [bgImageView release];
     
     r.origin.x=20;
@@ -57,7 +63,7 @@
     UIImage *image=[[UIImage imageNamed:@"changepwdbg.png"] imageByScalingToSize:r.size];
     UIImageView *imageView=[[UIImageView alloc] initWithFrame:r];
     [imageView setImage:image];
-    [self.view addSubview:imageView];
+    [scrollView addSubview:imageView];
     [imageView release];
     
     
@@ -73,24 +79,33 @@
     _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     _tableView.bounces=NO;
     _tableView.backgroundColor=[UIColor clearColor];
-    [self.view addSubview:_tableView];
+    [scrollView addSubview:_tableView];
+    
+    [self.view addSubview:scrollView];
+    [scrollView release];
 
     TKLabelFieldCell *cell1=[[[TKLabelFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-    cell1.label.text=@"原始密码:";
-    cell1.field.placeholder=@"请输入原始密码";
+    cell1.label.text=@"输入旧密码:";
+    cell1.field.placeholder=@"请输入旧密码";
     cell1.field.backgroundColor=[UIColor colorFromHexRGB:@"c6dfe5"];
+    cell1.field.delegate=self;
+    cell1.field.secureTextEntry=YES;
     
     TKLabelFieldCell *cell2=[[[TKLabelFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-    cell2.label.text=@"输入密码:";
+    cell2.label.text=@"输入新密码:";
     cell2.field.secureTextEntry=YES;
-    cell2.field.placeholder=@"请输入密码";
+    cell2.field.placeholder=@"请输入新密码";
     cell2.field.backgroundColor=[UIColor colorFromHexRGB:@"c6dfe5"];
+    cell2.field.delegate=self;
+    cell2.field.secureTextEntry=YES;
     
     TKLabelFieldCell *cell3=[[[TKLabelFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-    cell3.label.text=@"确认密码:";
+    cell3.label.text=@"确认新密码:";
     cell3.field.secureTextEntry=YES;
-    cell3.field.placeholder=@"请输入确认密码";
+    cell3.field.placeholder=@"请输入确认新密码";
     cell3.field.backgroundColor=[UIColor colorFromHexRGB:@"c6dfe5"];
+    cell3.field.delegate=self;
+    cell3.field.secureTextEntry=YES;
     
     TKRegisterButtonCell *cell4=[[[TKRegisterButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     [cell4.button setTitle:@"确定" forState:UIControlStateNormal];
@@ -99,29 +114,95 @@
     self.cells=[NSMutableArray arrayWithObjects:cell1,cell2,cell3,cell4, nil];
 	
 }
--(BOOL)formSubmit{
-    
-    for (id item in self.cells) {
-        if ([item isKindOfClass:[TKLabelFieldCell class]]) {
-            TKLabelFieldCell *cell=(TKLabelFieldCell*)item;
-            if (!cell.hasValue) {
-                //[cell.field becomeFirstResponder];
-                [cell.field shake];
-                return NO;
-            }
+#pragma mark UITextFieldDelegate Methods
+- (void)moveView:(UITextField *)textField leaveView:(BOOL)leave
+{
+    UIScrollView *scrollview=(UIScrollView*)[self.view viewWithTag:800];
+    if (!leave) {
+        CGRect r=scrollview.frame;
+        r.origin.y=-110;
+        [UIView animateWithDuration:0.3 animations:^{
+            scrollview.frame=r;
+        }];
+    }else{
+        CGRect r=scrollview.frame;
+        r.origin.y=0;
+        [UIView animateWithDuration:0.3 animations:^{
+            scrollview.frame=r;
+        }];
+    }
+}
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self moveView:textField leaveView:NO];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField;
+{
+    [self moveView:textField leaveView:YES];
+}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    // return NO to not change text
+    TKLabelFieldCell *cell=self.cells[0];
+    if (cell.field==textField) {
+       
+    }else{
+        if(strlen([textField.text UTF8String]) >= 12 && range.length != 1)
+            return NO;
+        
+    }
+    return YES;
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    TKLabelFieldCell *cell=self.cells[0];
+    if (textField==cell.field) {
+        
+    }else{
+        if(strlen([textField.text UTF8String]) <6)
+        {
+            [AlertHelper initWithTitle:@"提示" message:@"密码不能少于6位！"];
+            return NO;
         }
     }
-    Account *acc=[Account sharedInstance];
-    TKLabelFieldCell *cell=self.cells[0];
-    if (![acc.userPwd isEqualToString:cell.field.text]) {
-        [cell.field shake];
+    [textField resignFirstResponder];
+    return YES;
+}
+-(BOOL)formSubmit{
+    TKLabelFieldCell *cell1=self.cells[0];
+    if(!cell1.hasValue){
+        [AlertHelper initWithTitle:@"提示" message:@"旧密码不为空!"];
+        [cell1.field becomeFirstResponder];
         return NO;
     }
-    
-    TKLabelFieldCell *cell1=self.cells[1];
-    TKLabelFieldCell *cell2=self.cells[2];
-    if (![cell1.field.text isEqualToString:cell2.field.text]) {
-        [cell2.field shake];
+    TKLabelFieldCell *cell2=self.cells[1];
+    if(!cell2.hasValue){
+        [AlertHelper initWithTitle:@"提示" message:@"新密码不为空!"];
+        [cell2.field becomeFirstResponder];
+        return NO;
+    }
+    if(strlen([cell2.field.text UTF8String]) <6)
+    {
+        [AlertHelper initWithTitle:@"提示" message:@"新密码不能少于6位大于12位！"];
+        [cell2.field becomeFirstResponder];
+        return NO;
+    }
+    TKLabelFieldCell *cell3=self.cells[2];
+    if(!cell3.hasValue){
+        [AlertHelper initWithTitle:@"提示" message:@"确认密码不为空!"];
+        [cell3.field becomeFirstResponder];
+        return NO;
+    }
+    Account *acc=[Account sharedInstance];
+    if (![acc.userPwd isEqualToString:cell1.field.text]) {
+        [AlertHelper initWithTitle:@"提示" message:@"旧密码错误!"];
+        [cell1.field becomeFirstResponder];
+        return NO;
+    }
+    if (![cell2.field.text isEqualToString:cell3.field.text]) {
+        [AlertHelper initWithTitle:@"提示" message:@"新密码与确认密码不一致!"];
+        [cell3.field becomeFirstResponder];
         return NO;
     }
     return YES;
@@ -169,16 +250,20 @@
         }
         if (boo) {
             [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
-                [self.navigationController popViewControllerAnimated:YES];
+                [self showSuccessViewWithHide:^(AnimateErrorView *errorView) {
+                    errorView.labelTitle.text=@"修改成功!";
+                } completed:^(AnimateErrorView *errorView) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                }];
             }];
         }else{
             [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
-                [self showMessageWithTitle:@"修改失败！"];
+                [self showMessageWithTitle:@"密码不正确或网络连线失败！"];
             }];
         }
     } failed:^(NSError *error, NSDictionary *userInfo) {
         [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
-            [self showMessageWithTitle:@"修改失败！"];
+            [self showMessageWithTitle:@"密码不正确或网络连线失败！"];
         }];
         
     }];

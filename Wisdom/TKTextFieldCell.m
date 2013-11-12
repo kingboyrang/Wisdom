@@ -13,7 +13,7 @@
 - (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if(!(self=[super initWithStyle:style reuseIdentifier:reuseIdentifier])) return nil;
     
-    _field = [[EMKeyboardBarTextField alloc] initWithFrame:CGRectZero];
+    _field = [[UITextField alloc] initWithFrame:CGRectZero];
     _field.font=[UIFont boldSystemFontOfSize:16.0];
     _field.textColor=[UIColor blackColor];
     _field.borderStyle=UITextBorderStyleRoundedRect;

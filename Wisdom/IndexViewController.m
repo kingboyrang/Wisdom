@@ -28,10 +28,6 @@
     }
     return self;
 }
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"topbg.png"] forBarMetrics:UIBarMetricsDefault];
-}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -50,7 +46,6 @@
     [self.view addSubview:menu];
     [menu release];
     
-    [self loadWetherTitleView];
 }
 - (void)openAd: (AdView *)controller adModel: (AdModel *)adModel{
     WebViewController *web=[[WebViewController alloc] init];

@@ -31,7 +31,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"topbg.png"] forBarMetrics:UIBarMetricsDefault];
+   
     
     [_mapView viewWillAppear];
     _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
@@ -54,7 +54,6 @@
     //self.showRightBtnItem=NO;
 
     self.view.backgroundColor=[UIColor whiteColor];
-    [self loadWetherTitleView];
     /***
    UISegmentedControl *_segment=[[UISegmentedControl alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 44)];
     [_segment insertSegmentWithTitle:@"普通底图" atIndex:0 animated:YES];

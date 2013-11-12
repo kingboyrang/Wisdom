@@ -17,9 +17,12 @@
 #import "UIColor+TPCategory.h"
 #import "NetWorkConnection.h"
 #import "MemberViewController.h"
+#import "BasicNavigationController.h"
+#import "AlertHelper.h"
 @interface LoginViewController ()
 -(void)buttonSubmit;
 -(BOOL)formSubmit;
+- (void)moveView:(UITextField *)textField leaveView:(BOOL)leave;
 @end
 
 @implementation LoginViewController
@@ -37,40 +40,38 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-     [self navigationItemWithBack];
     Account *acc=[Account sharedInstance];
-   
     if(acc.isLogin){
         [self.navigationController popViewControllerAnimated:YES];
-    }
-    
-}
--(void)buttonBackClick{
-    NSArray *arr=self.navigationController.viewControllers;
-    if(arr&&[arr count]>=2){
-        id v=[arr objectAtIndex:arr.count-2];
-        if(![v isKindOfClass:[MemberViewController class]]){
-            [super buttonBackClick];
-        }
     }
     
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
     self.showRightBtnItem=NO;
     _helper=[[ServiceHelper alloc] init];
-    [self loadRightWetherView];
+    self.view.backgroundColor=[UIColor whiteColor];
     
-    //[self.navigationItem rightBarBtnItem:@"登录" target:self action:@selector(buttonSubmit)];
+   
+    CGFloat h=self.view.bounds.size.height-54-44;
+    UIScrollView *scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth,h)];
+    scrollView.backgroundColor=[UIColor clearColor];
+    scrollView.pagingEnabled=YES;
+    scrollView.showsHorizontalScrollIndicator=NO;
+    scrollView.showsVerticalScrollIndicator=NO;
+    scrollView.tag=800;
+    [scrollView setContentSize:CGSizeMake(DeviceWidth, scrollView.frame.size.height)];
     
     //bg_002.png
     CGRect r=self.view.bounds;
-    r.size.height-=44;
+    r.size.height=h*2;
     UIImage *bgImage=[UIImage imageNamed:@"bglogreg.png"];
     UIImageView *bgImageView=[[UIImageView alloc] initWithFrame:r];
     [bgImageView setImage:bgImage];
-    [self.view addSubview:bgImageView];
+    [scrollView addSubview:bgImageView];
     [bgImageView release];
     
     
@@ -85,12 +86,12 @@
     UIImage *image=[[UIImage imageNamed:@"loginbg.png"] imageByScalingToSize:r.size];
     UIImageView *imageView=[[UIImageView alloc] initWithFrame:r];
     [imageView setImage:image];
-    [self.view addSubview:imageView];
+    [scrollView addSubview:imageView];
     [imageView release];
     
     r.origin.x=(self.view.bounds.size.width-250)/2;
     r.origin.y=topY;
-    r.size.height=self.view.bounds.size.height-110;
+    r.size.height=h-topY;
     r.size.width=250;
     _tableView=[[UITableView alloc] initWithFrame:r style:UITableViewStylePlain];
     _tableView.dataSource=self;
@@ -100,18 +101,22 @@
     _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     _tableView.bounces=NO;
     _tableView.backgroundColor=[UIColor clearColor];
-    [self.view addSubview:_tableView];
+    [scrollView addSubview:_tableView];
     
+    [self.view addSubview:scrollView];
+    [scrollView release];
     
    
     TKTextFieldCell *cell1=[[[TKTextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-    cell1.field.placeholder=@"请输入手机号码";
+    cell1.field.placeholder=@"请输入用户帐号";
     cell1.field.backgroundColor=[UIColor colorFromHexRGB:@"c6dfe5"];
+    cell1.field.delegate=self;
     
     TKTextFieldCell *cell2=[[[TKTextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     cell2.field.secureTextEntry=YES;
     cell2.field.backgroundColor=[UIColor colorFromHexRGB:@"c6dfe5"];
     cell2.field.placeholder=@"请输入密码";
+    cell2.field.delegate=self;
     TKRememberCell *cell3=[[[TKRememberCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     
     TKLoginButtonCell *cell4=[[[TKLoginButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
@@ -121,29 +126,66 @@
     self.cells=[NSMutableArray arrayWithObjects:cell1,cell2,cell3,cell4, nil];
 	// Do any additional setup after loading the view.
 }
+#pragma mark UITextFieldDelegate Methods
+- (void)moveView:(UITextField *)textField leaveView:(BOOL)leave
+{
+    UIScrollView *scrollview=(UIScrollView*)[self.view viewWithTag:800];
+    if (!leave) {
+        CGRect r=scrollview.frame;
+        r.origin.y=-110;
+        [UIView animateWithDuration:0.3 animations:^{
+            scrollview.frame=r;
+        }];
+    }else{
+        CGRect r=scrollview.frame;
+        r.origin.y=0;
+        [UIView animateWithDuration:0.3 animations:^{
+            scrollview.frame=r;
+        }];
+    }
+}
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self moveView:textField leaveView:NO];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField;
+{
+    [self moveView:textField leaveView:YES];
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    // return NO to not change text
+    [textField resignFirstResponder];
+    return YES;
+}
 -(BOOL)formSubmit{
-    for (id item in self.cells) {
-        if ([item isKindOfClass:[TKTextFieldCell class]]) {
-            TKTextFieldCell *cell=(TKTextFieldCell*)item;
-            if (!cell.hasValue) {
-                //[cell.field becomeFirstResponder];
-                [cell.field shake];
-                return NO;
-            }
-        }
+    TKTextFieldCell *cell1=self.cells[0];
+    if (!cell1.hasValue) {
+        [AlertHelper initWithTitle:@"提示" message:@"用户帐号不为空!"];
+        [cell1.field becomeFirstResponder];
+        return NO;
+    }
+    TKTextFieldCell *cell2=self.cells[1];
+    if (!cell2.hasValue) {
+        [AlertHelper initWithTitle:@"提示" message:@"用户密码不为空!"];
+        [cell2.field becomeFirstResponder];
+        return NO;
     }
     return YES;
 }
+
 //提交
 -(void)buttonSubmit{
+    
+    if (![self formSubmit]) {
+        return;
+    }
     for (id item in self.cells) {
         if ([item isKindOfClass:[TKTextFieldCell class]]) {
             TKTextFieldCell *cell=(TKTextFieldCell*)item;
             [cell.field resignFirstResponder];
         }
-    }
-    if (![self formSubmit]) {
-        return;
     }
     if(![NetWorkConnection IsEnableConnection]){
         [self showNoNetworkNotice:nil];
@@ -180,12 +222,12 @@
             }];
         }else{
             [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
-                [self showMessageWithTitle:@"登录失败！"];
+                [self showMessageWithTitle:@"帐号与密码不正确或网络连线失败！"];
             }];
         }
     } failed:^(NSError *error, NSDictionary *userInfo) {
         [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
-            [self showMessageWithTitle:@"登录失败！"];
+            [self showMessageWithTitle:@"帐号与密码不正确或网络连线失败！"];
         }];
     }];
 }

@@ -32,14 +32,11 @@
     }
     return self;
 }
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-     [self navigationItemWithBack];
-}
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
     
+    [super viewDidLoad];
+    self.showWeatherView=NO;
     NSArray *arr=self.navigationController.viewControllers;
     if (arr&&[arr count]>=2) {
         id v=[arr objectAtIndex:arr.count-2];

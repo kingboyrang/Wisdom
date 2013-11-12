@@ -52,9 +52,18 @@
     return self;
 }
 -(void)loadingSourceData{
-    if (currentPage==0) {
+    if (currentPage==0||self.isReload) {
         [_tableView launchRefreshing];
     }
+}
+-(void)reloadingSourceData{
+    [self initParams];
+    [self loadingSourceData];
+}
+-(void)initParams{
+    currentPage=0;
+    pageSize=10;
+    maxPage=0;
 }
 -(void)showInfoWithTitle:(NSString*)title{
     WBInfoNoticeView *info=[WBInfoNoticeView infoNoticeInView:self title:title];

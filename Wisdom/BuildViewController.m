@@ -22,17 +22,11 @@
     }
     return self;
 }
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self navigationItemWithBack];
-    
-}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.showRightBtnItem=YES;
     self.view.backgroundColor=[UIColor whiteColor];
-    [self loadRightWetherView];
     
     UIImage *image=[UIImage imageNamed:@"build.png"];
     UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 309)];

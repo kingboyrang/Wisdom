@@ -11,6 +11,7 @@
 @interface RememberCheck ()
 -(void)loadControls:(CGRect)frame;
 -(void)buttonClickTap:(id)sender;
+-(void)teleButtonEvent:(id)sender;
 -(void)addButton:(CGFloat)leftx height:(CGFloat)h index:(NSInteger)tag;
 @end
 
@@ -43,10 +44,19 @@
         _lightLabel.text=title;
         _lightLabel.backgroundColor=[UIColor clearColor];
         _lightLabel.textColor=[UIColor blackColor];
-        //[UIColor colorWithRed:110/255.0 green:106/255.0 blue:97/255.0 alpha:1];
+        
+        UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame=_lightLabel.frame;
+        [btn addTarget:self action:@selector(teleButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:btn];
     }
     [self addSubview:_lightLabel];
     
+}
+-(void)teleButtonEvent:(id)sender{
+    UIButton *btn=(UIButton*)[self viewWithTag:100];
+    btn.selected=!btn.selected;
+    _hasRemember=btn.selected;
 }
 -(void)addButton:(CGFloat)leftx height:(CGFloat)h index:(NSInteger)tag{
     UIImage *image=[UIImage imageNamed:@"checkbox.png"];

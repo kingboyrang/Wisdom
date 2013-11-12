@@ -14,6 +14,7 @@
 #import "QRCodeViewController.h"
 #import "BuildViewController.h"
 #import "LoginViewController.h"
+#import "AlertHelper.h"
 @interface MemberViewController ()
 
 @end
@@ -30,21 +31,39 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"topbg.png"] forBarMetrics:UIBarMetricsDefault];
-    
    
-    
     Account *acc=[Account sharedInstance];
     if(!acc.isLogin){
         LoginViewController *login=[[LoginViewController alloc] init];
         [self.navigationController pushViewController:login animated:YES];
         [login release];
+    }else{
+        
+        NSLog(@"controls=%d",self.navigationController.viewControllers.count);
+        for (UINavigationItem *item in self.navigationController.navigationBar.items) {
+            
+            NSLog(@"leftcount=%d,rightcount=%d",item.leftBarButtonItems.count,item.rightBarButtonItems.count);
+        }
+        NSArray *arr=self.navigationController.navigationBar.items;
+        if ([arr count]>1) {
+            for (int i=1; i<arr.count; i++) {
+                UINavigationItem *lastBarBtn=[arr objectAtIndex:i];
+                lastBarBtn.titleView=nil;
+                lastBarBtn.leftBarButtonItem=nil;
+                lastBarBtn.rightBarButtonItem=nil;
+                lastBarBtn.hidesBackButton=YES;
+                //[self.navigationController.navigationBar popNavigationItemAnimated:NO];
+                //[self performSelector:lastBarBtn.backBarButtonItem.action];
+            }
+            // UINavigationItem *lastBarBtn=[arr lastObject];
+            //lastBarBtn.title=@"this is title";
+        }
     }
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self loadWetherTitleView];
+    
     //设置背景
     CGRect r=self.view.bounds;
     r.size.height-=44;
@@ -84,7 +103,9 @@
     }
     //NSMutableArray *source2=[NSMutableArray arrayWithObjects:@"个人资料",@"二维码",@"旅记",@"修改密码",@"我的消息",@"下载中心",@"注销用户",@"优惠信息", nil];
     self.sourceData=source1;
-	// Do any additional setup after loading the view.
+	
+    
+   
     
     
 }
@@ -108,12 +129,12 @@
     return cell;
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row==1) {
+    if (indexPath.row==4) {//二维码
         QRCodeViewController *controller=[[QRCodeViewController alloc] init];
         [self.navigationController pushViewController:controller animated:YES];
         [controller release];
     }
-   else if (indexPath.row==3) {
+   else if (indexPath.row==8) {//修改密码
         Account *acc=[Account sharedInstance];
         if (acc.isLogin) {
            EditPwdViewController *controller=[[EditPwdViewController alloc] init];
@@ -128,10 +149,20 @@
                    [alertView show];
         }
     }
-    else if (indexPath.row==4) {//页面执行
+    else if (indexPath.row==6) {//我的信息
         MainViewController *main=(MainViewController*)self.tabBarController;
         [main setSelectedItemIndex:2];
-    }else{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"myInfo" object:nil];
+    }else if(indexPath.row==9){//用户注销
+        [AlertHelper initWithTitle:@"提示" message:@"确定是否注销？" cancelTitle:@"取消" cancelAction:nil confirmTitle:@"确定" confirmAction:^{
+            [Account exitAccount];
+            [self loadNoLoginBarButtonItem];
+            LoginViewController *login=[[LoginViewController alloc] init];
+            [self.navigationController pushViewController:login animated:YES];
+            [login release];
+        }];
+    }
+    else{
         BuildViewController *controller=[[BuildViewController alloc] init];
         [self.navigationController pushViewController:controller animated:YES];
         [controller release];

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ServiceHelper.h"
-@interface EditPwdViewController : BasicViewController<UITableViewDataSource,UITableViewDelegate>{
+@interface EditPwdViewController : BasicViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>{
     ServiceHelper *_helper;
 }
 @property(nonatomic,strong) UITableView *tableView;

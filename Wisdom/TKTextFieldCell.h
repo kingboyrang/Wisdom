@@ -10,6 +10,6 @@
 //#import "UITextField+TPCategory.h"
 #import "EMKeyboardBarTextField.h"
 @interface TKTextFieldCell : UITableViewCell<UITextFieldDelegate>
-@property(nonatomic,strong) EMKeyboardBarTextField *field;
+@property(nonatomic,strong) UITextField *field;
 @property(nonatomic,readonly) BOOL hasValue;
 @end

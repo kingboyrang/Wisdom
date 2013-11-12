@@ -130,17 +130,13 @@
     NSArray *controls=self.viewControllers;
     UINavigationController *navController=(UINavigationController*)[controls objectAtIndex:self.selectedIndex];
     NSArray *arr=navController.viewControllers;
-    if (self.selectedIndex!=3&&[arr count]>1) {
-        [navController popToRootViewControllerAnimated:YES];//回首页
+    if (self.selectedIndex==3&&[navController.topViewController isKindOfClass:[LoginViewController class]]) {
+        
     }else{
-        if (arr.count==2&&[navController.topViewController isKindOfClass:[LoginViewController class]]) {
-            
-        }else{
-           [navController popToRootViewControllerAnimated:YES];//回首页
+        if (arr.count>1) {
+            [navController popToRootViewControllerAnimated:YES];//回首页
         }
     }
-
-    
 }
 - (void)setSelectedItemIndex:(int)index{
     int pos=100+index;
@@ -149,7 +145,7 @@
 }
 #pragma mark - UINavigationController delegate
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    //viewController.hidesBottomBarWhenPushed=YES;
+    viewController.hidesBottomBarWhenPushed=YES;
     //导航控制器子控制器的个数
     int count = navigationController.viewControllers.count;
     if (count == 1) {

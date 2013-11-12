@@ -27,22 +27,9 @@
     }
     return self;
 }
--(void) viewDidAppear:(BOOL)animated
-{
-    // run the reader when the view is visible
-    [super viewDidAppear:animated];
-    
-}
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self navigationItemWithBack];
-    
-}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.showRightBtnItem=NO;
-    [self loadRightWetherView];
    ZBarReaderViewController *_readerController = [[ZBarReaderViewController new] retain];
     _readerController.readerDelegate = self;
     //非全屏

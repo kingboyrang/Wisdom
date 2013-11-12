@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ServiceHelper.h"
-@interface LoginViewController : BasicViewController<UITableViewDataSource,UITableViewDelegate>{
+@interface LoginViewController : BasicViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>{
     ServiceHelper *_helper;
+    UITextField *prevTextfield;
 }
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) NSMutableArray *cells;
--(void)buttonBackClick;
 @end
