@@ -87,11 +87,13 @@
     if (![self.topViewController isKindOfClass:[viewController class]]) {
         [super pushViewController:viewController animated:animated];
     }
+    /***
     if ([self.viewControllers count]==1){
         viewController.navigationItem.leftBarButtonItem =[self loadLogoImage];
     }else{
         viewController.navigationItem.leftBarButtonItem =[self customLeftBackButton];
-    }   
+    }  
+     ***/
 }
 - (void)didReceiveMemoryWarning
 {

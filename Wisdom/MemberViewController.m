@@ -37,27 +37,6 @@
         LoginViewController *login=[[LoginViewController alloc] init];
         [self.navigationController pushViewController:login animated:YES];
         [login release];
-    }else{
-        
-        NSLog(@"controls=%d",self.navigationController.viewControllers.count);
-        for (UINavigationItem *item in self.navigationController.navigationBar.items) {
-            
-            NSLog(@"leftcount=%d,rightcount=%d",item.leftBarButtonItems.count,item.rightBarButtonItems.count);
-        }
-        NSArray *arr=self.navigationController.navigationBar.items;
-        if ([arr count]>1) {
-            for (int i=1; i<arr.count; i++) {
-                UINavigationItem *lastBarBtn=[arr objectAtIndex:i];
-                lastBarBtn.titleView=nil;
-                lastBarBtn.leftBarButtonItem=nil;
-                lastBarBtn.rightBarButtonItem=nil;
-                lastBarBtn.hidesBackButton=YES;
-                //[self.navigationController.navigationBar popNavigationItemAnimated:NO];
-                //[self performSelector:lastBarBtn.backBarButtonItem.action];
-            }
-            // UINavigationItem *lastBarBtn=[arr lastObject];
-            //lastBarBtn.title=@"this is title";
-        }
     }
 }
 - (void)viewDidLoad

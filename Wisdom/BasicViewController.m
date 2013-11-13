@@ -30,6 +30,9 @@
 -(void)buttonRegister;
 -(void)buttonWeatherClick;
 -(void)buttonMemberClick;
+-(void)loadLeftLogoImage;
+-(void)loadLeftBackBarButtonItem;
+-(void)popself;
 @end
 
 @implementation BasicViewController
@@ -75,7 +78,61 @@
     self.showWeatherView=YES;
     [super viewDidLoad];
     
+    if (self.navigationController.viewControllers.count>1) {
+        [self loadLeftBackBarButtonItem];
+    }else{
+        [self loadLogoImage];
+    }
     
+}
+-(void)popself
+{
+    NSArray *arr=self.navigationController.viewControllers;
+    id v=[arr objectAtIndex:arr.count-1];
+    if ([v isKindOfClass:[LoginViewController class]]||[v isKindOfClass:[RegisterViewController class]]) {
+        MainViewController *main=(MainViewController*)self.tabBarController;
+        [main setSelectedItemIndex:0];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+-(void)loadLeftLogoImage{
+    UIImage *image1=[UIImage imageNamed:@"titletext1.png"];
+    UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(0,(44-image1.size.height)/2,image1.size.width, image1.size.height)];
+    [imageView setImage:image1];
+    
+    UIBarButtonItem *leftBtn=[[UIBarButtonItem alloc] initWithCustomView:imageView];
+    [imageView release];
+    self.navigationItem.leftBarButtonItem=leftBtn;
+    [leftBtn release];
+}
+-(void)loadLeftBackBarButtonItem{
+    UIView *leftView=[[UIView alloc] initWithFrame:CGRectZero];
+    leftView.backgroundColor=[UIColor clearColor];
+    
+    
+    UIImage *image=[UIImage imageNamed:@"back1.png"];
+    UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame=CGRectMake(0, 0, image.size.width, image.size.height);
+    [btn setBackgroundImage:image forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(popself) forControlEvents:UIControlEventTouchUpInside];
+    [leftView addSubview:btn];
+    
+    
+    UIImage *image1=[UIImage imageNamed:@"titletext1.png"];
+    UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(btn.frame.size.width,(image.size.height-image1.size.height)/2,image1.size.width, image1.size.height)];
+    [imageView setImage:image1];
+    [leftView addSubview:imageView];
+    
+    
+    leftView.frame=CGRectMake(0, 0, imageView.frame.origin.x+imageView.frame.size.width, image.size.height);
+    [imageView release];
+    
+    UIBarButtonItem *leftBtn=[[UIBarButtonItem alloc] initWithCustomView:leftView];
+    [leftView release];
+    self.navigationItem.leftBarButtonItem=leftBtn;
+    [leftBtn release];
 }
 - (void) showMessageWithTitle:(NSString*)title{
     [self showMessageWithTitle:title innerView:self.view];

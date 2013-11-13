@@ -41,9 +41,9 @@
     if (title&&[title length]>0) {
         UIView *leftView=[[UIView alloc] initWithFrame:CGRectZero];
         leftView.backgroundColor=[UIColor clearColor];
-        UIImage *image=[UIImage imageNamed:@"back.png"];
+        UIImage *image=[UIImage imageNamed:@"back1.png"];
         UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame=CGRectMake(0, -6.5, image.size.width, image.size.height);
+        btn.frame=CGRectMake(0, -3, image.size.width, image.size.height);
         [btn setBackgroundImage:image forState:UIControlStateNormal];
         [btn addTarget:sender action:sel forControlEvents:UIControlEventTouchUpInside];
         [leftView addSubview:btn];
@@ -58,7 +58,7 @@
         self.leftBarButtonItem=leftBtn;
         [leftBtn release];
     }else{
-        UIImage *image=[UIImage imageNamed:@"back.png"];
+        UIImage *image=[UIImage imageNamed:@"back1.png"];
         UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
         btn.frame=CGRectMake(0, -6.5, image.size.width, image.size.height);
         [btn setBackgroundImage:image forState:UIControlStateNormal];
