@@ -7,7 +7,7 @@
 //
 
 #import "Account.h"
-
+#import "FileHelper.h"
 @interface Account ()
 -(void)initloadValue;
 @end
@@ -45,11 +45,16 @@
     });
     return sSharedInstance;
 }
+-(id)init{
+    if (self=[super init]) {
+        [self initloadValue];
+    }
+    return self;
+}
 -(void)save{
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:data forKey:@"saveEncodeAccount"];
-    [defaults synchronize];
+    //NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self];
+    NSString *path=[DocumentPath stringByAppendingPathComponent:@"saveaccount"];
+    [NSKeyedArchiver archiveRootObject:self toFile:path];
 }
 +(void)accountLogin:(NSString*)user password:(NSString*)pwd login:(BOOL)login{
     Account *acc=[Account sharedInstance];
@@ -61,20 +66,20 @@
 }
 +(void)exitAccount{
     Account *acc=[Account sharedInstance];
-    if (!acc.isRemember) {
-        acc.userAcc=@"";
-        acc.userPwd=@"";
-    }
+    acc.userAcc=@"";
+    acc.userPwd=@"";
     acc.isLogin=NO;
+    acc.isRemember=NO;
     [acc save];
 }
 #pragma mark -
 #pragma mark 私有方法
 -(void)initloadValue{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSData *data = [defaults objectForKey:@"saveEncodeAccount"];
-    if (data) {
-        Account *obj = (Account*)[NSKeyedUnarchiver unarchiveObjectWithData: data];
+    NSString *path=[DocumentPath stringByAppendingPathComponent:@"saveaccount"];
+    //NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //NSData *data = [defaults objectForKey:@"saveEncodeAccount"];
+   if([FileHelper existsFilePath:path]){ //如果不存在
+        Account *obj = (Account*)[NSKeyedUnarchiver unarchiveObjectWithFile: path];
         self.userAcc=obj.userAcc;
         self.userPwd=obj.userPwd;
         self.isRemember=obj.isRemember;

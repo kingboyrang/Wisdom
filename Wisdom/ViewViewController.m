@@ -27,6 +27,7 @@
 {
     [super viewDidLoad];
     [self editBackBarbuttonItem:@"景点"];
+    
     self.view.backgroundColor=[UIColor whiteColor];
     if (![NetWorkConnection IsEnableConnection]) {
         [self showNoNetworkNotice:nil];
@@ -78,6 +79,7 @@
         activityIndicator = nil;
         if(reuqest.responseStatusCode==200){
             UIWebView *webView=[[[UIWebView alloc] initWithFrame:self.view.bounds] autorelease];
+            webView.tag=100;
             webView.scalesPageToFit=YES;
             [webView loadHTMLString:reuqest.responseString baseURL:nil];
             [self.view addSubview:webView];
@@ -93,7 +95,20 @@
     [reuqest startAsynchronous];
 
 }
-
+-(BOOL)backWebViewPage{
+    id v=[self.view viewWithTag:100];
+    if ([v isKindOfClass:[UIWebView class]]) {
+        UIWebView *web=(UIWebView*)v;
+        
+        if (web.canGoBack) {
+            [web goBack];
+            return NO;
+        }else{
+             NSLog(@"oh,my god!");
+        }
+    }
+    return YES;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

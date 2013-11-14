@@ -15,6 +15,7 @@
 #import "FoodViewController.h"
 #import "TrafficViewController.h"
 #import "WebViewController.h"
+#import "IntrouduceViewController.h"
 @interface IndexViewController ()
 @end
 
@@ -54,6 +55,7 @@
     [web release];
 }
 -(void)buttonMenuItemIndex:(NSString*)index{
+    /***
     if ([index isEqualToString:@"0"]) {
         MaitreyaViewController *controller=[[MaitreyaViewController alloc] init];
         [self.navigationController pushViewController:controller animated:YES];
@@ -64,11 +66,6 @@
         [self.navigationController pushViewController:controller animated:YES];
         [controller release];
     }
-    if ([index isEqualToString:@"2"]) {
-        TrafficViewController *controller=[[TrafficViewController alloc] init];
-        [self.navigationController pushViewController:controller animated:YES];
-        [controller release];
-    }
     if ([index isEqualToString:@"3"]) {
         HotelViewController *controller=[[HotelViewController alloc] init];
         [self.navigationController pushViewController:controller animated:YES];
@@ -76,6 +73,17 @@
     }
     if ([index isEqualToString:@"4"]) {
         FoodViewController *controller=[[FoodViewController alloc] init];
+        [self.navigationController pushViewController:controller animated:YES];
+        [controller release];
+    }
+    ***/
+    if ([index isEqualToString:@"2"]) {
+        TrafficViewController *controller=[[TrafficViewController alloc] init];
+        [self.navigationController pushViewController:controller animated:YES];
+        [controller release];
+    }else{
+        IntrouduceViewController *controller=[[IntrouduceViewController alloc] init];
+        controller.introduceType=index;
         [self.navigationController pushViewController:controller animated:YES];
         [controller release];
     }

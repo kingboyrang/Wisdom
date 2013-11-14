@@ -149,25 +149,22 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     // return NO to not change text
-    TKLabelFieldCell *cell=self.cells[0];
-    if (cell.field==textField) {
-       
-    }else{
-        if(strlen([textField.text UTF8String]) >= 12 && range.length != 1)
-            return NO;
-        
-    }
+    if(strlen([textField.text UTF8String]) >= 12 && range.length != 1)
+        return NO;
     return YES;
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     TKLabelFieldCell *cell=self.cells[0];
-    if (textField==cell.field) {
-        
+    if(cell.field==textField){
+    
     }else{
+        TKLabelFieldCell *cell1=self.cells[2];
+        NSString *memo=@"新密码不能少于6位!";
+        if(cell1.field==textField){memo=@"确认密码不能少于6位!";}
         if(strlen([textField.text UTF8String]) <6)
         {
-            [AlertHelper initWithTitle:@"提示" message:@"密码不能少于6位！"];
+            [AlertHelper initWithTitle:@"提示" message:memo];
             return NO;
         }
     }
@@ -183,7 +180,7 @@
     }
     Account *acc=[Account sharedInstance];
     if (![acc.userPwd isEqualToString:cell1.field.text]) {
-        [AlertHelper initWithTitle:@"提示" message:@"旧密码错误!"];
+        [AlertHelper initWithTitle:@"提示" message:@"旧密码错误,请重新确认!"];
         [cell1.field becomeFirstResponder];
         return NO;
     }
@@ -207,6 +204,17 @@
     TKLabelFieldCell *cell3=self.cells[2];
     if(!cell3.hasValue){
         [AlertHelper initWithTitle:@"提示" message:@"确认密码不为空!"];
+        [cell3.field becomeFirstResponder];
+        return NO;
+    }
+    if ([cell3.field.text containsChinese]) {
+        [AlertHelper initWithTitle:@"提示" message:@"确认密码不能包含汉字!"];
+        [cell3.field becomeFirstResponder];
+        return NO;
+    }
+    if(strlen([cell3.field.text UTF8String]) <6)
+    {
+        [AlertHelper initWithTitle:@"提示" message:@"确认密码不能少于6位大于12位！"];
         [cell3.field becomeFirstResponder];
         return NO;
     }
@@ -259,12 +267,8 @@
             }
         }
         if (boo) {
-            [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
-                [self showSuccessViewWithHide:^(AnimateErrorView *errorView) {
-                    errorView.labelTitle.text=@"修改成功!";
-                } completed:^(AnimateErrorView *errorView) {
-                    [self.navigationController popViewControllerAnimated:YES];
-                }];
+            [self hideLoadingSuccessWithTitle:@"修改成功!" completed:^(AnimateErrorView *errorView) {
+                [self.navigationController popViewControllerAnimated:YES];
             }];
         }else{
             [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {

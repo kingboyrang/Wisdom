@@ -33,6 +33,7 @@
     CGFloat h=self.view.bounds.size.height-44-54-48;
     ScrollTraffice *traffice=[[ScrollTraffice alloc] initWithFrame:CGRectMake(0, 48, DeviceWidth,h)];
     traffice.controller=self;
+    traffice.tag=800;
     
     TrafficMenu *menu=[[TrafficMenu alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 48)];
     menu.controller=traffice;
@@ -42,6 +43,10 @@
     [traffice loadWebView:0];
     [traffice release];
 	// Do any additional setup after loading the view.
+}
+-(BOOL)backWebViewPage{
+    ScrollTraffice *traffice=(ScrollTraffice*)[self.view viewWithTag:800];
+    return [traffice goBackWebPage];
 }
 - (void)didReceiveMemoryWarning
 {

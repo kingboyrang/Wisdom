@@ -20,6 +20,7 @@
 #import "BasicNavigationController.h"
 #import "AlertHelper.h"
 #import "UINavigationItem+TPCategory.h"
+#import "NSString+TPCategory.h"
 @interface LoginViewController ()
 -(void)buttonSubmit;
 -(BOOL)formSubmit;
@@ -111,10 +112,10 @@
     
    
     TKTextFieldCell *cell1=[[[TKTextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-    cell1.field.placeholder=@"请输入用户帐号";
+    cell1.field.placeholder=@"请输入手机号码";
     cell1.field.backgroundColor=[UIColor colorFromHexRGB:@"c6dfe5"];
     cell1.field.delegate=self;
-    cell1.field.keyboardType=UIKeyboardTypeNumberPad;
+    cell1.field.keyboardType=UIKeyboardTypeASCIICapable;
     
     TKTextFieldCell *cell2=[[[TKTextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     cell2.field.secureTextEntry=YES;
@@ -160,35 +161,51 @@
         }];
     }
 }
-- (void)textFieldDidBeginEditing:(UITextField *)textField
+#pragma mark UITextFieldDelegate Methods
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
+    // return NO to not change text
     TKTextFieldCell *cell=self.cells[0];
     if (cell.field==textField) {
-        [self showDoneButton:YES];
-    }else{//隐藏done
-        [self showDoneButton:NO];
+        if(strlen([textField.text UTF8String]) >= 11 && range.length != 1)
+            return NO;
+    }else{
+        if(strlen([textField.text UTF8String]) >= 12 && range.length != 1)
+            return NO;
     }
+    return YES;
+}
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
     [self moveView:textField leaveView:NO];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField;
 {
-    TKTextFieldCell *cell=self.cells[0];
-    if (cell.field==textField) {
-        [self showDoneButton:NO];
-    }
     [self moveView:textField leaveView:YES];
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    // return NO to not change text
+    TKTextFieldCell *cell=self.cells[1];
+    if (textField==cell.field) {
+        if(strlen([textField.text UTF8String]) <6)
+        {
+            [AlertHelper initWithTitle:@"提示" message:@"密码不能少于6位！"];
+            return NO;
+        }
+    }
     [textField resignFirstResponder];
     return YES;
 }
 -(BOOL)formSubmit{
     TKTextFieldCell *cell1=self.cells[0];
     if (!cell1.hasValue) {
-        [AlertHelper initWithTitle:@"提示" message:@"用户帐号不为空!"];
+        [AlertHelper initWithTitle:@"提示" message:@"手机号码不为空!"];
+        [cell1.field becomeFirstResponder];
+        return NO;
+    }
+    if (![cell1.field.text isNumberString]) {
+        [AlertHelper initWithTitle:@"提示" message:@"手机号码只能为数字!"];
         [cell1.field becomeFirstResponder];
         return NO;
     }
@@ -198,6 +215,18 @@
         [cell2.field becomeFirstResponder];
         return NO;
     }
+    if ([cell2.field.text containsChinese]) {
+        [AlertHelper initWithTitle:@"提示" message:@"用户密码不能包含汉字!"];
+        [cell2.field becomeFirstResponder];
+        return NO;
+    }
+    if(strlen([cell2.field.text UTF8String])<6)
+    {
+        [AlertHelper initWithTitle:@"提示" message:@"用户密码不能少于6位大于12位！"];
+        [cell2.field becomeFirstResponder];
+        return NO;
+    }
+   
     return YES;
 }
 

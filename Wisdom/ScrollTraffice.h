@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ScrollTraffice : UIView{
+@interface ScrollTraffice : UIView<UIWebViewDelegate>{
     BOOL isRoadSuccess;
     BOOL isBusSuccess;
     BOOL isTaxiSuccess;
     BOOL isFlightSuccess;
+    int curPage;
 }
 @property(nonatomic,strong) UIScrollView *scrollView;
 @property(nonatomic,assign) id controller;
 -(void)loadWebView:(int)index;
+-(BOOL)goBackWebPage;
 @end

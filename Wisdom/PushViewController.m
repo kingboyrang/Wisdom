@@ -120,13 +120,13 @@
 -(void)pageScrollLeft{
     PushView *view=(PushView*)[_scrollView viewWithTag:100];
     view.infoType=1;
-    [view loadingSourceData];
+    [view reloadingSourceData];
     [self.scrollView setContentOffset:CGPointMake(0, 0)];//页面滑动
 }
 -(void)pageScrollRight{
     PushView *view=(PushView*)[_scrollView viewWithTag:101];
     view.infoType=2;
-    [view loadingSourceData];
+    [view reloadingSourceData];
     [self.scrollView setContentOffset:CGPointMake(DeviceWidth, 0)];//页面滑动
 }
 - (void)didReceiveMemoryWarning

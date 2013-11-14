@@ -101,10 +101,10 @@
     
     TKLabelFieldCell *cell1=[[[TKLabelFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     cell1.label.text=@"用户帐号:";
-    cell1.field.placeholder=@"请输入用户帐号";
+    cell1.field.placeholder=@"请输入手机号码";
     cell1.field.backgroundColor=[UIColor colorFromHexRGB:@"c6dfe5"];
     cell1.field.delegate=self;
-    cell1.field.keyboardType=UIKeyboardTypeNumberPad;
+    cell1.field.keyboardType=UIKeyboardTypeASCIICapable;
     
     TKLabelFieldCell *cell2=[[[TKLabelFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     cell2.label.text=@"输入密码:";
@@ -160,21 +160,11 @@
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    TKLabelFieldCell *cell=self.cells[0];
-    if (cell.field==textField) {
-        [self showDoneButton:YES];
-    }else{//隐藏done
-        [self showDoneButton:NO];
-    }
     [self moveView:textField leaveView:NO];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField;
 {
-    TKLabelFieldCell *cell=self.cells[0];
-    if (cell.field==textField) {
-        [self showDoneButton:NO];
-    }
     [self moveView:textField leaveView:YES];
 }
 #pragma mark UITextFieldDelegate Methods
@@ -198,9 +188,12 @@
     if (textField==cell.field) {
         
     }else{
+        TKLabelFieldCell *cell1=self.cells[2];
+        NSString *memo=@"输入密码不能少于6位!";
+        if(cell1.field==textField){memo=@"确认密码不能少于6位!";}
         if(strlen([textField.text UTF8String]) <6)
         {
-            [AlertHelper initWithTitle:@"提示" message:@"密码不能少于6位！"];
+            [AlertHelper initWithTitle:@"提示" message:memo];
             return NO;
         }
     }
@@ -211,12 +204,12 @@
 -(BOOL)formSubmit{
     TKLabelFieldCell *cell=self.cells[0];
     if (!cell.hasValue) {
-        [AlertHelper initWithTitle:@"提示" message:@"用户帐号不为空!"];
+        [AlertHelper initWithTitle:@"提示" message:@"手机号码不为空!"];
         [cell.field becomeFirstResponder];
         return NO;
     }
     if (![cell.field.text isNumberString]) {
-        [AlertHelper initWithTitle:@"提示" message:@"用户帐号只能为数字!"];
+        [AlertHelper initWithTitle:@"提示" message:@"手机号码只能为数字!"];
         [cell.field becomeFirstResponder];
         return NO;
     }
@@ -227,19 +220,30 @@
         return NO;
     }
     if ([cell1.field.text containsChinese]) {
-        [AlertHelper initWithTitle:@"提示" message:@"密码不能包含汉字!"];
+        [AlertHelper initWithTitle:@"提示" message:@"输入密码不能包含汉字!"];
         [cell1.field becomeFirstResponder];
         return NO;
     }
     if(strlen([cell1.field.text UTF8String])<6)
     {
-        [AlertHelper initWithTitle:@"提示" message:@"密码不能少于6位大于12位！"];
+        [AlertHelper initWithTitle:@"提示" message:@"输入密码不能少于6位大于12位！"];
         [cell1.field becomeFirstResponder];
         return NO;
     }
     TKLabelFieldCell *cell2=self.cells[2];
     if (!cell2.hasValue) {
         [AlertHelper initWithTitle:@"提示" message:@"确认密码不为空!"];
+        [cell2.field becomeFirstResponder];
+        return NO;
+    }
+    if ([cell2.field.text containsChinese]) {
+        [AlertHelper initWithTitle:@"提示" message:@"确认密码不能包含汉字!"];
+        [cell2.field becomeFirstResponder];
+        return NO;
+    }
+    if(strlen([cell2.field.text UTF8String])<6)
+    {
+        [AlertHelper initWithTitle:@"提示" message:@"确认密码不能少于6位大于12位！"];
         [cell2.field becomeFirstResponder];
         return NO;
     }

@@ -46,4 +46,5 @@
 - (void) showMessageWithTitle:(NSString*)title innerView:(UIView*)view;
 
 -(void)buttonBackClick;
+-(BOOL)backWebViewPage;
 @end

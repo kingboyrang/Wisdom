@@ -13,7 +13,9 @@
 #import "NetWorkConnection.h"
 #import "WBInfoNoticeView.h"
 #import "UIColor+TPCategory.h"
-@interface ScrollTraffice ()
+@interface ScrollTraffice (){
+    AnimateLoadView *activityIndicator;
+}
 -(void)changeStatus:(BOOL)status index:(int)index;
 -(BOOL)loadStatusWithIndex:(int)index;
 -(void)showInfoWithTitle:(NSString*)title;
@@ -56,6 +58,7 @@
     return isFlightSuccess;
 }
 -(void)loadWebView:(int)index{
+    curPage=index;
     [_scrollView setContentOffset:CGPointMake(index*self.bounds.size.width, 0)];//页面滑动
     if ([self loadStatusWithIndex:index]) {//是否已加载成功
         return;
@@ -75,7 +78,43 @@
     if (index==3) {
         webUrl=FlightIntroduceURL;
     }
-
+    id v=[self viewWithTag:100+index];
+    if ([v isKindOfClass:[UIWebView class]]) {
+        //UIWebView *web=(UIWebView*)v;
+        //[web reload];
+        return;
+    }
+    
+    NSURL *webURL=[NSURL URLWithString:webUrl];
+    NSURLRequest *request=[NSURLRequest requestWithURL:webURL];
+    
+     CGRect frame=CGRectMake(index*self.bounds.size.width, 0, self.bounds.size.width, self.bounds.size.height);
+    UIWebView *webView=[[[UIWebView alloc] initWithFrame:frame] autorelease];
+    webView.tag=100+index;
+    webView.allowsInlineMediaPlayback=YES;
+    webView.mediaPlaybackRequiresUserAction=YES;
+    webView.mediaPlaybackAllowsAirPlay=YES;
+    //webView.suppressesIncrementalRendering=YES;
+    webView.keyboardDisplayRequiresUserAction=YES;
+    webView.delegate=self;
+    [_scrollView addSubview:webView];
+    
+    activityIndicator=[[AnimateLoadView alloc] initWithFrame:CGRectMake(0, 0, 300, 40)];
+    activityIndicator.backgroundColor=[UIColor clearColor];
+    activityIndicator.activityIndicatorView.activityIndicatorViewStyle=UIActivityIndicatorViewStyleGray;
+    activityIndicator.labelTitle.text=@"正在加载,请稍后...";
+    activityIndicator.labelTitle.textColor=[UIColor blackColor];
+    CGFloat w=activityIndicator.labelTitle.frame.origin.x+activityIndicator.labelTitle.frame.size.width;
+    CGRect r=activityIndicator.frame;
+    r.size.width=w;
+    r.origin.x=(self.bounds.size.width-w)/2.0;
+    r.origin.y=(self.bounds.size.height-40)/2.0;
+    activityIndicator.frame=r;
+    [self addSubview:activityIndicator];
+    [activityIndicator.activityIndicatorView startAnimating];
+    
+    [webView loadRequest:request];
+    /***
     __block AnimateLoadView *activityIndicator = nil;
     if (!activityIndicator)    {
         activityIndicator=[[AnimateLoadView alloc] initWithFrame:CGRectMake(0, 0, 300, 40)];
@@ -103,6 +142,11 @@
             webView.scrollView.minimumZoomScale=1.0;
             webView.scrollView.maximumZoomScale=2.0;
             webView.scrollView.decelerationRate=1.0f;
+            webView.allowsInlineMediaPlayback=YES;
+            webView.mediaPlaybackRequiresUserAction=YES;
+            webView.mediaPlaybackAllowsAirPlay=YES;
+            webView.suppressesIncrementalRendering=YES;
+            webView.keyboardDisplayRequiresUserAction=YES;
             //webView.scalesPageToFit=YES;
             [webView loadHTMLString:reuqest.responseString baseURL:nil];
             [_scrollView addSubview:webView];
@@ -126,6 +170,28 @@
         }
     }];
     [reuqest startAsynchronous];
+     ***/
+}
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [activityIndicator removeFromSuperview];
+     activityIndicator = nil;
+}
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    [activityIndicator removeFromSuperview];
+    activityIndicator = nil;
+}
+-(BOOL)goBackWebPage{
+    id v=[_scrollView viewWithTag:100+curPage];
+    if ([v isKindOfClass:[UIWebView class]]) {
+        UIWebView *web=(UIWebView*)v;
+        if ([web canGoBack]) {
+            [web goBack];
+            return NO;
+        }
+    }
+    return YES;
 }
 -(void)changeStatus:(BOOL)status index:(int)index{
     if (index==0) {isRoadSuccess=status;}

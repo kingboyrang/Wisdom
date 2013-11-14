@@ -14,6 +14,7 @@
 #import "ZBarSDK.h"
 #import "NSString+TPCategory.h"
 #import "BasicViewController.h"
+#import "AlertHelper.h"
 @implementation AppDelegate
 - (void)dealloc
 {
@@ -24,6 +25,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    Account *acc=[Account sharedInstance];
+    if (acc.isRemember) {
+        acc.isLogin=YES;
+        [acc save];
+    }else{
+        acc.isLogin=NO;
+        [acc save];
+    }
+    
     [ZBarReaderView class];
     //fD8052pzVUNGQLMlLuNGMIvh 我的API key
     
@@ -35,21 +46,6 @@
         NSLog(@"manager start failed!");
     }
   
-       /***
-        NSString *path2=[DocumentPath stringByAppendingPathComponent:@"changepwdbg.png"];
-        UIImage *image2=[UIImage imageNamed:@"changepwdbg.png"];
-        [image2 saveImage:path2];
-        NSLog(@"path=%@\n",path2);
-        
-     NSString *path=[DocumentPath stringByAppendingPathComponent:@"login.png"];
-     UIImage *image=[[UIImage imageNamed:@"login.png"] imageByScalingProportionallyToSize:CGSizeMake(80*35/49, 35)];
-     [image saveImage:path];
-     NSLog(@"path=%@\n",path);
-    
-    NSString *path3=[DocumentPath stringByAppendingPathComponent:@"search_select.png"];
-    UIImage *image3=[[UIImage imageNamed:@"search_select.png"] imageByScalingProportionallyToSize:CGSizeMake(79, 55)];
-    [image3 saveImage:path3];
-    ***/
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     MainViewController *main=[[[MainViewController alloc] init] autorelease];
     self.window.rootViewController = main;

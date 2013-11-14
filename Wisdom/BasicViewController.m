@@ -260,7 +260,13 @@
 -(void)editBackBarbuttonItem:(NSString*)title{
     [self.navigationItem backBarBtnItem:title target:self action:@selector(buttonBackClick)];
 }
+-(BOOL)backWebViewPage{
+    return YES;
+}
 -(void)buttonBackClick{
+    if (![self backWebViewPage]) {
+        return;
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)didReceiveMemoryWarning
@@ -288,7 +294,7 @@
 -(AnimateErrorView*) successView {
     if (!_successView) {
         _successView=[[AnimateErrorView alloc] initWithFrame:CGRectMake(0, -40, DeviceWidth, 40)];
-        _successView.backgroundColor=[UIColor colorFromHexRGB:@"ddd978"];
+        _successView.backgroundColor=[UIColor colorFromHexRGB:@"c94018"];
         [_successView setErrorImage:[UIImage imageNamed:@"notice_success_icon.png"]];
     }
     return _successView;
