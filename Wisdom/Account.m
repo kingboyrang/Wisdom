@@ -61,9 +61,10 @@
 }
 +(void)exitAccount{
     Account *acc=[Account sharedInstance];
-    acc.userAcc=@"";
-    acc.userPwd=@"";
-    acc.isRemember=NO;
+    if (!acc.isRemember) {
+        acc.userAcc=@"";
+        acc.userPwd=@"";
+    }
     acc.isLogin=NO;
     [acc save];
 }

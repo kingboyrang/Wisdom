@@ -69,6 +69,8 @@
  */
 - (BOOL) isEmail;
 - (BOOL) isURLString;
+- (BOOL) isNumberString;
+- (BOOL) containsChinese;
 /** Returns a `NSString` that properly replaces HTML specific character sequences.
  @return An escaped HTML string.
  */

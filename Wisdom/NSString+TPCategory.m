@@ -131,6 +131,21 @@
     NSPredicate *regExPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
     return [regExPredicate evaluateWithObject:[self lowercaseString]];
 }
+- (BOOL) isNumberString{
+    NSString *emailRegEx =@"^[0-9]+$";
+	
+    NSPredicate *regExPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
+    return [regExPredicate evaluateWithObject:self];
+}
+- (BOOL) containsChinese{
+   //[u4e00-u9fa5]
+    for(int i = 0; i < [self length]; i++) {
+        int a = [self characterAtIndex:i];
+        if( a > 0x4e00 && a < 0x9fff)
+            return YES;
+    }
+    return NO;
+}
 - (NSString *) escapeHTML{
 	NSMutableString *s = [NSMutableString string];
 	

@@ -14,6 +14,7 @@
 #import "NetWorkConnection.h"
 #import "UIImage+TPCategory.h"
 #import "AlertHelper.h"
+#import "NSString+TPCategory.h"
 @interface EditPwdViewController ()
 -(void)buttonSubmit;
 -(BOOL)formSubmit;
@@ -90,6 +91,8 @@
     cell1.field.backgroundColor=[UIColor colorFromHexRGB:@"c6dfe5"];
     cell1.field.delegate=self;
     cell1.field.secureTextEntry=YES;
+    cell1.field.keyboardType=UIKeyboardTypeASCIICapable;
+    
     
     TKLabelFieldCell *cell2=[[[TKLabelFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     cell2.label.text=@"输入新密码:";
@@ -98,6 +101,7 @@
     cell2.field.backgroundColor=[UIColor colorFromHexRGB:@"c6dfe5"];
     cell2.field.delegate=self;
     cell2.field.secureTextEntry=YES;
+    cell2.field.keyboardType=UIKeyboardTypeASCIICapable;
     
     TKLabelFieldCell *cell3=[[[TKLabelFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     cell3.label.text=@"确认新密码:";
@@ -106,6 +110,7 @@
     cell3.field.backgroundColor=[UIColor colorFromHexRGB:@"c6dfe5"];
     cell3.field.delegate=self;
     cell3.field.secureTextEntry=YES;
+    cell3.field.keyboardType=UIKeyboardTypeASCIICapable;
     
     TKRegisterButtonCell *cell4=[[[TKRegisterButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     [cell4.button setTitle:@"确定" forState:UIControlStateNormal];
@@ -176,9 +181,20 @@
         [cell1.field becomeFirstResponder];
         return NO;
     }
+    Account *acc=[Account sharedInstance];
+    if (![acc.userPwd isEqualToString:cell1.field.text]) {
+        [AlertHelper initWithTitle:@"提示" message:@"旧密码错误!"];
+        [cell1.field becomeFirstResponder];
+        return NO;
+    }
     TKLabelFieldCell *cell2=self.cells[1];
     if(!cell2.hasValue){
         [AlertHelper initWithTitle:@"提示" message:@"新密码不为空!"];
+        [cell2.field becomeFirstResponder];
+        return NO;
+    }
+    if ([cell2.field.text containsChinese]) {
+        [AlertHelper initWithTitle:@"提示" message:@"新密码不能包含汉字!"];
         [cell2.field becomeFirstResponder];
         return NO;
     }
@@ -192,12 +208,6 @@
     if(!cell3.hasValue){
         [AlertHelper initWithTitle:@"提示" message:@"确认密码不为空!"];
         [cell3.field becomeFirstResponder];
-        return NO;
-    }
-    Account *acc=[Account sharedInstance];
-    if (![acc.userPwd isEqualToString:cell1.field.text]) {
-        [AlertHelper initWithTitle:@"提示" message:@"旧密码错误!"];
-        [cell1.field becomeFirstResponder];
         return NO;
     }
     if (![cell2.field.text isEqualToString:cell3.field.text]) {

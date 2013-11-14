@@ -136,6 +136,8 @@
         [AlertHelper initWithTitle:@"提示" message:@"确定是否注销？" cancelTitle:@"取消" cancelAction:nil confirmTitle:@"确定" confirmAction:^{
             [Account exitAccount];
             [self loadNoLoginBarButtonItem];
+            MainViewController *main=(MainViewController*)self.tabBarController;
+            [main setSelectedItemIndex:0];
             LoginViewController *login=[[LoginViewController alloc] init];
             [self.navigationController pushViewController:login animated:YES];
             [login release];

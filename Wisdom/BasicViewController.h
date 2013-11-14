@@ -39,6 +39,7 @@
 -(void)loadLogoImage;
 
 -(void)buttonExitLogin;
+-(void)switchLoginExit;
 
 - (void) showNoNetworkNotice:(void (^)(void))dismissError;
 - (void) showMessageWithTitle:(NSString*)title;

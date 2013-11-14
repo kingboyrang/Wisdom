@@ -13,6 +13,7 @@
 #import "Account.h"
 #import "ZBarSDK.h"
 #import "NSString+TPCategory.h"
+#import "BasicViewController.h"
 @implementation AppDelegate
 - (void)dealloc
 {
@@ -33,7 +34,7 @@
     if (!ret) {
         NSLog(@"manager start failed!");
     }
-   
+  
        /***
         NSString *path2=[DocumentPath stringByAppendingPathComponent:@"changepwdbg.png"];
         UIImage *image2=[UIImage imageNamed:@"changepwdbg.png"];
@@ -123,6 +124,16 @@
     Account *acc=[Account sharedInstance];
     if ([acc.appId length]==0) {
         [BPush bindChannel];
+    }
+    if(!acc.isLogin){
+        if (acc.isRemember) {
+            acc.isLogin=YES;
+            [acc save];
+            MainViewController *main=(MainViewController*)self.window.rootViewController;
+            UINavigationController *nav=[main.viewControllers objectAtIndex:main.selectedIndex];
+            BasicViewController *basic=(BasicViewController*)nav.topViewController;
+            [basic switchLoginExit];
+        }
     }
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }

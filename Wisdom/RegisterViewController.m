@@ -18,10 +18,14 @@
 #import "TKRegisterButtonCell.h"
 #import "NetWorkConnection.h"
 #import "AlertHelper.h"
+#import "NSString+TPCategory.h"
+#import "UINavigationItem+TPCategory.h"
 @interface RegisterViewController ()
 -(void)buttonSubmit;
 -(BOOL)formSubmit;
 -(void)moveView:(UITextField *)textField leaveView:(BOOL)leave;
+-(void)showDoneClick;
+-(void)showDoneButton:(BOOL)show;
 @end
 
 @implementation RegisterViewController
@@ -100,6 +104,7 @@
     cell1.field.placeholder=@"请输入用户帐号";
     cell1.field.backgroundColor=[UIColor colorFromHexRGB:@"c6dfe5"];
     cell1.field.delegate=self;
+    cell1.field.keyboardType=UIKeyboardTypeNumberPad;
     
     TKLabelFieldCell *cell2=[[[TKLabelFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     cell2.label.text=@"输入密码:";
@@ -107,6 +112,7 @@
     cell2.field.placeholder=@"请输入密码";
     cell2.field.backgroundColor=[UIColor colorFromHexRGB:@"c6dfe5"];
     cell2.field.delegate=self;
+    cell2.field.keyboardType=UIKeyboardTypeASCIICapable;
     
     TKLabelFieldCell *cell3=[[[TKLabelFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     cell3.label.text=@"确认密码:";
@@ -114,6 +120,7 @@
     cell3.field.placeholder=@"请输入确认密码";
     cell3.field.backgroundColor=[UIColor colorFromHexRGB:@"c6dfe5"];
     cell3.field.delegate=self;
+    cell3.field.keyboardType=UIKeyboardTypeASCIICapable;
     
     TKRegisterButtonCell *cell4=[[[TKRegisterButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     [cell4.button setTitle:@"确定" forState:UIControlStateNormal];
@@ -122,6 +129,17 @@
     TKRegisterCheckCell *cell5=[[[TKRegisterCheckCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     
     self.cells=[NSMutableArray arrayWithObjects:cell1,cell2,cell3,cell4,cell5, nil];
+}
+-(void)showDoneClick{
+    TKLabelFieldCell *cell=self.cells[0];
+    [cell.field resignFirstResponder];
+}
+-(void)showDoneButton:(BOOL)show{
+    if (show) {
+        [self.navigationItem rightBarBtnItem:@"Done" target:self action:@selector(showDoneClick)];
+    }else{
+        self.navigationItem.rightBarButtonItem=nil;
+    }
 }
 - (void)moveView:(UITextField *)textField leaveView:(BOOL)leave
 {
@@ -142,11 +160,21 @@
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    TKLabelFieldCell *cell=self.cells[0];
+    if (cell.field==textField) {
+        [self showDoneButton:YES];
+    }else{//隐藏done
+        [self showDoneButton:NO];
+    }
     [self moveView:textField leaveView:NO];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField;
 {
+    TKLabelFieldCell *cell=self.cells[0];
+    if (cell.field==textField) {
+        [self showDoneButton:NO];
+    }
     [self moveView:textField leaveView:YES];
 }
 #pragma mark UITextFieldDelegate Methods
@@ -187,9 +215,19 @@
         [cell.field becomeFirstResponder];
         return NO;
     }
+    if (![cell.field.text isNumberString]) {
+        [AlertHelper initWithTitle:@"提示" message:@"用户帐号只能为数字!"];
+        [cell.field becomeFirstResponder];
+        return NO;
+    }
     TKLabelFieldCell *cell1=self.cells[1];
     if (!cell1.hasValue) {
         [AlertHelper initWithTitle:@"提示" message:@"输入密码不为空!"];
+        [cell1.field becomeFirstResponder];
+        return NO;
+    }
+    if ([cell1.field.text containsChinese]) {
+        [AlertHelper initWithTitle:@"提示" message:@"密码不能包含汉字!"];
         [cell1.field becomeFirstResponder];
         return NO;
     }

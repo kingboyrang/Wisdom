@@ -60,12 +60,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (self.showRightBtnItem) {
-        Account *acc=[Account sharedInstance];
-        if (acc.isLogin) {
-            [self loadLoginBarButtonItem];
-        }else{
-            [self loadNoLoginBarButtonItem];
-        }
+        [self switchLoginExit];
     }
     if (self.showWeatherView) {
         [self loadWetherTitleView];
@@ -83,7 +78,14 @@
     }else{
         [self loadLogoImage];
     }
-    
+}
+-(void)switchLoginExit{
+    Account *acc=[Account sharedInstance];
+    if (acc.isLogin) {
+        [self loadLoginBarButtonItem];
+    }else{
+        [self loadNoLoginBarButtonItem];
+    }
 }
 -(void)popself
 {

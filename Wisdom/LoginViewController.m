@@ -19,10 +19,13 @@
 #import "MemberViewController.h"
 #import "BasicNavigationController.h"
 #import "AlertHelper.h"
+#import "UINavigationItem+TPCategory.h"
 @interface LoginViewController ()
 -(void)buttonSubmit;
 -(BOOL)formSubmit;
 - (void)moveView:(UITextField *)textField leaveView:(BOOL)leave;
+-(void)showDoneClick;
+-(void)showDoneButton:(BOOL)show;
 @end
 
 @implementation LoginViewController
@@ -111,12 +114,14 @@
     cell1.field.placeholder=@"请输入用户帐号";
     cell1.field.backgroundColor=[UIColor colorFromHexRGB:@"c6dfe5"];
     cell1.field.delegate=self;
+    cell1.field.keyboardType=UIKeyboardTypeNumberPad;
     
     TKTextFieldCell *cell2=[[[TKTextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     cell2.field.secureTextEntry=YES;
     cell2.field.backgroundColor=[UIColor colorFromHexRGB:@"c6dfe5"];
     cell2.field.placeholder=@"请输入密码";
     cell2.field.delegate=self;
+    cell2.field.keyboardType=UIKeyboardTypeASCIICapable;
     TKRememberCell *cell3=[[[TKRememberCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
     
     TKLoginButtonCell *cell4=[[[TKLoginButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
@@ -125,6 +130,17 @@
     
     self.cells=[NSMutableArray arrayWithObjects:cell1,cell2,cell3,cell4, nil];
 	// Do any additional setup after loading the view.
+}
+-(void)showDoneClick{
+    TKTextFieldCell *cell=self.cells[0];
+    [cell.field resignFirstResponder];
+}
+-(void)showDoneButton:(BOOL)show{
+    if (show) {
+        [self.navigationItem rightBarBtnItem:@"Done" target:self action:@selector(showDoneClick)];
+    }else{
+        self.navigationItem.rightBarButtonItem=nil;
+    }
 }
 #pragma mark UITextFieldDelegate Methods
 - (void)moveView:(UITextField *)textField leaveView:(BOOL)leave
@@ -146,11 +162,21 @@
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    TKTextFieldCell *cell=self.cells[0];
+    if (cell.field==textField) {
+        [self showDoneButton:YES];
+    }else{//隐藏done
+        [self showDoneButton:NO];
+    }
     [self moveView:textField leaveView:NO];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField;
 {
+    TKTextFieldCell *cell=self.cells[0];
+    if (cell.field==textField) {
+        [self showDoneButton:NO];
+    }
     [self moveView:textField leaveView:YES];
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
