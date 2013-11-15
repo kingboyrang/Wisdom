@@ -22,4 +22,5 @@
 -(void)save;
 +(void)exitAccount;
 +(void)accountLogin:(NSString*)user password:(NSString*)pwd login:(BOOL)login;
++(void)loadRememberPwdLogin;
 @end

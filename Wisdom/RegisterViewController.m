@@ -213,6 +213,12 @@
         [cell.field becomeFirstResponder];
         return NO;
     }
+    if(strlen([cell.field.text UTF8String])<11)
+    {
+        [AlertHelper initWithTitle:@"提示" message:@"手机号码必须为11位！"];
+        [cell.field becomeFirstResponder];
+        return NO;
+    }
     TKLabelFieldCell *cell1=self.cells[1];
     if (!cell1.hasValue) {
         [AlertHelper initWithTitle:@"提示" message:@"输入密码不为空!"];

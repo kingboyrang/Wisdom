@@ -26,21 +26,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    Account *acc=[Account sharedInstance];
-    if (acc.isRemember) {
-        acc.isLogin=YES;
-        [acc save];
-    }else{
-        acc.isLogin=NO;
-        [acc save];
-    }
+        
+    //是否记住密码
+    [Account loadRememberPwdLogin];
     
     [ZBarReaderView class];
-    //fD8052pzVUNGQLMlLuNGMIvh 我的API key
-    
-    //6shoE9aDtgljrB0YYKdGhO7a
+    //百度地图注册
     _mapManager = [[BMKMapManager alloc]init];
-    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
     BOOL ret = [_mapManager start:@"0E0006d6779b856330e93e877acbd7d1"  generalDelegate:self];
     if (!ret) {
         NSLog(@"manager start failed!");
@@ -77,8 +69,6 @@
         NSString *userid = [res valueForKey:BPushRequestUserIdKey];
         NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
         //NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
-        //NSLog(@"u=%@",userid);
-        //NSLog(@"c=%@",channelid);
         int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
         if (returnCode == BPushErrorCode_Success) {
             Account *acc=[Account sharedInstance];
