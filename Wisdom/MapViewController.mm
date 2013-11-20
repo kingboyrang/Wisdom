@@ -153,7 +153,7 @@
         annotationView = [[[BMKPinAnnotationView alloc] initWithAnnotation:annotation
                                                            reuseIdentifier:AnnotationViewID] autorelease];
         ((BMKPinAnnotationView*) annotationView).pinColor = BMKPinAnnotationColorRed;
-        annotationView.canShowCallout = NO;//使用自定义bubble
+        //annotationView.canShowCallout = NO;//使用自定义bubble
         //}
         
         ((BMKPinAnnotationView*)annotationView).animatesDrop = YES;// 设置该标注点动画显示
