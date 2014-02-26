@@ -18,7 +18,7 @@
         AdModel *item=[[[AdModel alloc] init] autorelease];
         item.advertName=@"";
         item.thumb=path;
-        item.webURl=[NSString stringWithFormat:@"http://iBDCloud.com:8888/APP/top_00%d.htm",i];
+        item.webURl=[NSString stringWithFormat:@"http://www.ibdcloud.com/APP/top_00%d.htm",i];
         [arr addObject:item];
     }
     return arr;

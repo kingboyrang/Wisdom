@@ -27,23 +27,24 @@
 #define DataWebserviceURL @"http://ibdcloud.com:8889/WebServices/Push.asmx"
 #define DataNameSpace @"http://tempuri.org/"
 
+//http://iBDCloud.com:8888/
 
 //弥勒介绍
-#define MaitreyaURL @"http://iBDCloud.com:8888/app/main01.htm"
+#define MaitreyaURL @"http://www.ibdcloud.com/app/main01.htm"
 //景点
-#define ViewIntroduceURL @"http://iBDCloud.com:8888/app/main02.htm"
+#define ViewIntroduceURL @"http://www.ibdcloud.com/app/main02.htm"
 //住宿
-#define HotelIntroduceURL @"http://iBDCloud.com:8888/app/main04.htm"
+#define HotelIntroduceURL @"http://www.ibdcloud.com/app/main04.htm"
 //美食
-#define FoodIntroduceURL @"http://iBDCloud.com:8888/app/main05.htm"
+#define FoodIntroduceURL @"http://www.ibdcloud.com/app/main05.htm"
 //路况
-#define RoadIntroduceURL @"http://iBDCloud.com:8888/app/traffic01.htm"
+#define RoadIntroduceURL @"http://www.ibdcloud.com/app/traffic01.htm"
 //公交
-#define BusIntroduceURL @"http://iBDCloud.com:8888/app/traffic02.htm"
+#define BusIntroduceURL @"http://www.ibdcloud.com/app/traffic02.htm"
 //出租车
-#define TaxiIntroduceURL @"http://iBDCloud.com:8888/app/traffic03.htm"
+#define TaxiIntroduceURL @"http://www.ibdcloud.com/app/traffic03.htm"
 //航班
-#define FlightIntroduceURL @"http://iBDCloud.com:8888/app/traffic04.htm"
+#define FlightIntroduceURL @"http://www.ibdcloud.com/app/traffic04.htm"
 
 //天气
 //取得一周天气

@@ -39,6 +39,8 @@
 		014877201830618C001E6B9A /* titletext.png in Resources */ = {isa = PBXBuildFile; fileRef = 0148771E1830618C001E6B9A /* titletext.png */; };
 		014877211830618C001E6B9A /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 0148771F1830618C001E6B9A /* back.png */; };
 		0148772518307C1B001E6B9A /* top_001.png in Resources */ = {isa = PBXBuildFile; fileRef = 0148772418307C1B001E6B9A /* top_001.png */; };
+		014C5B2118BDD45800846F06 /* Icon-80.png in Resources */ = {isa = PBXBuildFile; fileRef = 014C5B1F18BDD45800846F06 /* Icon-80.png */; };
+		014C5B2218BDD45800846F06 /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 014C5B2018BDD45800846F06 /* Icon-120.png */; };
 		014DC2D81821E0A10050DFB8 /* MaitreyaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014DC2D71821E0A10050DFB8 /* MaitreyaViewController.m */; };
 		014DC2DB1821E7C80050DFB8 /* ViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014DC2DA1821E7C80050DFB8 /* ViewViewController.m */; };
 		014DC2DD1822065B0050DFB8 /* loginbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 014DC2DC1822065B0050DFB8 /* loginbg.png */; };
@@ -300,6 +302,8 @@
 		0148771E1830618C001E6B9A /* titletext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = titletext.png; sourceTree = "<group>"; };
 		0148771F1830618C001E6B9A /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		0148772418307C1B001E6B9A /* top_001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_001.png; sourceTree = "<group>"; };
+		014C5B1F18BDD45800846F06 /* Icon-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-80.png"; sourceTree = "<group>"; };
+		014C5B2018BDD45800846F06 /* Icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-120.png"; sourceTree = "<group>"; };
 		014DC2D61821E0A10050DFB8 /* MaitreyaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaitreyaViewController.h; sourceTree = "<group>"; };
 		014DC2D71821E0A10050DFB8 /* MaitreyaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaitreyaViewController.m; sourceTree = "<group>"; };
 		014DC2D91821E7C80050DFB8 /* ViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewViewController.h; sourceTree = "<group>"; };
@@ -892,6 +896,8 @@
 		015A0747181E302E00000FCC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				014C5B1F18BDD45800846F06 /* Icon-80.png */,
+				014C5B2018BDD45800846F06 /* Icon-120.png */,
 				015B8BC5182B749B00B99ED0 /* Icon-72.png */,
 				015B8BC6182B749B00B99ED0 /* Icon-Small-50.png */,
 				015B8BC7182B749B00B99ED0 /* Icon-Small.png */,
@@ -1567,6 +1573,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				014C5B2118BDD45800846F06 /* Icon-80.png in Resources */,
 				01CFE8BF182B6E7100F52888 /* ico_011.png in Resources */,
 				01B85C0A181F52FB004DA2D3 /* login.png in Resources */,
 				015A074B181E302E00000FCC /* InfoPlist.strings in Resources */,
@@ -1600,6 +1607,7 @@
 				014877211830618C001E6B9A /* back.png in Resources */,
 				01B85BF1181F48B7004DA2D3 /* bg_info.png in Resources */,
 				01B85BE1181F42F8004DA2D3 /* message.png in Resources */,
+				014C5B2218BDD45800846F06 /* Icon-120.png in Resources */,
 				01CFE8BC182B6E7100F52888 /* ico_019.png in Resources */,
 				01DA074618233AFA00597F2A /* btnbg01.png in Resources */,
 				01CFE8B6182B6E7100F52888 /* ico_017.png in Resources */,
@@ -1803,65 +1811,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		012A91611821112F000EFDF1 /* AdHoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Maxense Corp. (B9R2MVL97F)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maxense Corp. (B9R2MVL97F)";
-				COPY_PHASE_STRIP = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = /usr/include/libxml2;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "0DAF6004-50F5-4310-9C5A-7CF42CDC1E2F";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0DAF6004-50F5-4310-9C5A-7CF42CDC1E2F";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = AdHoc;
-		};
-		012A91621821112F000EFDF1 /* AdHoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Maxense Corp. (B9R2MVL97F)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maxense Corp. (B9R2MVL97F)";
-				GCC_INPUT_FILETYPE = automatic;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Wisdom/Wisdom-Prefix.pch";
-				HEADER_SEARCH_PATHS = /usr/include/libxml2;
-				INFOPLIST_FILE = "Wisdom/Wisdom-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/aJia/Desktop/Project/Wisdom/Wisdom,
-					"\"$(SRCROOT)/Wisdom/ZBarSDK\"",
-				);
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0DAF6004-50F5-4310-9C5A-7CF42CDC1E2F";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0DAF6004-50F5-4310-9C5A-7CF42CDC1E2F";
-				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = armv7;
-				WRAPPER_EXTENSION = app;
-			};
-			name = AdHoc;
-		};
 		015A0761181E302E00000FCC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1875,7 +1824,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 澜洲 吴 (M3F85US4G2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bai Fu (KJ93M4ECNB)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1892,9 +1841,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E0D876C4-6692-4144-A13A-283D6DCFF021";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "344C3F50-674F-4184-A7C4-FA75E56CABCF";
+				SDKROOT = iphoneos6.1;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1911,7 +1860,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 澜洲 吴 (M3F85US4G2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: YUNNAN BEIDOU NAVIGATION TECHNOLOGY CO., LTD. (4A34U6BSLD)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1921,9 +1870,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E0D876C4-6692-4144-A13A-283D6DCFF021";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A1C029DA-A24E-4A6C-90D8-6530276783D9";
+				SDKROOT = iphoneos6.1;
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1932,7 +1881,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 澜洲 吴 (M3F85US4G2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bai Fu (KJ93M4ECNB)";
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wisdom/Wisdom-Prefix.pch";
@@ -1947,6 +1896,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "344C3F50-674F-4184-A7C4-FA75E56CABCF";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -1957,7 +1907,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 澜洲 吴 (M3F85US4G2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: YUNNAN BEIDOU NAVIGATION TECHNOLOGY CO., LTD. (4A34U6BSLD)";
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wisdom/Wisdom-Prefix.pch";
@@ -1972,6 +1922,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A1C029DA-A24E-4A6C-90D8-6530276783D9";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -1986,7 +1937,6 @@
 			buildConfigurations = (
 				015A0761181E302E00000FCC /* Debug */,
 				015A0762181E302E00000FCC /* Release */,
-				012A91611821112F000EFDF1 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1996,7 +1946,6 @@
 			buildConfigurations = (
 				015A0764181E302E00000FCC /* Debug */,
 				015A0765181E302E00000FCC /* Release */,
-				012A91621821112F000EFDF1 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
