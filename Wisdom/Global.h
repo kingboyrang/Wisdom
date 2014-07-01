@@ -46,7 +46,7 @@
 //航班
 #define FlightIntroduceURL @"http://www.ibdcloud.com/app/traffic04.htm"
 
-//天气
+//天气（101030100为天津）
 //取得一周天气
 #define WeatherWeekURL @"http://m.weather.com.cn/data/101290304.html"
 //取得今天天气
