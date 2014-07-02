@@ -15,6 +15,7 @@
 #import "BuildViewController.h"
 #import "LoginViewController.h"
 #import "AlertHelper.h"
+#import "UIImage+TPCategory.h"
 @interface MemberViewController ()
 
 @end
@@ -47,13 +48,17 @@
     CGRect r=self.view.bounds;
     r.size.height-=44;
     UIImage *bgImage=[UIImage imageNamed:@"bglogreg.png"];
+    CGFloat normalLeftCap = bgImage.size.width * 0.5f;
+    CGFloat normalTopCap = bgImage.size.height * 0.5f;
+    UIEdgeInsets insets = UIEdgeInsetsMake(normalTopCap,normalLeftCap, normalTopCap - 1, normalLeftCap-1);
+    bgImage=[bgImage resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
     UIImageView *bgImageView=[[UIImageView alloc] initWithFrame:r];
     [bgImageView setImage:bgImage];
     [self.view addSubview:bgImageView];
     [bgImageView release];
     
     CGRect rect=self.view.bounds;
-    rect.size.height-=54+44;
+    rect.size.height-=54+[self topHeight];
     UICollectionViewFlowLayout *flowlayout=[[UICollectionViewFlowLayout alloc] init];
     CGFloat h=136;
     flowlayout.itemSize=CGSizeMake(DeviceWidth/3.0, h);

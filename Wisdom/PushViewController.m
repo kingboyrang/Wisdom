@@ -55,7 +55,7 @@
     [self.view addSubview:switchItem];
    
     
-    CGFloat h=self.view.bounds.size.height-44-54-40;
+    CGFloat h=self.view.bounds.size.height-[self topHeight]-54-40;
     _scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(0, 40, DeviceWidth, h)];
     _scrollView.delegate=self;
     _scrollView.pagingEnabled=YES;

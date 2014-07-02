@@ -42,7 +42,7 @@
     [ad_view adLoad];
     [ad_view release];
     
-    IndexMenu *menu=[[IndexMenu alloc] initWithFrame:CGRectMake(0, 141, DeviceWidth, self.view.bounds.size.height-141-44-54)];
+    IndexMenu *menu=[[IndexMenu alloc] initWithFrame:CGRectMake(0, 141, DeviceWidth, self.view.bounds.size.height-141-[self topHeight]-54)];
     menu.controler=self;
     [self.view addSubview:menu];
     [menu release];

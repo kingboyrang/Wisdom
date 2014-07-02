@@ -18,7 +18,6 @@
 		0114A5CD1828F26300332911 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0114A5CC1828F26300332911 /* CoreMedia.framework */; };
 		0114A5CF1828F26E00332911 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0114A5CE1828F26E00332911 /* CoreVideo.framework */; };
 		0114A5D11828F28900332911 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0114A5D01828F28900332911 /* libiconv.dylib */; };
-		012A916018211120000EFDF1 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 012A915F18211120000EFDF1 /* Entitlements.plist */; };
 		0137DBAA1820AD8D0087B152 /* AnimateLoadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0137DBA71820AD8D0087B152 /* AnimateLoadView.m */; };
 		0137DBAB1820AD8D0087B152 /* AnimateErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0137DBA91820AD8D0087B152 /* AnimateErrorView.m */; };
 		0137DBAD1820AFC60087B152 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = 0137DBAC1820AFC60087B152 /* error.png */; };
@@ -274,7 +273,6 @@
 		0114A5CC1828F26300332911 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		0114A5CE1828F26E00332911 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		0114A5D01828F28900332911 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
-		012A915F18211120000EFDF1 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		0137DBA61820AD8D0087B152 /* AnimateLoadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimateLoadView.h; sourceTree = "<group>"; };
 		0137DBA71820AD8D0087B152 /* AnimateLoadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimateLoadView.m; sourceTree = "<group>"; };
 		0137DBA81820AD8D0087B152 /* AnimateErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimateErrorView.h; sourceTree = "<group>"; };
@@ -840,7 +838,6 @@
 		015A0734181E302E00000FCC = {
 			isa = PBXGroup;
 			children = (
-				012A915F18211120000EFDF1 /* Entitlements.plist */,
 				015A0746181E302E00000FCC /* Wisdom */,
 				015A073F181E302E00000FCC /* Frameworks */,
 				015A073E181E302E00000FCC /* Products */,
@@ -1550,6 +1547,11 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = lz;
+				TargetAttributes = {
+					015A073C181E302E00000FCC = {
+						DevelopmentTeam = 4A34U6BSLD;
+					};
+				};
 			};
 			buildConfigurationList = 015A0738181E302E00000FCC /* Build configuration list for PBXProject "Wisdom" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1620,7 +1622,6 @@
 				01B85C47181F8BA6004DA2D3 /* checkbox.png in Resources */,
 				01CFE8B8182B6E7100F52888 /* ico_013.png in Resources */,
 				01B85C2D181F659F004DA2D3 /* ico_001.png in Resources */,
-				012A916018211120000EFDF1 /* Entitlements.plist in Resources */,
 				01DA07661823772A00597F2A /* BPushConfig.plist in Resources */,
 				0199E9C71823808000A51DAD /* MemberCell.xib in Resources */,
 				0199E9C918238E4B00A51DAD /* ico_weather.png in Resources */,
@@ -1822,9 +1823,9 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 澜洲 吴 (M3F85US4G2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bai Fu (KJ93M4ECNB)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1841,7 +1842,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8EA2EC07-684E-4CF8-82BE-B3484079E6A4";
+				PROVISIONING_PROFILE = "344C3F50-674F-4184-A7C4-FA75E56CABCF";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1858,9 +1859,9 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maxense Corp. (B9R2MVL97F)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bai Fu (KJ93M4ECNB)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1870,7 +1871,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8F6D2FD7-2900-47D2-B322-3D47738AAD7F";
+				PROVISIONING_PROFILE = "344C3F50-674F-4184-A7C4-FA75E56CABCF";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
@@ -1880,8 +1881,9 @@
 		015A0764181E302E00000FCC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 澜洲 吴 (M3F85US4G2)";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wisdom/Wisdom-Prefix.pch";
@@ -1896,7 +1898,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "13B269E9-75A6-4538-A460-049A63FEDEF9";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -1906,8 +1908,9 @@
 		015A0765181E302E00000FCC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maxense Corp. (B9R2MVL97F)";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wisdom/Wisdom-Prefix.pch";
@@ -1922,7 +1925,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8F6D2FD7-2900-47D2-B322-3D47738AAD7F";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

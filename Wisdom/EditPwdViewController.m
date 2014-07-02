@@ -36,10 +36,11 @@
     [super viewDidLoad];
     _helper=[[ServiceHelper alloc] init];
     
-    CGFloat h=self.view.bounds.size.height-54-44;
+    CGFloat h=self.view.bounds.size.height-54-[self topHeight];
     UIScrollView *scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth,h)];
     scrollView.backgroundColor=[UIColor clearColor];
     scrollView.pagingEnabled=YES;
+    scrollView.bounces=NO;
     scrollView.showsHorizontalScrollIndicator=NO;
     scrollView.showsVerticalScrollIndicator=NO;
     scrollView.tag=800;
@@ -55,7 +56,7 @@
     [bgImageView release];
     
     r.origin.x=20;
-    r.origin.y=(self.view.bounds.size.height-300-54-44)/2.0;
+    r.origin.y=(self.view.bounds.size.height-300-54-[self topHeight])/2.0;
     r.size.width=DeviceWidth-40;
     r.size.height=300;
     

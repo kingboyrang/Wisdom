@@ -54,7 +54,9 @@
         [activityIndicator removeFromSuperview];
         activityIndicator = nil;
         if (reuqest.responseStatusCode==200) {
-            UIWebView *webView=[[[UIWebView alloc] initWithFrame:self.view.bounds] autorelease];
+            CGRect r=self.view.bounds;
+            r.size.height-=[self topHeight]+54;
+            UIWebView *webView=[[[UIWebView alloc] initWithFrame:r] autorelease];
             [webView loadHTMLString:reuqest.responseString baseURL:nil];
             [self.view addSubview:webView];
         }else{

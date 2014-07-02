@@ -12,6 +12,7 @@
 @interface BasicViewController : UIViewController
 @property(nonatomic,assign) BOOL showRightBtnItem;
 @property(nonatomic,assign) BOOL showWeatherView;
+@property(nonatomic,readonly) float topHeight;
 -(void)editBackBarbuttonItem:(NSString*)title;
 //动画操作
 -(AnimateErrorView*) errorView;

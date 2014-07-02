@@ -79,6 +79,20 @@
         [self loadLogoImage];
     }
 }
+- (float)topHeight{
+    float h=0;
+#ifdef __IPHONE_7_0
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0) {
+        if (self.navigationController) {
+            return 64;
+        }
+    }
+#endif
+    if (self.navigationController) {
+        return 44;
+    }
+    return h;
+}
 -(void)switchLoginExit{
     Account *acc=[Account sharedInstance];
     if (acc.isLogin) {
